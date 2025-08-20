@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Player {
+  id                String              @id @default(uuid())
+  name              String              @unique
+  imageUrl          String?
+  hittingStats      PlayerHittingStats[]
+  pitchingStats     PlayerPitchingStats[]
+  teams             PlayerTeam[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+}
+
+model Team {
+  id                String              @id @default(uuid())
+  name              String              @unique
+  abbr              String?             @unique
+  logoUrl           String?
+  players           PlayerTeam[]
+  teamStats         TeamStats[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+}
+
+model PlayerTeam {
+  id                String              @id @default(uuid())
+  player            Player              @relation(fields: [playerId], references: [id])
+  playerId          String
+  team              Team                @relation(fields: [teamId], references: [id])
+  teamId            String
+  year              Int
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  @@unique([playerId, teamId, year])
+}
+
+model PlayerHittingStats {
+  id                 String   @id @default(uuid())
+  player             Player   @relation(fields: [playerId], references: [id])
+  playerId           String
+  year               Int
+  games              Int
+  plateAppearances   Int      @default(0)
+  atBats             Int
+  runs               Int
+  hits               Int
+  doubles            Int
+  triples            Int
+  homeRuns           Int
+  rbis               Int
+  walks              Int
+  strikeouts         Int
+  sacFlies           Int?     @default(0)
+  avg                Float
+  obp                Float
+  slg                Float
+  ops                Float
+  opsPlus            Float?
+  woba               Float?
+  wobaNum            Float?
+  wobaDen            Float?
+  wrcPlus            Float?
+  isQualified        Boolean  @default(true)
+  wrcPlusPercentile  Float?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@unique([playerId, year], name: "playerId_year")
+}
+
+model PlayerPitchingStats {
+  id             String   @id @default(uuid())
+  player         Player   @relation(fields: [playerId], references: [id])
+  playerId       String
+  year           Int
+  games          Int
+  inningsPitched Float
+  wins           Int
+  losses         Int
+  saves          Int
+  strikeouts     Int
+  walks          Int
+  hits           Int
+  runs           Int
+  earnedRuns     Int
+  era            Float
+  whip           Float
+  oppAvg         Float?
+  isQualified    Boolean  @default(true)
+  eraPercentile  Float?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([playerId, year], name: "playerId_year")
+}
+
+model TeamStats {
+  id                String   @id @default(uuid())
+  team              Team     @relation(fields: [teamId], references: [id])
+  teamId            String
+  year              Int
+  wins              Int
+  losses            Int
+  winningPercentage Float
+  runsScored        Int
+  runsAllowed       Int
+  runDifferential   Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([teamId, year], name: "teamId_year")
+}

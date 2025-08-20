@@ -70,3 +70,4 @@ jspm_packages/
 # Google Cloud credentials
 credentials.json
 credebtials.json
+.env.local

@@ -41,9 +41,28 @@ async function fileExists(path: string): Promise<boolean> {
 }
 
 async function getGoogleSheetsClient() {
+  // Check if environment variables are available
+  if (!process.env.GOOGLE_CLOUD_PRIVATE_KEY || !process.env.GOOGLE_CLOUD_CLIENT_EMAIL) {
+    throw new Error('Google Cloud credentials not found in environment variables. Please check your .env.local file.')
+  }
+
+  const credentials = {
+    type: process.env.GOOGLE_CLOUD_TYPE || 'service_account',
+    project_id: process.env.GOOGLE_CLOUD_PROJECT_ID,
+    private_key_id: process.env.GOOGLE_CLOUD_PRIVATE_KEY_ID,
+    private_key: process.env.GOOGLE_CLOUD_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    client_email: process.env.GOOGLE_CLOUD_CLIENT_EMAIL,
+    client_id: process.env.GOOGLE_CLOUD_CLIENT_ID,
+    auth_uri: process.env.GOOGLE_CLOUD_AUTH_URI || 'https://accounts.google.com/o/oauth2/auth',
+    token_uri: process.env.GOOGLE_CLOUD_TOKEN_URI || 'https://oauth2.googleapis.com/token',
+    auth_provider_x509_cert_url: process.env.GOOGLE_CLOUD_AUTH_PROVIDER_X509_CERT_URL || 'https://www.googleapis.com/oauth2/v1/certs',
+    client_x509_cert_url: process.env.GOOGLE_CLOUD_CLIENT_X509_CERT_URL,
+    universe_domain: process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN || 'googleapis.com'
+  }
+
   const auth = new google.auth.GoogleAuth({
     scopes: SCOPES,
-    keyFile: 'credentials.json',
+    credentials,
   })
 
   return google.sheets({ version: 'v4', auth })
@@ -58,25 +77,39 @@ async function fetchCsv(sheetName: string): Promise<string[][]> {
 }
 
 async function loadSheet(name: string): Promise<string[][]> {
-  if (await fileExists('credentials.json')) {
-    const sheets = await getGoogleSheetsClient()
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: SPREADSHEET_ID,
-      range: `${name}!A:ZZ`,
-    })
-    return (response.data.values || []) as string[][]
+  if (process.env.GOOGLE_CLOUD_PRIVATE_KEY && process.env.GOOGLE_CLOUD_CLIENT_EMAIL) {
+    try {
+      const sheets = await getGoogleSheetsClient()
+      const response = await sheets.spreadsheets.values.get({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `${name}!A:ZZ`,
+      })
+      return (response.data.values || []) as string[][]
+    } catch (error) {
+      console.warn('Failed to load sheet via API, falling back to CSV:', error)
+      return fetchCsv(name)
+    }
   }
   return fetchCsv(name)
 }
 
 async function loadSheetRange(name: string, a1: string): Promise<string[][]> {
-  if (await fileExists('credentials.json')) {
-    const sheets = await getGoogleSheetsClient()
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: SPREADSHEET_ID,
-      range: `${name}!${a1}`,
-    })
-    return (response.data.values || []) as string[][]
+  if (process.env.GOOGLE_CLOUD_PRIVATE_KEY && process.env.GOOGLE_CLOUD_CLIENT_EMAIL) {
+    try {
+      const sheets = await getGoogleSheetsClient()
+      const response = await sheets.spreadsheets.values.get({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `${name}!${a1}`,
+      })
+      return (response.data.values || []) as string[][]
+    } catch (error) {
+      console.warn('Failed to load sheet range via API, falling back to CSV:', error)
+      const m = a1.match(/^[A-Za-z]+(\d+):[A-Za-z]+(\d+)$/)
+      const startRow = m ? parseInt(m[1], 10) : 1
+      const endRow = m ? parseInt(m[2], 10) : Number.MAX_SAFE_INTEGER
+      const rows = await fetchCsv(name)
+      return rows.slice(Math.max(0, startRow - 1), Math.min(rows.length, endRow))
+    }
   }
   const m = a1.match(/^[A-Za-z]+(\d+):[A-Za-z]+(\d+)$/)
   const startRow = m ? parseInt(m[1], 10) : 1

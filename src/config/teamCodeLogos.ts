@@ -1,7 +1,7 @@
 export type TeamCodeMeta = { name: string; logo: string }
 
 export const TEAM_CODE_MAP: Record<string, TeamCodeMeta> = {
-  "100": { name: "100% Real Juice", logo: "percent-real-juice-logo.png" },
+  "100": { name: "100% Real Juice", logo: "100-percent-real-juice-logo.png" },
   "BB": { name: "The Bungalow Boys", logo: "bungalow-boys-logo.png" },
   "BS": { name: "Bilabial Stops", logo: "bilabial-stops-logo.png" },
   "BSX": { name: "Blue Sox", logo: "blue-sox-logo.png" },

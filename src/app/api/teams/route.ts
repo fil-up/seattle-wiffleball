@@ -1,58 +1,50 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const year = searchParams.get('year')
-
+export async function GET() {
   try {
-    const teams = await prisma.team.findMany({
-      include: {
-        teamStats: year ? {
-          where: { year: parseInt(year) }
-        } : true,
-        players: {
-          include: {
-            player: {
-              include: {
-                hittingStats: true,
-                pitchingStats: true
-              }
-            }
-          },
-          where: year ? {
-            year: parseInt(year)
-          } : undefined
-        }
-      }
-    })
+    // Fetch team mapping data from Google Sheets
+    const response = await fetch(
+      `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=Player/Team%20Adj&range=O4:S100`
+    )
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch team data')
+    }
 
-    // Calculate team totals and sort by winning percentage
-    const teamsWithStats = teams.map(team => {
-      const yearStats = year 
-        ? team.teamStats.find(stat => stat.year === parseInt(year))
-        : team.teamStats.reduce((acc, stat) => ({
-            wins: acc.wins + stat.wins,
-            losses: acc.losses + stat.losses,
-            runsScored: acc.runsScored + stat.runsScored,
-            runsAllowed: acc.runsAllowed + stat.runsAllowed,
-            runDifferential: acc.runDifferential + stat.runDifferential,
-            winningPercentage: (acc.wins + stat.wins) / (acc.wins + stat.wins + acc.losses + stat.losses)
-          }), { wins: 0, losses: 0, runsScored: 0, runsAllowed: 0, runDifferential: 0, winningPercentage: 0 })
+    const text = await response.text()
+    const jsonText = text.substring(47).slice(0, -2)
+    const data = JSON.parse(jsonText)
+
+    const rows = data.table.rows || []
+    const teams = rows
+      .map((row: any) => {
+        const cells = row.c || []
+        const uniqueTeams = cells[0]?.v || ''
+        const teamCodes = cells[1]?.v || ''
+        const franchiseCurrentName = cells[2]?.v || ''
+        const franchiseCurrentCode = cells[3]?.v || ''
+        const logoImageName = cells[4]?.v || ''
+        
+        // Only return teams with valid data
+        if (!uniqueTeams || !franchiseCurrentName) return null
 
       return {
-        ...team,
-        currentStats: yearStats
-      }
-    }).sort((a, b) => {
-      const aWP = a.currentStats?.winningPercentage || 0
-      const bWP = b.currentStats?.winningPercentage || 0
-      return bWP - aWP
-    })
+          id: franchiseCurrentCode.toLowerCase(),
+          name: franchiseCurrentName,
+          abbreviation: franchiseCurrentCode,
+          uniqueTeamName: uniqueTeams,
+          teamCode: teamCodes,
+          logoUrl: logoImageName ? `/images/teams/${logoImageName}` : '/images/teams/default-team-logo.png'
+        }
+      })
+      .filter(Boolean) // Remove null entries
 
-    return NextResponse.json(teamsWithStats)
+    return NextResponse.json(teams)
   } catch (error) {
     console.error('Error fetching teams:', error)
-    return NextResponse.json({ error: 'Failed to fetch teams' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Failed to fetch teams' },
+      { status: 500 }
+    )
   }
 }

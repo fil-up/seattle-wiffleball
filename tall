@@ -1,0 +1,3 @@
+[33m80e8f91[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Update Google Sheets authentication to use environment variables instead of credentials.json
+[33m48564d2[m Add .env.local to gitignore
+[33m65d29cb[m Initial commit without credentials

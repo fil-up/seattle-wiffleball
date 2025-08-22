@@ -7,6 +7,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { teams } from "@/config/teams"
 import { resolveTeamByCode } from "@/config/teamCodeLogos"
+import PageNavigation from "@/components/PageNavigation"
 
 interface HittingRow {
   id: string
@@ -344,23 +345,25 @@ export default function PlayersStats() {
   const initialSortDesc = tab === "pitching" ? false : true
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Player Statistics</h1>
-        <div className="flex items-center gap-3">
-          <input
-            type="text"
-            placeholder="Search player..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="border rounded px-3 py-2 text-sm"
-          />
-          <div className="inline-flex rounded-md shadow-sm" role="group">
-            <button className={`px-4 py-2 text-sm font-medium border ${tab === "hitting" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`} onClick={() => setTab("hitting")}>Hitting</button>
-            <button className={`px-4 py-2 text-sm font-medium border ${tab === "pitching" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`} onClick={() => setTab("pitching")}>Pitching</button>
+    <div className="min-h-screen bg-gray-50">
+      <PageNavigation />
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-3xl font-bold text-gray-900">Player Statistics</h1>
+          <div className="flex items-center gap-3">
+            <input
+              type="text"
+              placeholder="Search player..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="border rounded px-3 py-2 text-sm"
+            />
+            <div className="inline-flex rounded-md shadow-sm" role="group">
+              <button className={`px-4 py-2 text-sm font-medium border ${tab === "hitting" ? "bg-[#25397B] text-white" : "bg-white text-gray-700"}`} onClick={() => setTab("hitting")}>Hitting</button>
+              <button className={`px-4 py-2 text-sm font-medium border ${tab === "pitching" ? "bg-[#25397B] text-white" : "bg-white text-gray-700"}`} onClick={() => setTab("pitching")}>Pitching</button>
+            </div>
           </div>
         </div>
-      </div>
 
       <div className="mb-4 flex items-center gap-4">
         <div className="inline-flex rounded-md shadow-sm" role="group">
@@ -399,6 +402,7 @@ export default function PlayersStats() {
       ) : (
         <StatsTable data={visibleStats as any[]} columns={columns as any[]} initialSortField={initialSort} initialSortDesc={initialSortDesc} stickyFirstCols={2} columnWidthsPx={[180, 220]} />
       )}
+      </div>
     </div>
   )
 }

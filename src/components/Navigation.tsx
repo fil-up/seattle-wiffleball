@@ -22,31 +22,27 @@ export default function Navigation() {
             </Link>
           </div>
 
-          <div className="hidden md:flex space-x-8">
-            <Link 
-              href="/stats/players" 
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Players
-            </Link>
-            <Link 
-              href="/stats/teams" 
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Teams
-            </Link>
-            <Link 
-              href="/leaderboards" 
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Leaderboards
-            </Link>
-            <Link 
-              href="/rules" 
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Rules
-            </Link>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              <Link href="/" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Home
+              </Link>
+              <Link href="/news" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                News
+              </Link>
+              <Link href="/stats/players" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Players
+              </Link>
+              <Link href="/stats/teams" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Teams
+              </Link>
+              <Link href="/debug/team-mapping" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Debug
+              </Link>
+              <Link href="/debug/player-data" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Player Data
+              </Link>
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -64,6 +60,12 @@ export default function Navigation() {
       <div className="hidden md:hidden">
         <div className="px-2 pt-2 pb-3 space-y-1">
           <Link 
+            href="/"
+            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+          >
+            Home
+          </Link>
+          <Link 
             href="/stats/players"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
           >
@@ -80,6 +82,12 @@ export default function Navigation() {
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
           >
             Leaderboards
+          </Link>
+          <Link 
+            href="/news"
+            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+          >
+            News
           </Link>
           <Link 
             href="/rules"

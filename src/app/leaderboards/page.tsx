@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import PageNavigation from "@/components/PageNavigation"
 
 type Row = any
 
@@ -119,8 +120,10 @@ export default function LeaderboardsPage() {
   }, [year])
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Leaderboards</h1>
+    <div className="min-h-screen bg-gray-50">
+      <PageNavigation />
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Leaderboards</h1>
 
       <div className="flex items-center gap-3 mb-6">
         <label className="text-sm">Season</label>

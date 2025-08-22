@@ -79,12 +79,12 @@ async function fetchCsv(sheetName: string): Promise<string[][]> {
 async function loadSheet(name: string): Promise<string[][]> {
   if (process.env.GOOGLE_CLOUD_PRIVATE_KEY && process.env.GOOGLE_CLOUD_CLIENT_EMAIL) {
     try {
-      const sheets = await getGoogleSheetsClient()
-      const response = await sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${name}!A:ZZ`,
-      })
-      return (response.data.values || []) as string[][]
+    const sheets = await getGoogleSheetsClient()
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: `${name}!A:ZZ`,
+    })
+    return (response.data.values || []) as string[][]
     } catch (error) {
       console.warn('Failed to load sheet via API, falling back to CSV:', error)
       return fetchCsv(name)
@@ -96,12 +96,12 @@ async function loadSheet(name: string): Promise<string[][]> {
 async function loadSheetRange(name: string, a1: string): Promise<string[][]> {
   if (process.env.GOOGLE_CLOUD_PRIVATE_KEY && process.env.GOOGLE_CLOUD_CLIENT_EMAIL) {
     try {
-      const sheets = await getGoogleSheetsClient()
-      const response = await sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${name}!${a1}`,
-      })
-      return (response.data.values || []) as string[][]
+    const sheets = await getGoogleSheetsClient()
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: `${name}!${a1}`,
+    })
+    return (response.data.values || []) as string[][]
     } catch (error) {
       console.warn('Failed to load sheet range via API, falling back to CSV:', error)
       const m = a1.match(/^[A-Za-z]+(\d+):[A-Za-z]+(\d+)$/)
@@ -120,6 +120,19 @@ async function loadSheetRange(name: string, a1: string): Promise<string[][]> {
 
 function headerIndex(header: string[], exact: string): number {
   return header.findIndex((h) => clean(h).toLowerCase() === exact.toLowerCase())
+}
+
+function headerIndexFlexible(header: string[], patterns: string[]): number {
+  for (const pattern of patterns) {
+    const idx = header.findIndex((h) => {
+      const cleaned = clean(h).toLowerCase()
+      return cleaned === pattern.toLowerCase() || 
+             cleaned.includes(pattern.toLowerCase()) ||
+             pattern.toLowerCase().includes(cleaned)
+    })
+    if (idx >= 0) return idx
+  }
+  return -1
 }
 
 async function loadTeamMappingByCode(): Promise<Record<string, { name?: string; logo?: string }>> {
@@ -190,33 +203,33 @@ async function importHittingStats() {
 
   const header = rows[0]
   const idx = {
-    year: headerIndex(header, 'Year'),
-    first: headerIndex(header, 'FIRST'),
-    last: headerIndex(header, 'LAST'),
-    team: headerIndex(header, 'TEAM'),
-    gp: headerIndex(header, 'GP'),
-    pa: headerIndex(header, 'PA'),
-    ab: headerIndex(header, 'AB'),
-    r: headerIndex(header, 'R'),
-    h: headerIndex(header, 'H'),
-    doub: headerIndex(header, '2B'),
-    trip: headerIndex(header, '3B'),
-    hr: headerIndex(header, 'HR'),
-    rbi: headerIndex(header, 'RBI'),
-    bb: headerIndex(header, 'BB'),
-    k: headerIndex(header, 'K'),
-    ibb: headerIndex(header, 'IBB'),
-    sf: headerIndex(header, 'SF'),
-    avg: headerIndex(header, 'AVG'),
-    obp: headerIndex(header, 'OBP'),
-    slg: headerIndex(header, 'SLG'),
-    ops: headerIndex(header, 'OPS'),
-    opsPlus: headerIndex(header, 'OPS+'),
-    woba: headerIndex(header, 'wOBA'),
-    wobaNum: headerIndex(header, 'wOBA (Num)'),
-    wobaDen: headerIndex(header, 'wOBA (Den)'),
-    wrcPlus: headerIndex(header, 'wRC+'),
-    wrcPct: headerIndex(header, 'wRC+ Percentile'),
+    year: headerIndexFlexible(header, ['Year', 'YEAR', 'year']),
+    first: headerIndexFlexible(header, ['FIRST', 'First', 'first']),
+    last: headerIndexFlexible(header, ['LAST', 'Last', 'last']),
+    team: headerIndexFlexible(header, ['TEAM', 'Team', 'team']),
+    gp: headerIndexFlexible(header, ['GP', 'G', 'Games', 'games']),
+    pa: headerIndexFlexible(header, ['PA', 'Plate Appearances', 'plate appearances']),
+    ab: headerIndexFlexible(header, ['AB', 'At Bats', 'at bats']),
+    r: headerIndexFlexible(header, ['R', 'Runs', 'runs']),
+    h: headerIndexFlexible(header, ['H', 'Hits', 'hits']),
+    doub: headerIndexFlexible(header, ['2B', 'Doubles', 'doubles']),
+    trip: headerIndexFlexible(header, ['3B', 'Triples', 'triples']),
+    hr: headerIndexFlexible(header, ['HR', 'Home Runs', 'home runs']),
+    rbi: headerIndexFlexible(header, ['RBI', 'Runs Batted In', 'runs batted in']),
+    bb: headerIndexFlexible(header, ['BB', 'Walks', 'walks']),
+    k: headerIndexFlexible(header, ['K', 'Strikeouts', 'strikeouts']),
+    ibb: headerIndexFlexible(header, ['IBB', 'Intentional Walks', 'intentional walks']),
+    sf: headerIndexFlexible(header, ['SF', 'Sacrifice Flies', 'sacrifice flies']),
+    avg: headerIndexFlexible(header, ['AVG', 'Average', 'average']),
+    obp: headerIndexFlexible(header, ['OBP', 'On Base Percentage', 'on base percentage']),
+    slg: headerIndexFlexible(header, ['SLG', 'Slugging', 'slugging']),
+    ops: headerIndexFlexible(header, ['OPS', 'On Base Plus Slugging', 'on base plus slugging']),
+    opsPlus: headerIndexFlexible(header, ['OPS+', 'OPS Plus', 'ops plus']),
+    woba: headerIndexFlexible(header, ['wOBA', 'woba', 'WOBA']),
+    wobaNum: headerIndexFlexible(header, ['wOBA (Num)', 'woba num', 'WOBA NUM']),
+    wobaDen: headerIndexFlexible(header, ['wOBA (Den)', 'woba den', 'WOBA DEN']),
+    wrcPlus: headerIndexFlexible(header, ['wRC+', 'wrc plus', 'WRC PLUS']),
+    wrcPct: headerIndexFlexible(header, ['wRC+ Percentile', 'wrc percentile', 'WRC PERCENTILE']),
   }
 
   if (idx.year < 0 || idx.first < 0 || idx.last < 0) {
@@ -294,31 +307,31 @@ async function importPitchingStats() {
 
   const header = rows[0]
   const idx = {
-    year: headerIndex(header, 'Year'),
-    first: headerIndex(header, 'FIRST'),
-    last: headerIndex(header, 'LAST'),
-    team: headerIndex(header, 'TEAM'),
-    gp: headerIndex(header, 'GP'),
-    gs: headerIndex(header, 'GS'),
-    ip: headerIndex(header, 'IP'),
-    r: headerIndex(header, 'R'),
-    er: headerIndex(header, 'ER'),
-    h: headerIndex(header, 'H'),
-    bb: headerIndex(header, 'BB'),
-    ibb: headerIndex(header, 'IBB'),
-    k: headerIndex(header, 'K'),
-    cg: headerIndex(header, 'CG'),
-    w: headerIndex(header, 'W'),
-    l: headerIndex(header, 'L'),
-    s: headerIndex(header, 'S'),
-    hld: headerIndex(header, 'HLD'),
-    era: headerIndex(header, 'ERA'),
-    whip: headerIndex(header, 'WHIP'),
-    kPct: headerIndex(header, 'K PCT'),
-    bbPct: headerIndex(header, 'BB PCT'),
-    kbb: headerIndex(header, 'K/BB'),
-    oppAvg: headerIndex(header, 'OPP AVG'),
-    eraPct: headerIndex(header, 'ERA Percentile'),
+    year: headerIndexFlexible(header, ['Year', 'YEAR', 'year']),
+    first: headerIndexFlexible(header, ['FIRST', 'First', 'first']),
+    last: headerIndexFlexible(header, ['LAST', 'Last', 'last']),
+    team: headerIndexFlexible(header, ['TEAM', 'Team', 'team']),
+    gp: headerIndexFlexible(header, ['GP', 'G', 'Games', 'games']),
+    gs: headerIndexFlexible(header, ['GS', 'Games Started', 'games started']),
+    ip: headerIndexFlexible(header, ['IP', 'Innings Pitched', 'innings pitched']),
+    r: headerIndexFlexible(header, ['R', 'Runs', 'runs']),
+    er: headerIndexFlexible(header, ['ER', 'Earned Runs', 'earned runs']),
+    h: headerIndexFlexible(header, ['H', 'Hits', 'hits']),
+    bb: headerIndexFlexible(header, ['BB', 'Walks', 'walks']),
+    ibb: headerIndexFlexible(header, ['IBB', 'Intentional Walks', 'intentional walks']),
+    k: headerIndexFlexible(header, ['K', 'Strikeouts', 'strikeouts']),
+    cg: headerIndexFlexible(header, ['CG', 'Complete Games', 'complete games']),
+    w: headerIndexFlexible(header, ['W', 'Wins', 'wins']),
+    l: headerIndexFlexible(header, ['L', 'Losses', 'losses']),
+    s: headerIndexFlexible(header, ['S', 'Saves', 'saves']),
+    hld: headerIndexFlexible(header, ['HLD', 'Holds', 'holds']),
+    era: headerIndexFlexible(header, ['ERA', 'Earned Run Average', 'earned run average']),
+    whip: headerIndexFlexible(header, ['WHIP', 'Walks and Hits per Inning', 'walks and hits per inning']),
+    kPct: headerIndexFlexible(header, ['K PCT', 'K PCT', 'k pct']),
+    bbPct: headerIndexFlexible(header, ['BB PCT', 'BB PCT', 'bb pct']),
+    kbb: headerIndexFlexible(header, ['K/BB', 'K/BB', 'k/bb']),
+    oppAvg: headerIndexFlexible(header, ['OPP AVG', 'Opponent Average', 'opponent average']),
+    eraPct: headerIndexFlexible(header, ['ERA Percentile', 'ERA Percentile', 'era percentile']),
   }
 
   if (idx.year < 0 || idx.first < 0 || idx.last < 0) {
@@ -382,32 +395,94 @@ async function importPitchingStats() {
 
 async function importTeamStats() {
   console.log('Importing Standings ...')
-  const rows = await loadSheet('Standings')
-  if (rows.length <= 1) return
+  // Load from the correct range: A54:T952 with headers in row 54
+  const rows = await loadSheetRange('IH', 'A54:T952')
+  if (!rows || rows.length <= 1) return
 
-  const headerIdx = rows.findIndex((row) => row.some((c) => clean(c).toLowerCase() === 'year'))
-  const start = headerIdx >= 0 ? headerIdx + 1 : 1
+  // First row contains headers
+  const header = rows[0]
+  const idx = {
+    team: headerIndexFlexible(header, ['Teams', 'Team', 'team']),
+    year: headerIndexFlexible(header, ['Year', 'YEAR', 'year']),
+    wins: headerIndexFlexible(header, ['W', 'Wins', 'wins']),
+    losses: headerIndexFlexible(header, ['L', 'Losses', 'losses']),
+    pct: headerIndexFlexible(header, ['PCT', 'Percentage', 'percentage']),
+    berth: headerIndexFlexible(header, ['Berth', 'berth']),
+    playoffWins: headerIndexFlexible(header, ['Playoffs W', 'Playoff W', 'playoffs w']),
+    playoffLosses: headerIndexFlexible(header, ['Playoff L', 'Playoff L', 'playoff l']),
+    playoffPct: headerIndexFlexible(header, ['Playoff PCT', 'Playoff PCT', 'playoff pct']),
+    seriesWins: headerIndexFlexible(header, ['Series W', 'Series W', 'series w']),
+    seriesLosses: headerIndexFlexible(header, ['Series L', 'Series L', 'series l']),
+    seriesPct: headerIndexFlexible(header, ['Series PCT', 'Series PCT', 'series pct']),
+    wsApp: headerIndexFlexible(header, ['WS APP', 'World Series Appearances', 'ws app']),
+    wsWin: headerIndexFlexible(header, ['WS Win', 'World Series Wins', 'ws win']),
+    runsFor: headerIndexFlexible(header, ['RF', 'Runs For', 'runs for']),
+    runsAgainst: headerIndexFlexible(header, ['RA', 'Runs Against', 'runs against']),
+    runsForPlayoffs: headerIndexFlexible(header, ['RF Playoffs', 'Playoff Runs For', 'rf playoffs']),
+    runsAgainstPlayoffs: headerIndexFlexible(header, ['RA Playoffs', 'Playoff Runs Against', 'ra playoffs']),
+    runsPerGame: headerIndexFlexible(header, ['Runs/Game', 'Runs Per Game', 'runs/game']),
+    runsAgainstPerGame: headerIndexFlexible(header, ['RA/Game', 'Runs Against Per Game', 'ra/game']),
+  }
 
-  for (let r = start; r < rows.length; r++) {
+  if (idx.team < 0 || idx.year < 0 || idx.wins < 0 || idx.losses < 0) {
+    console.warn('Standings: Missing required header indices. Got header:', header)
+    return
+  }
+
+  for (let r = 1; r < rows.length; r++) {
     const row = rows[r]
     if (!row || row.length === 0) continue
-    const year = toInt(row[0], NaN)
-    const teamName = clean(row[1] ?? row[0])
+
+    const year = toInt(row[idx.year], NaN)
+    const teamName = clean(row[idx.team])
     if (!teamName || !Number.isFinite(year)) continue
 
-    const wins = toInt(row[3] ?? row[2] ?? 0)
-    const losses = toInt(row[4] ?? row[3] ?? 0)
-    const pct = toFloat(row[5] ?? row[4] ?? 0)
-    const runsScored = toInt(row[6] ?? row[5] ?? 0)
-    const runsAllowed = toInt(row[7] ?? row[6] ?? 0)
-    const runDiff = toInt(row[8] ?? row[7] ?? (runsScored - runsAllowed))
+    const wins = toInt(row[idx.wins], 0)
+    const losses = toInt(row[idx.losses], 0)
+    const pct = idx.pct >= 0 ? toFloat(row[idx.pct], 0) : (wins / (wins + losses))
+    const runsScored = idx.runsFor >= 0 ? toInt(row[idx.runsFor], 0) : 0
+    const runsAllowed = idx.runsAgainst >= 0 ? toInt(row[idx.runsAgainst], 0) : 0
+    const runDiff = runsScored - runsAllowed
 
-    const team = await prisma.team.upsert({ where: { name: teamName }, create: { name: teamName, logoUrl: `/images/teams/${teamName.toLowerCase().replace(/\s+/g, '-')}.png` }, update: {} })
+    // Try to find team by name first, then create if not found
+    let team = await prisma.team.findFirst({ 
+      where: { 
+        OR: [
+          { name: teamName },
+          { name: { contains: teamName } }
+        ]
+      }
+    })
+
+    if (!team) {
+      team = await prisma.team.create({ 
+        data: { 
+          name: teamName, 
+          logoUrl: `/images/teams/${teamName.toLowerCase().replace(/\s+/g, '-')}.png` 
+        } 
+      })
+    }
 
     await prisma.teamStats.upsert({
       where: { teamId_year: { teamId: team.id, year } },
-      create: { teamId: team.id, year, wins, losses, winningPercentage: pct, runsScored, runsAllowed, runDifferential: runDiff },
-      update: { wins, losses, winningPercentage: pct, runsScored, runsAllowed, runDifferential: runDiff },
+      create: { 
+        teamId: team.id, 
+        year, 
+        wins, 
+        losses, 
+        winningPercentage: pct, 
+        runsScored, 
+        runsAllowed, 
+        runDifferential: runDiff 
+      },
+      update: { 
+        wins, 
+        losses, 
+        winningPercentage: pct, 
+        runsScored, 
+        runsAllowed, 
+        runDifferential: runDiff 
+      },
     })
   }
 }

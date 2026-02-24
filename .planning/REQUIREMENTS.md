@@ -97,13 +97,48 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| — | — | Pending |
+| DATA-01 | Phase 1: Data Foundation | Pending |
+| DATA-02 | Phase 1: Data Foundation | Pending |
+| DATA-03 | Phase 1: Data Foundation | Pending |
+| DATA-04 | Phase 1: Data Foundation | Pending |
+| DATA-05 | Phase 1: Data Foundation | Pending |
+| STAT-01 | Phase 2: Stats Engine | Pending |
+| STAT-02 | Phase 2: Stats Engine | Pending |
+| STAT-03 | Phase 2: Stats Engine | Pending |
+| STAT-04 | Phase 2: Stats Engine | Pending |
+| STAT-05 | Phase 2: Stats Engine | Pending |
+| STAT-06 | Phase 5: Design & Polish | Pending |
+| STAT-07 | Phase 5: Design & Polish | Pending |
+| STAT-08 | Phase 5: Design & Polish | Pending |
+| STAT-09 | Phase 5: Design & Polish | Pending |
+| PAGE-01 | Phase 3: Core Pages | Pending |
+| PAGE-02 | Phase 4: Content Pages | Pending |
+| PAGE-03 | Phase 3: Core Pages | Pending |
+| PAGE-04 | Phase 3: Core Pages | Pending |
+| PAGE-05 | Phase 2: Stats Engine | Pending |
+| PAGE-06 | Phase 3: Core Pages | Pending |
+| PAGE-07 | Phase 4: Content Pages | Pending |
+| PAGE-08 | Phase 4: Content Pages | Pending |
+| PAGE-09 | Phase 4: Content Pages | Pending |
+| PAGE-10 | Phase 4: Content Pages | Pending |
+| LIVE-01 | Phase 3: Core Pages | Pending |
+| LIVE-02 | Phase 3: Core Pages | Pending |
+| UX-01 | Phase 5: Design & Polish | Pending |
+| UX-02 | Phase 5: Design & Polish | Pending |
+| UX-03 | Phase 5: Design & Polish | Pending |
+| UX-04 | Phase 5: Design & Polish | Pending |
+| UX-05 | Phase 5: Design & Polish | Pending |
+| INFRA-01 | Phase 6: Infrastructure & Launch | Pending |
+| INFRA-02 | Phase 6: Infrastructure & Launch | Pending |
+| INFRA-03 | Phase 6: Infrastructure & Launch | Pending |
+| INFRA-04 | Phase 1: Data Foundation | Pending |
+| INFRA-05 | Phase 6: Infrastructure & Launch | Pending |
 
 **Coverage:**
-- v1 requirements: 32 total
-- Mapped to phases: 0
-- Unmapped: 32 (pending roadmap creation)
+- v1 requirements: 36 total
+- Mapped to phases: 36
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-23*
-*Last updated: 2026-02-23 after initial definition*
+*Last updated: 2026-02-23 after roadmap creation — traceability complete*

@@ -10,16 +10,16 @@ See: .planning/PROJECT.md (updated 2026-02-23)
 ## Current Position
 
 Phase: 3 of 6 (Core Pages)
-Plan: 1 of 4 in phase
+Plan: 4 of 4 in phase (03-01, 03-04 complete; 03-02, 03-03 pending)
 Status: In progress
-Last activity: 2026-03-04 — Completed 03-01-PLAN.md
+Last activity: 2026-03-04 — Completed 03-04-PLAN.md
 
-Progress: [███████░░░░░░░░░░░░░] 37%
+Progress: [████████░░░░░░░░░░░░] 42%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 9 min
 - Total execution time: 1.1 hours
 
@@ -29,11 +29,11 @@ Progress: [███████░░░░░░░░░░░░░] 37%
 |-------|-------|-------|----------|
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
-| 3 - Core Pages | 1/4 | 5 min | 5 min |
+| 3 - Core Pages | 2/4 | 8 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (5 min), 02-02 (5 min), 02-03 (5 min), 03-01 (5 min)
-- Trend: Stable / Fast
+- Last 5 plans: 02-01 (5 min), 02-02 (5 min), 02-03 (5 min), 03-01 (4 min), 03-04 (4 min)
+- Trend: Accelerating
 
 *Updated after each plan completion*
 
@@ -63,9 +63,9 @@ Recent decisions affecting current work:
 - [02-03]: Default hitting sort changed from OPS to wRC+ descending
 - [02-03]: ERA/WHIP/OPP AVG marked sortDescFirst: false; all other stats sortDescFirst: true
 - [02-03]: Page size set to 50 rows (up from TanStack default of 10)
-- [03-01]: Nav links extracted to shared array — DRYs desktop and mobile rendering
-- [03-01]: useRef for GameChanger widget ID (not useId) — avoids colon issues in CSS selectors
-- [03-01]: YouTube channel ID as placeholder — graceful degradation returns empty array
+- [03-04]: Hitting leaderboard categories: AVG, HR, RBI, wRC+ (focused set, removed OPS/OBP/SLG)
+- [03-04]: Pitching leaderboard categories expanded to 7: ERA, K, W, WHIP, IP, K/9, OPP AVG
+- [03-04]: OPP AVG added to ASCENDING_STATS — lower opponent batting average ranks higher
 
 ### Pending Todos
 
@@ -81,5 +81,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-04
-Stopped at: Completed 03-01-PLAN.md
+Stopped at: Completed 03-04-PLAN.md
 Resume file: None

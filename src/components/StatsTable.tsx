@@ -47,6 +47,9 @@ export default function StatsTable<T>({
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: { pageSize: 50 },
+    },
   })
 
   const stickyLefts = useMemo(() => {
@@ -74,9 +77,10 @@ export default function StatsTable<T>({
                 >
                   <div className="flex items-center space-x-1">
                     <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
-                    <span>
-                      {header.column.getIsSorted() === 'asc' && '↑'}
-                      {header.column.getIsSorted() === 'desc' && '↓'}
+                    <span className={header.column.getIsSorted() ? '' : 'text-gray-300'}>
+                      {header.column.getIsSorted() === 'asc' ? '↑' :
+                       header.column.getIsSorted() === 'desc' ? '↓' :
+                       header.column.getCanSort() ? '⇅' : ''}
                     </span>
                   </div>
                 </th>

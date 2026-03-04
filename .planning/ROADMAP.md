@@ -50,9 +50,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Fix data bugs — wrong sheet reference for totals, implement header-based column mapping
-- [ ] 02-02: Fix year/team/scope filtering and rebuild batting stats table
-- [ ] 02-03: Build pitching stats table and integrate both into the Stats page
+- [ ] 02-01-PLAN.md — Centralize 12 duplicated transforms into sheets.ts with header-based column mapping, update all API routes
+- [ ] 02-02-PLAN.md — Fix stats page data flow (year list bug, double fetch, qualifier proxy), add team filter
+- [ ] 02-03-PLAN.md — Smart sort direction per column, fix default sorts (wRC+/ERA), final integration verification
 
 ### Phase 3: Core Pages
 **Goal**: The site's primary pages exist and display correct, live data with working navigation between them

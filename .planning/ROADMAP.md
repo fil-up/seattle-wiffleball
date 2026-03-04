@@ -64,13 +64,14 @@ Plans:
   3. Leaderboards page shows top performers by stat category with year filtering
   4. GameChanger schedule/scores widget is embedded and functional on the appropriate page
   5. YouTube video stream embeds display on the appropriate page
-**Plans**: 4 plans
+**Plans**: 5 plans
 
 Plans:
 - [ ] 03-01-PLAN.md — Shared components & navigation: extract GameChangerWidget, create YouTubeEmbed, fix PageNavigation mobile menu, add Schedule/Media links
 - [ ] 03-02-PLAN.md — Home page + new pages: restructure home with standings sidebar & news, create Schedule page (full GC widget), create Media page (YouTube gallery)
 - [ ] 03-03-PLAN.md — Teams index & detail: logo-focused grid with records, roster section, team aggregate batting/pitching stats
 - [ ] 03-04-PLAN.md — Leaderboards podium: podium-style top 3, add K/9 to pitching transforms, expand to 11 stat categories
+- [ ] 03-05-PLAN.md — Gap closure: create player detail page, fix leaderboards year default
 
 ### Phase 4: Content Pages
 **Goal**: All remaining site pages exist with correct, browsable content

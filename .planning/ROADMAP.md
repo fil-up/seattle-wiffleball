@@ -67,10 +67,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 03-01: Build Home page with hero, standings widget, news preview, and quick links
-- [ ] 03-02: Build Teams index and Team detail pages with roster, records, and team stats
-- [ ] 03-03: Build Leaderboards page with stat category filtering
-- [ ] 03-04: Integrate GameChanger and YouTube embeds
+- [ ] 03-01-PLAN.md — Shared components & navigation: extract GameChangerWidget, create YouTubeEmbed, fix PageNavigation mobile menu, add Schedule/Media links
+- [ ] 03-02-PLAN.md — Home page + new pages: restructure home with standings sidebar & news, create Schedule page (full GC widget), create Media page (YouTube gallery)
+- [ ] 03-03-PLAN.md — Teams index & detail: logo-focused grid with records, roster section, team aggregate batting/pitching stats
+- [ ] 03-04-PLAN.md — Leaderboards podium: podium-style top 3, add K/9 to pitching transforms, expand to 11 stat categories
 
 ### Phase 4: Content Pages
 **Goal**: All remaining site pages exist with correct, browsable content

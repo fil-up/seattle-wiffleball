@@ -34,9 +34,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Remove Prisma/SQLite and centralize spreadsheet configuration
-- [ ] 01-02: Build shared gviz parsing utility and centralized API routes for all Sheets data
-- [ ] 01-03: Add caching layer and migrate all page components to use API routes
+- [ ] 01-01: Remove Prisma/SQLite artifacts, clean up dependencies, centralize spreadsheet ID in env var
+- [ ] 01-02: Build shared gviz parsing utility (src/lib/sheets.ts) with caching, rewrite all API routes to use it
+- [ ] 01-03: Migrate all client-side components from direct Google Sheets fetches to internal API routes
 
 ### Phase 2: Stats Engine
 **Goal**: Stats tables show accurate, correctly filtered batting and pitching data built on the new data pipeline

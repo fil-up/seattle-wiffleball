@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Accurate, browsable league stats and information — if the numbers are wrong or hard to find, nothing else matters.
-**Current focus:** Phase 3 complete — ready for Phase 4
+**Current focus:** Phase 3 gap closure complete — ready for Phase 4
 
 ## Current Position
 
-Phase: 3 of 6 (Core Pages) — COMPLETE
-Plan: 4 of 4 in phase
+Phase: 3 of 6 (Core Pages) — COMPLETE (including gap closure)
+Plan: 5 of 5 in phase (gap closure plan)
 Status: Phase complete
-Last activity: 2026-03-04 — Completed 03-02-PLAN.md
+Last activity: 2026-03-04 — Completed 03-05-PLAN.md (gap closure)
 
-Progress: [██████████░░░░░░░░░░] 50%
+Progress: [███████████░░░░░░░░░] 55%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Average duration: 8 min
-- Total execution time: 1.3 hours
+- Total plans completed: 11
+- Average duration: 7 min
+- Total execution time: 1.35 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [██████████░░░░░░░░░░] 50%
 |-------|-------|-------|----------|
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
-| 3 - Core Pages | 4/4 | 29 min | 7 min |
+| 3 - Core Pages | 5/5 | 32 min | 6 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (5 min), 03-01 (~6 min), 03-03 (6 min), 03-04 (6 min), 03-02 (5 min)
-- Trend: Stable
+- Last 5 plans: 03-01 (~6 min), 03-03 (6 min), 03-04 (6 min), 03-02 (5 min), 03-05 (3 min)
+- Trend: Stable/improving
 
 *Updated after each plan completion*
 
@@ -71,6 +71,9 @@ Recent decisions affecting current work:
 - [03-03]: Match standings to teams by franchise name (case-insensitive), most recent year
 - [03-03]: Team aggregate OPS averaged; wRC+ averaged only for qualified hitters
 - [03-03]: Players in both hitting/pitching datasets deduplicated, shown as "Both"
+- [03-05]: Plain HTML tables for player detail (no StatsTable) — simpler for static career display
+- [03-05]: Leaderboards year default via empty string init + setYear in years-fetch useEffect
+- [03-05]: Guard leaderboard data fetch with if (!year) return to prevent empty-year fetch
 
 ### Pending Todos
 
@@ -82,10 +85,9 @@ None yet.
 - No test coverage exists; refactoring in Phase 1 carries regression risk
 - OneDrive sync can corrupt .next cache on Windows — delete .next before builds if errors occur
 - Header labels in colIdx are inferred — need live gviz response verification (fallback indices ensure correctness)
-- Player detail page (/stats/players/[id]) does not exist yet — team detail roster links will 404
 
 ## Session Continuity
 
 Last session: 2026-03-04
-Stopped at: Completed 03-02-PLAN.md (Phase 3 complete)
+Stopped at: Completed 03-05-PLAN.md (Phase 3 gap closure complete)
 Resume file: None

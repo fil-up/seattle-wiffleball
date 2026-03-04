@@ -2,6 +2,9 @@ interface StatsFilterProps {
   years: number[]
   selectedYear: number | null
   onYearChange: (year: number | null) => void
+  teams?: string[]
+  selectedTeam?: string | null
+  onTeamChange?: (team: string | null) => void
   showQualified?: boolean
   qualified: boolean
   onQualifiedChange: (qualified: boolean) => void
@@ -11,6 +14,9 @@ export default function StatsFilter({
   years,
   selectedYear,
   onYearChange,
+  teams = [],
+  selectedTeam = null,
+  onTeamChange,
   showQualified = true,
   qualified,
   onQualifiedChange,
@@ -31,6 +37,27 @@ export default function StatsFilter({
             {years.map((year) => (
               <option key={year} value={year}>
                 {year}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {teams.length > 0 && onTeamChange && (
+        <div className="flex items-center space-x-2">
+          <label htmlFor="team" className="text-sm font-medium text-gray-700">
+            Team
+          </label>
+          <select
+            id="team"
+            value={selectedTeam ?? ''}
+            onChange={(e) => onTeamChange(e.target.value || null)}
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          >
+            <option value="">All Teams</option>
+            {teams.map((team) => (
+              <option key={team} value={team}>
+                {team}
               </option>
             ))}
           </select>

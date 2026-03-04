@@ -17,11 +17,11 @@ Requirements for initial release before the May 2026 season.
 
 ### Stats & Tables
 
-- [ ] **STAT-01**: Fix year/team/scope filtering and default population bugs
-- [ ] **STAT-02**: Fix wrong sheet reference (hitting totals pulling from pitching sheet IP instead of IH)
-- [ ] **STAT-03**: Map columns by header name instead of hardcoded indices
-- [ ] **STAT-04**: Player batting stats table with sorting and filtering
-- [ ] **STAT-05**: Player pitching stats table with sorting and filtering
+- [x] **STAT-01**: Fix year/team/scope filtering and default population bugs
+- [x] **STAT-02**: Fix wrong sheet reference (hitting totals pulling from pitching sheet IP instead of IH)
+- [x] **STAT-03**: Map columns by header name instead of hardcoded indices
+- [x] **STAT-04**: Player batting stats table with sorting and filtering
+- [x] **STAT-05**: Player pitching stats table with sorting and filtering
 - [ ] **STAT-06**: Team logo icons displayed inline in stats tables
 - [ ] **STAT-07**: Player headshot placeholders in stats/player views
 - [ ] **STAT-08**: Award icons (MVP, batting title, etc.) next to player names
@@ -33,7 +33,7 @@ Requirements for initial release before the May 2026 season.
 - [ ] **PAGE-02**: News section with article list and individual article pages
 - [ ] **PAGE-03**: Teams index with all teams, logos, records
 - [ ] **PAGE-04**: Team detail pages with roster, season records by year, team batting/pitching stats
-- [ ] **PAGE-05**: Stats page with full batting and pitching tables with filters
+- [x] **PAGE-05**: Stats page with full batting and pitching tables with filters
 - [ ] **PAGE-06**: Leaderboards page with top performers by stat category
 - [ ] **PAGE-07**: Rules page with league rules and regulations
 - [ ] **PAGE-08**: Archives page with past seasons, champions, historical records
@@ -102,11 +102,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-03 | Phase 1: Data Foundation | Complete |
 | DATA-04 | Phase 1: Data Foundation | Complete |
 | DATA-05 | Phase 1: Data Foundation | Complete |
-| STAT-01 | Phase 2: Stats Engine | Pending |
-| STAT-02 | Phase 2: Stats Engine | Pending |
-| STAT-03 | Phase 2: Stats Engine | Pending |
-| STAT-04 | Phase 2: Stats Engine | Pending |
-| STAT-05 | Phase 2: Stats Engine | Pending |
+| STAT-01 | Phase 2: Stats Engine | Complete |
+| STAT-02 | Phase 2: Stats Engine | Complete |
+| STAT-03 | Phase 2: Stats Engine | Complete |
+| STAT-04 | Phase 2: Stats Engine | Complete |
+| STAT-05 | Phase 2: Stats Engine | Complete |
 | STAT-06 | Phase 5: Design & Polish | Pending |
 | STAT-07 | Phase 5: Design & Polish | Pending |
 | STAT-08 | Phase 5: Design & Polish | Pending |
@@ -115,7 +115,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PAGE-02 | Phase 4: Content Pages | Pending |
 | PAGE-03 | Phase 3: Core Pages | Pending |
 | PAGE-04 | Phase 3: Core Pages | Pending |
-| PAGE-05 | Phase 2: Stats Engine | Pending |
+| PAGE-05 | Phase 2: Stats Engine | Complete |
 | PAGE-06 | Phase 3: Core Pages | Pending |
 | PAGE-07 | Phase 4: Content Pages | Pending |
 | PAGE-08 | Phase 4: Content Pages | Pending |
@@ -141,4 +141,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-23*
-*Last updated: 2026-03-03 — Phase 1 requirements marked Complete*
+*Last updated: 2026-03-04 — Phase 2 requirements marked Complete*

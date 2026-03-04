@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-02-23)
 
 ## Current Position
 
-Phase: 2 of 6 (Stats Engine) — COMPLETE
-Plan: 3 of 3 in phase (all complete)
-Status: Phase complete
-Last activity: 2026-03-04 — Completed 02-03-PLAN.md (final plan in Phase 2)
+Phase: 3 of 6 (Core Pages)
+Plan: 1 of 4 in phase
+Status: In progress
+Last activity: 2026-03-04 — Completed 03-01-PLAN.md
 
-Progress: [██████░░░░░░░░░░░░░░] 32%
+Progress: [███████░░░░░░░░░░░░░] 37%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: 10 min
-- Total execution time: 1.0 hours
+- Total plans completed: 7
+- Average duration: 9 min
+- Total execution time: 1.1 hours
 
 **By Phase:**
 
@@ -29,10 +29,11 @@ Progress: [██████░░░░░░░░░░░░░░] 32%
 |-------|-------|-------|----------|
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
+| 3 - Core Pages | 1/4 | 5 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (10 min), 02-01 (5 min), 02-02 (5 min), 02-03 (5 min)
-- Trend: Accelerating
+- Last 5 plans: 02-01 (5 min), 02-02 (5 min), 02-03 (5 min), 03-01 (5 min)
+- Trend: Stable / Fast
 
 *Updated after each plan completion*
 
@@ -62,6 +63,9 @@ Recent decisions affecting current work:
 - [02-03]: Default hitting sort changed from OPS to wRC+ descending
 - [02-03]: ERA/WHIP/OPP AVG marked sortDescFirst: false; all other stats sortDescFirst: true
 - [02-03]: Page size set to 50 rows (up from TanStack default of 10)
+- [03-01]: Nav links extracted to shared array — DRYs desktop and mobile rendering
+- [03-01]: useRef for GameChanger widget ID (not useId) — avoids colon issues in CSS selectors
+- [03-01]: YouTube channel ID as placeholder — graceful degradation returns empty array
 
 ### Pending Todos
 
@@ -77,5 +81,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-04
-Stopped at: Completed 02-03-PLAN.md — Phase 2 complete
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None

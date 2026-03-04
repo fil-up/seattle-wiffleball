@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Remove Prisma/SQLite artifacts, centralize spreadsheet ID in env var, stub dependent routes
+- [x] 01-01-PLAN.md — Remove Prisma/SQLite artifacts, centralize spreadsheet ID in env var, stub dependent routes
 - [ ] 01-02-PLAN.md — Build shared gviz parsing utility (sheets.ts) with caching, rewrite all API routes
 - [ ] 01-03-PLAN.md — Migrate all client components to fetch from API routes, add stale data banners
 
@@ -174,7 +174,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Foundation | 0/3 | Not started | - |
+| 1. Data Foundation | 1/3 | In progress | - |
 | 2. Stats Engine | 0/3 | Not started | - |
 | 3. Core Pages | 0/4 | Not started | - |
 | 4. Content Pages | 0/3 | Not started | - |
@@ -183,4 +183,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 ---
 *Roadmap created: 2026-02-23*
-*Last updated: 2026-02-23*
+*Last updated: 2026-03-03*

@@ -9,28 +9,29 @@ See: .planning/PROJECT.md (updated 2026-02-23)
 
 ## Current Position
 
-Phase: 1 of 6 (Data Foundation) — COMPLETE
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-03-03 — Completed 01-03-PLAN.md
+Phase: 2 of 6 (Stats Engine)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-03-04 — Completed 02-01-PLAN.md
 
-Progress: [████░░░░░░░░░░░░░░░░] 16%
+Progress: [█████░░░░░░░░░░░░░░░] 22%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 13 min
-- Total execution time: 0.7 hours
+- Total plans completed: 4
+- Average duration: 12 min
+- Total execution time: 0.8 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
+| 2 - Stats Engine | 1/3 | 5 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (20 min), 01-02 (10 min), 01-03 (10 min)
+- Last 5 plans: 01-01 (20 min), 01-02 (10 min), 01-03 (10 min), 02-01 (5 min)
 - Trend: Accelerating
 
 *Updated after each plan completion*
@@ -52,6 +53,9 @@ Recent decisions affecting current work:
 - [01-02]: Cache key format sheet!range to distinguish split ranges within same tab
 - [01-03]: Removed roster table from teams/[id] — Sheets-based route lacks player-team relationships (Phase 2)
 - [01-03]: Qualifier filter uses numeric wrcPlus > 0 instead of string-based 'Non-qualifier' check
+- [02-01]: Branch-specific fetchSheet calls for TypeScript type narrowing instead of union-typed transform variable
+- [02-01]: Case-insensitive header matching via toLowerCase in buildColumnMap
+- [02-01]: Fallback indices match existing hardcoded values for zero-change behavior
 
 ### Pending Todos
 
@@ -62,9 +66,10 @@ None yet.
 - Codebase has 36 v1 requirements (REQUIREMENTS.md header says 32 — count should be corrected)
 - No test coverage exists; refactoring in Phase 1 carries regression risk
 - OneDrive sync can corrupt .next cache on Windows — delete .next before builds if errors occur
+- Header labels in colIdx are inferred — need live gviz response verification (fallback indices ensure correctness)
 
 ## Session Continuity
 
-Last session: 2026-03-03T21:01:00Z
-Stopped at: Completed 01-03-PLAN.md — Phase 1 complete
+Last session: 2026-03-04T13:06:59Z
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None

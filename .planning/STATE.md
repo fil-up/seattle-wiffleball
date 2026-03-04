@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-02-23)
 ## Current Position
 
 Phase: 3 of 6 (Core Pages)
-Plan: 4 of 4 in phase (03-01, 03-04 complete; 03-02, 03-03 pending)
+Plan: 3 of 4 in phase
 Status: In progress
-Last activity: 2026-03-04 — Completed 03-04-PLAN.md
+Last activity: 2026-03-04 — Completed 03-03-PLAN.md
 
 Progress: [████████░░░░░░░░░░░░] 42%
 
@@ -21,7 +21,7 @@ Progress: [████████░░░░░░░░░░░░] 42%
 **Velocity:**
 - Total plans completed: 8
 - Average duration: 9 min
-- Total execution time: 1.1 hours
+- Total execution time: 1.2 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [████████░░░░░░░░░░░░] 42%
 |-------|-------|-------|----------|
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
-| 3 - Core Pages | 2/4 | 8 min | 4 min |
+| 3 - Core Pages | 2/4 | 12 min | 6 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (5 min), 02-02 (5 min), 02-03 (5 min), 03-01 (4 min), 03-04 (4 min)
-- Trend: Accelerating
+- Last 5 plans: 02-02 (5 min), 02-03 (5 min), 03-01 (~6 min), 03-03 (6 min)
+- Trend: Stable
 
 *Updated after each plan completion*
 
@@ -63,9 +63,9 @@ Recent decisions affecting current work:
 - [02-03]: Default hitting sort changed from OPS to wRC+ descending
 - [02-03]: ERA/WHIP/OPP AVG marked sortDescFirst: false; all other stats sortDescFirst: true
 - [02-03]: Page size set to 50 rows (up from TanStack default of 10)
-- [03-04]: Hitting leaderboard categories: AVG, HR, RBI, wRC+ (focused set, removed OPS/OBP/SLG)
-- [03-04]: Pitching leaderboard categories expanded to 7: ERA, K, W, WHIP, IP, K/9, OPP AVG
-- [03-04]: OPP AVG added to ASCENDING_STATS — lower opponent batting average ranks higher
+- [03-03]: Match standings to teams by franchise name (case-insensitive), most recent year
+- [03-03]: Team aggregate OPS averaged; wRC+ averaged only for qualified hitters
+- [03-03]: Players in both hitting/pitching datasets deduplicated, shown as "Both"
 
 ### Pending Todos
 
@@ -77,9 +77,10 @@ None yet.
 - No test coverage exists; refactoring in Phase 1 carries regression risk
 - OneDrive sync can corrupt .next cache on Windows — delete .next before builds if errors occur
 - Header labels in colIdx are inferred — need live gviz response verification (fallback indices ensure correctness)
+- Player detail page (/stats/players/[id]) does not exist yet — team detail roster links will 404
 
 ## Session Continuity
 
 Last session: 2026-03-04
-Stopped at: Completed 03-04-PLAN.md
+Stopped at: Completed 03-03-PLAN.md
 Resume file: None

@@ -2,43 +2,44 @@
 
 import React, { useState, useEffect } from 'react'
 
-interface StandingsRow {
-  Teams: string
-  Year: string
-  W: string
-  L: string
-  PCT: string
-  RF: string
-  RA: string
+interface YearlyStandingsRow {
+  team: string
+  year: string
+  wins: number
+  losses: number
+  pct: number
+  rf: number
+  ra: number
 }
 
 interface AllTimeRow {
-  Teams: string
-  W: string
-  L: string
-  PCT: string
-  Berth: string
-  PlayoffsW: string
-  PlayoffsL: string
-  PlayoffPCT: string
-  SeriesW: string
-  SeriesL: string
-  SeriesPCT: string
-  WSAPP: string
-  WSWin: string
-  RF: string
-  RA: string
-  RFPlayoffs: string
-  RAPlayoffs: string
-  RunsPerGame: string
-  RAPerGame: string
+  team: string
+  wins: number
+  losses: number
+  pct: number
+  rf: number
+  ra: number
+  runsPerGame: number
+  raPerGame: number
+  playoffsW: number
+  playoffsL: number
+  playoffPct: number
+  seriesW: number
+  seriesL: number
+  seriesPct: number
+  wsApp: number
+  wsWin: number
+  rfPlayoffs: number
+  raPlayoffs: number
+  berth: number
 }
 
 const SheetrockStandings: React.FC = () => {
-  const [standings, setStandings] = useState<StandingsRow[]>([])
+  const [standings, setStandings] = useState<YearlyStandingsRow[]>([])
   const [allTimeStandings, setAllTimeStandings] = useState<AllTimeRow[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [stale, setStale] = useState(false)
   const [selectedYear, setSelectedYear] = useState<string>('')
   const [availableYears, setAvailableYears] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState<'yearly' | 'alltime'>('yearly')
@@ -51,36 +52,20 @@ const SheetrockStandings: React.FC = () => {
   const fetchStandings = async () => {
     try {
       setLoading(true)
-      const response = await fetch(
-        `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=Standings&range=A54:T952`
-      )
+      const response = await fetch('/api/standings?scope=yearly')
       
       if (!response.ok) {
         throw new Error('Failed to fetch standings data')
       }
 
-      const text = await response.text()
-      const jsonText = text.substring(47).slice(0, -2)
-      const data = JSON.parse(jsonText)
+      const result = await response.json()
+      const { data, stale: isStale } = result
+      setStale((prev) => prev || isStale)
 
-      const rows = data.table.rows || []
-      const parsedData: StandingsRow[] = rows.map((row: any) => {
-        const cells = row.c || []
-        return {
-          Teams: cells[0]?.v || '',
-          Year: cells[1]?.v || '',
-          W: cells[2]?.v || '0',
-          L: cells[3]?.v || '0',
-          PCT: cells[4]?.v || '',
-          RF: cells[14]?.v || '0', // RF column (O) - 0-indexed so O=14
-          RA: cells[15]?.v || '0', // RA column (P) - 0-indexed so P=15
-        }
-      }).filter((row: StandingsRow) => row.Teams && row.Year && row.Teams.trim() !== '')
-
+      const parsedData: YearlyStandingsRow[] = data || []
       setStandings(parsedData)
       
-      // Extract unique years and set default to most recent
-      const years = [...new Set(parsedData.map((row: any) => row.Year))] as string[]
+      const years = [...new Set(parsedData.map((row) => row.year))]
       years.sort((a, b) => parseInt(b) - parseInt(a))
       setAvailableYears(years)
       if (years.length > 0) {
@@ -97,70 +82,33 @@ const SheetrockStandings: React.FC = () => {
 
   const fetchAllTimeStandings = async () => {
     try {
-      const response = await fetch(
-        `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=Standings&range=B1:T49`
-      )
+      const response = await fetch('/api/standings?scope=alltime')
       
       if (!response.ok) {
         throw new Error('Failed to fetch all-time standings data')
       }
 
-      const text = await response.text()
-      const jsonText = text.substring(47).slice(0, -2)
-      const data = JSON.parse(jsonText)
+      const result = await response.json()
+      const { data, stale: isStale } = result
+      setStale((prev) => prev || isStale)
 
-      const rows = data.table.rows || []
-      const allTimeRows = rows
-        .map((row: any) => {
-          const cells = row.c || []
-          return {
-            Teams: cells[0]?.v || '',
-            W: cells[1]?.v ? Math.round(parseFloat(cells[1].v)).toString() : '0',
-            L: cells[2]?.v ? Math.round(parseFloat(cells[2].v)).toString() : '0',
-            PCT: cells[3]?.v ? parseFloat(cells[3].v).toFixed(3) : '0.000',
-            RF: cells[4]?.v ? Math.round(parseFloat(cells[4].v)).toString() : '0',
-            RA: cells[5]?.v ? Math.round(parseFloat(cells[5].v)).toString() : '0',
-            RunsPerGame: cells[6]?.v ? parseFloat(cells[6].v).toFixed(2) : '0.00',
-            RAPerGame: cells[7]?.v ? parseFloat(cells[7].v).toFixed(2) : '0.00',
-            PlayoffsW: cells[8]?.v ? Math.round(parseFloat(cells[8].v)).toString() : '0',
-            PlayoffsL: cells[9]?.v ? Math.round(parseFloat(cells[9].v)).toString() : '0',
-            PlayoffPCT: cells[10]?.v ? parseFloat(cells[10].v).toFixed(3) : '0.000',
-            SeriesW: cells[11]?.v ? Math.round(parseFloat(cells[11].v)).toString() : '0',
-            SeriesL: cells[12]?.v ? Math.round(parseFloat(cells[12].v)).toString() : '0',
-            SeriesPCT: cells[13]?.v ? parseFloat(cells[13].v).toFixed(3) : '0.000',
-            WSAPP: cells[14]?.v ? Math.round(parseFloat(cells[14].v)).toString() : '0',
-            WSWin: cells[15]?.v ? Math.round(parseFloat(cells[15].v)).toString() : '0',
-            RFPlayoffs: cells[16]?.v ? Math.round(parseFloat(cells[16].v)).toString() : '0',
-            RAPlayoffs: cells[17]?.v ? Math.round(parseFloat(cells[17].v)).toString() : '0',
-            Berth: cells[18]?.v ? Math.round(parseFloat(cells[18].v)).toString() : '0'
-          }
-        })
-      
-      const filteredData = allTimeRows.filter((row: AllTimeRow) => {
-        return row.Teams && row.Teams.trim() !== '' && row.Teams !== '-' && row.Teams !== '~'
-      })
-
-      // Sort by win percentage (highest first)
-      const sortedData = filteredData.sort((a: AllTimeRow, b: AllTimeRow) => {
-        const aPct = parseFloat(a.PCT) || 0
-        const bPct = parseFloat(b.PCT) || 0
-        return bPct - aPct
+      const sortedData = (data || []).sort((a: AllTimeRow, b: AllTimeRow) => {
+        return (b.pct || 0) - (a.pct || 0)
       })
 
       setAllTimeStandings(sortedData)
     } catch (err) {
       console.error('Error fetching all-time standings:', err)
-      // Don't set error state for all-time data as it's secondary
     }
   }
 
-  const filteredStandings = standings.filter((row: any) => String(row.Year) === String(selectedYear))
+  const filteredStandings = standings.filter((row) => String(row.year) === String(selectedYear))
 
   if (loading) {
     return (
       <div className="flex justify-center items-center py-8">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <span className="ml-2 text-gray-600">Loading standings from Google Sheets...</span>
+        <span className="ml-2 text-gray-600">Loading standings...</span>
       </div>
     )
   }
@@ -181,6 +129,12 @@ const SheetrockStandings: React.FC = () => {
 
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
+      {stale && (
+        <div className="mx-6 mt-4 bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded text-sm">
+          Data may be outdated — showing last known data while we reconnect.
+        </div>
+      )}
+
       {/* Tab Navigation */}
       <div className="border-b border-gray-200">
         <nav className="-mb-px flex space-x-8 px-6">
@@ -243,26 +197,19 @@ const SheetrockStandings: React.FC = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredStandings.map((row, index) => {
-                  const wins = parseInt(row.W) || 0
-                  const losses = parseInt(row.L) || 0
-                  const runsFor = parseInt(row.RF) || 0
-                  const runsAgainst = parseInt(row.RA) || 0
-                  const runDiff = runsFor - runsAgainst
-                  
-                  // Format PCT as percentage, fallback to calculated if not provided
-                  const pctValue = row.PCT ? parseFloat(row.PCT) : null
-                  const displayPct = pctValue !== null ? pctValue.toFixed(3) : (wins + losses > 0 ? (wins / (wins + losses)).toFixed(3) : '0.000')
+                  const runDiff = row.rf - row.ra
+                  const displayPct = row.pct !== null ? row.pct.toFixed(3) : (row.wins + row.losses > 0 ? (row.wins / (row.wins + row.losses)).toFixed(3) : '0.000')
                   
                   return (
                     <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {row.Teams}
+                        {row.team}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{wins}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{losses}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.wins}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.losses}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{displayPct}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{runsFor}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{runsAgainst}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.rf}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.ra}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{runDiff}</td>
                     </tr>
                   )
@@ -302,47 +249,22 @@ const SheetrockStandings: React.FC = () => {
                   </tr>
                 ) : (
                   allTimeStandings.map((row, index) => {
-                    const wins = Math.round(parseFloat(row.W) || 0)
-                    const losses = Math.round(parseFloat(row.L) || 0)
-                    const playoffWins = Math.round(parseFloat(row.PlayoffsW) || 0)
-                    const playoffLosses = Math.round(parseFloat(row.PlayoffsL) || 0)
-                    const seriesWins = Math.round(parseFloat(row.SeriesW) || 0)
-                    const seriesLosses = Math.round(parseFloat(row.SeriesL) || 0)
-                    const wsAppearances = Math.round(parseFloat(row.WSAPP) || 0)
-                    const wsWins = Math.round(parseFloat(row.WSWin) || 0)
-                    const runsFor = Math.round(parseFloat(row.RF) || 0)
-                    const runsAgainst = Math.round(parseFloat(row.RA) || 0)
-                    
-                    // Format PCT as percentage, fallback to calculated if not provided
-                    const pctValue = row.PCT ? parseFloat(row.PCT) : null
-                    const displayPct = pctValue !== null ? pctValue.toFixed(3) : (wins + losses > 0 ? (wins / (wins + losses)).toFixed(3) : '0.000')
-                    
-                    // Format playoff and series records - handle 0 values properly
-                    const playoffRecord = (playoffWins > 0 || playoffLosses > 0) ? `${playoffWins}-${playoffLosses}` : '0-0'
-                    const seriesRecord = (seriesWins > 0 || seriesLosses > 0) ? `${seriesWins}-${seriesLosses}` : '0-0'
-                    
-                    // Fix WS record calculation: "WS Win - (WS APP - WS Win)" - handle 0 values
-                    const wsRecord = wsAppearances > 0 ? `${wsWins}-${wsAppearances - wsWins}` : '0-0'
-                    
-                    // Format per game stats to 2 decimal places
-                    const runsPerGame = row.RunsPerGame ? parseFloat(row.RunsPerGame).toFixed(2) : '0.00'
-                    const raPerGame = row.RAPerGame ? parseFloat(row.RAPerGame).toFixed(2) : '0.00'
-                    
-                    // Format playoff berths as integer - handle 0 values
-                    const playoffBerths = row.Berth ? Math.round(parseFloat(row.Berth)).toString() : '0'
+                    const playoffRecord = (row.playoffsW > 0 || row.playoffsL > 0) ? `${row.playoffsW}-${row.playoffsL}` : '0-0'
+                    const seriesRecord = (row.seriesW > 0 || row.seriesL > 0) ? `${row.seriesW}-${row.seriesL}` : '0-0'
+                    const wsRecord = row.wsApp > 0 ? `${row.wsWin}-${row.wsApp - row.wsWin}` : '0-0'
                     
                     return (
                       <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {row.Teams}
+                          {row.team}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{wins}-{losses}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{displayPct}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{runsFor}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{runsAgainst}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{runsPerGame}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{raPerGame}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{playoffBerths}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.wins}-{row.losses}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.pct.toFixed(3)}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.rf}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.ra}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.runsPerGame.toFixed(2)}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.raPerGame.toFixed(2)}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{row.berth}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{playoffRecord}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{seriesRecord}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{wsRecord}</td>

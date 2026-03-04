@@ -6,51 +6,29 @@ const StandingsDebug: React.FC = () => {
   const [standingsData, setStandingsData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [selectedRange, setSelectedRange] = useState<string>('A54:T952')
+  const [stale, setStale] = useState(false)
+  const [selectedScope, setSelectedScope] = useState<string>('yearly')
 
   useEffect(() => {
     fetchStandingsData()
-  }, [selectedRange])
+  }, [selectedScope])
 
   const fetchStandingsData = async () => {
     try {
       setLoading(true)
       setError(null)
 
-      // Fetch standings data from Google Sheets
-      const response = await fetch(
-        `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=Standings&range=${selectedRange}`
-      )
+      const response = await fetch(`/api/standings?scope=${selectedScope}`)
       
       if (!response.ok) {
         throw new Error('Failed to fetch standings data')
       }
 
-      const text = await response.text()
-      const jsonText = text.substring(47).slice(0, -2)
-      const data = JSON.parse(jsonText)
+      const result = await response.json()
+      const { data, stale: isStale } = result
+      setStale(isStale)
 
-      const rows = data.table.rows || []
-      const standings = rows
-        .map((row: any) => {
-          const cells = row.c || []
-          return {
-            Team: cells[0]?.v || '',
-            Year: cells[1]?.v || '',
-            W: cells[2]?.v || '',
-            L: cells[3]?.v || '',
-            PCT: cells[4]?.v || '',
-            RF: cells[14]?.v || '',
-            RA: cells[15]?.v || ''
-          }
-        })
-        .filter((item: any) => {
-          // Only show rows with valid team data
-          return item.Team && item.Team.trim() !== ''
-        })
-        .slice(0, 50) // Show first 50 rows
-
-      setStandingsData(standings)
+      setStandingsData((data || []).slice(0, 50))
     } catch (err) {
       console.error('Error fetching standings data:', err)
       setError('Failed to fetch standings data')
@@ -101,38 +79,41 @@ const StandingsDebug: React.FC = () => {
       <div className="px-6 py-4 border-b border-gray-200">
         <h2 className="text-xl font-semibold text-gray-900">Standings Data Debug</h2>
         <p className="text-sm text-gray-600 mt-1">
-          Raw data from Standings tab, cells A54:T952 (first 50 rows)
+          First 50 rows from /api/standings
         </p>
         <div className="mt-2 text-sm text-gray-600">
           <p><strong>Total Records:</strong> {standingsData.length}</p>
         </div>
         <div className="mt-4 flex items-center space-x-4">
-          <label htmlFor="range-select" className="text-sm font-medium text-gray-700">
-            Select Range:
+          <label htmlFor="scope-select" className="text-sm font-medium text-gray-700">
+            Select Scope:
           </label>
           <select
-            id="range-select"
-            value={selectedRange}
-            onChange={(e) => setSelectedRange(e.target.value)}
+            id="scope-select"
+            value={selectedScope}
+            onChange={(e) => setSelectedScope(e.target.value)}
             className="block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           >
-            <option value="A1:T100">A1:T100 (Headers + Early Data)</option>
-            <option value="A54:T952">A54:T952 (Current Range)</option>
-            <option value="A100:T200">A100:T200 (Alternative Range)</option>
-            <option value="A200:T400">A200:T400 (Alternative Range)</option>
-            <option value="A400:T600">A400:T600 (Alternative Range)</option>
-            <option value="A600:T800">A600:T800 (Alternative Range)</option>
-            <option value="A800:T1000">A800:T1000 (Alternative Range)</option>
+            <option value="yearly">Yearly</option>
+            <option value="alltime">All-Time</option>
           </select>
         </div>
       </div>
+
+      {stale && (
+        <div className="mx-6 mt-4 bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded text-sm">
+          Data may be outdated — showing last known data while we reconnect.
+        </div>
+      )}
       
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Team</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
+              {selectedScope === 'yearly' && (
+                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
+              )}
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">W</th>
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">L</th>
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PCT</th>
@@ -143,13 +124,15 @@ const StandingsDebug: React.FC = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {standingsData.map((item, index) => (
               <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.Team}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.Year}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.W}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.L}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.PCT}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.RF}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.RA}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.team}</td>
+                {selectedScope === 'yearly' && (
+                  <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.year}</td>
+                )}
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.wins}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.losses}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{(item.pct ?? 0).toFixed(3)}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.rf}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.ra}</td>
               </tr>
             ))}
           </tbody>

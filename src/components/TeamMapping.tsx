@@ -3,17 +3,19 @@
 import React, { useState, useEffect } from 'react'
 
 interface TeamMappingData {
-  uniqueTeams: string
-  teamCodes: string
-  franchiseCurrentName: string
-  franchiseCurrentCode: string
-  logoImageName: string
+  id: string
+  name: string
+  abbreviation: string
+  uniqueTeamName: string
+  teamCode: string
+  logoUrl: string
 }
 
 const TeamMapping: React.FC = () => {
   const [mappingData, setMappingData] = useState<TeamMappingData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [stale, setStale] = useState(false)
 
   useEffect(() => {
     fetchTeamMapping()
@@ -24,35 +26,19 @@ const TeamMapping: React.FC = () => {
       setLoading(true)
       setError(null)
 
-      // Fetch team mapping data from Google Sheets
-      const response = await fetch(
-        `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=Player/Team%20Adj&range=O4:S100`
-      )
+      const response = await fetch('/api/teams')
       
       if (!response.ok) {
         throw new Error('Failed to fetch team mapping data')
       }
 
-      const text = await response.text()
-      const jsonText = text.substring(47).slice(0, -2)
-      const data = JSON.parse(jsonText)
+      const result = await response.json()
+      const { data, stale: isStale } = result
+      setStale(isStale)
 
-      const rows = data.table.rows || []
-      const mapping = rows
-        .map((row: any) => {
-          const cells = row.c || []
-          return {
-            uniqueTeams: cells[0]?.v || '',
-            teamCodes: cells[1]?.v || '',
-            franchiseCurrentName: cells[2]?.v || '',
-            franchiseCurrentCode: cells[3]?.v || '',
-            logoImageName: cells[4]?.v || ''
-          }
-        })
-        .filter((item: TeamMappingData) => {
-          // Only show rows with valid team data
-          return item.uniqueTeams && item.uniqueTeams.trim() !== ''
-        })
+      const mapping: TeamMappingData[] = (data || []).filter(
+        (item: TeamMappingData) => item.uniqueTeamName && item.uniqueTeamName.trim() !== ''
+      )
 
       setMappingData(mapping)
     } catch (err) {
@@ -104,10 +90,13 @@ const TeamMapping: React.FC = () => {
     <div className="bg-white rounded-lg shadow">
       <div className="px-6 py-4 border-b border-gray-200">
         <h2 className="text-xl font-semibold text-gray-900">Team Mapping Data</h2>
-        <p className="text-sm text-gray-600 mt-1">
-          Raw data from "Player/Team Adj" tab, cells O4:S100
-        </p>
       </div>
+
+      {stale && (
+        <div className="mx-6 mt-4 bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded text-sm">
+          Data may be outdated — showing last known data while we reconnect.
+        </div>
+      )}
       
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
@@ -126,7 +115,7 @@ const TeamMapping: React.FC = () => {
                 Franchise Current Code
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Logo Image Name
+                Logo URL
               </th>
             </tr>
           </thead>
@@ -134,19 +123,19 @@ const TeamMapping: React.FC = () => {
             {mappingData.map((item, index) => (
               <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {item.uniqueTeams}
+                  {item.uniqueTeamName}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {item.teamCodes}
+                  {item.teamCode}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {item.franchiseCurrentName}
+                  {item.name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {item.franchiseCurrentCode}
+                  {item.abbreviation}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {item.logoImageName}
+                  {item.logoUrl}
                 </td>
               </tr>
             ))}
@@ -157,7 +146,6 @@ const TeamMapping: React.FC = () => {
       <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
         <div className="text-sm text-gray-600">
           <p><strong>Total Teams:</strong> {mappingData.length}</p>
-          <p><strong>Data Source:</strong> Player/Team Adj tab, cells O4:S100</p>
         </div>
       </div>
     </div>

@@ -2,49 +2,29 @@
 
 import React, { useState, useEffect } from 'react'
 
-interface PlayerBattingData {
-  Year: string
-  NameID: string
-  First: string
-  Last: string
-  Team: string
-  Season: string
-  AVG: string
-  GP: string
-  PA: string
-  AB: string
-  R: string
-  H: string
-  '2B': string
-  '3B': string
-  HR: string
-  RBI: string
-  BB: string
-  K: string
-  IBB: string
-  SF: string
-  TB: string
-  OBP: string
-  SLG: string
-  OPS: string
-  'K PCT': string
-  'BB PCT': string
-  CONTACT: string
-  'AB/HR': string
-  'OPS+': string
-  ISO: string
-  BABIP: string
-  wOBA: string
-  wRAA: string
-  wRC: string
-  'wRC+': string
-  'wRC+ Percentile': string
-  'wOBA (Num)': string
-  'wOBA (Den)': string
-  'OPS+*PAs': string
-  'wRAA*PAs': string
-  'wRC*PAs': string
-  'wRC+*PAs': string
+interface PlayerBattingRow {
+  id: string
+  playerId: string
+  player: { id: string; name: string }
+  year: number
+  team: string
+  games: number
+  plateAppearances: number
+  atBats: number
+  runs: number
+  hits: number
+  doubles: number
+  triples: number
+  homeRuns: number
+  rbis: number
+  walks: number
+  strikeouts: number
+  avg: number
+  obp: number
+  slg: number
+  ops: number
+  wrcPlus: number
+  teamLogo: string
 }
 
 interface PlayerBattingDataProps {
@@ -60,19 +40,17 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
   selectedPlayer,
   qualifierOnly = true
 }) => {
-  const [battingData, setBattingData] = useState<PlayerBattingData[]>([])
+  const [battingData, setBattingData] = useState<PlayerBattingRow[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [stale, setStale] = useState(false)
   const [availableYears, setAvailableYears] = useState<string[]>([])
   const [availableTeams, setAvailableTeams] = useState<string[]>([])
 
   useEffect(() => {
-    console.log('PlayerBattingData: selectedYear changed to:', selectedYear)
     if (selectedYear && typeof selectedYear === 'string' && selectedYear.trim() !== '') {
-      console.log('PlayerBattingData: Fetching data for year:', selectedYear)
       fetchBattingData()
     } else {
-      // If no year selected, don't show loading state
       setLoading(false)
     }
   }, [selectedYear])
@@ -82,84 +60,29 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
       setLoading(true)
       setError(null)
 
-      // Fetch batting data from Google Sheets IH tab
-      const response = await fetch(
-        `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=IH&range=A700:AP2000`
-      )
+      const response = await fetch('/api/players?type=hitting&scope=yearly')
       
       if (!response.ok) {
         throw new Error('Failed to fetch batting data')
       }
 
-      const text = await response.text()
-      const jsonText = text.substring(47).slice(0, -2)
-      const data = JSON.parse(jsonText)
+      const result = await response.json()
+      const { data, stale: isStale } = result
+      setStale(isStale)
 
-      const rows = data.table.rows || []
-      const batting = rows
-        .map((row: any) => {
-          const cells = row.c || []
-          return {
-            Year: cells[0]?.v || '',
-            NameID: cells[1]?.v || '',
-            First: cells[2]?.v || '',
-            Last: cells[3]?.v || '',
-            Team: cells[4]?.v || '',
-            Season: cells[5]?.v || '',
-            AVG: cells[6]?.v ? parseFloat(cells[6].v).toFixed(3) : '0.000',
-            GP: cells[7]?.v ? Math.round(parseFloat(cells[7].v)).toString() : '0',
-            PA: cells[8]?.v ? Math.round(parseFloat(cells[8].v)).toString() : '0',
-            AB: cells[9]?.v ? Math.round(parseFloat(cells[9].v)).toString() : '0',
-            R: cells[10]?.v ? Math.round(parseFloat(cells[10].v)).toString() : '0',
-            H: cells[11]?.v ? Math.round(parseFloat(cells[11].v)).toString() : '0',
-            '2B': cells[12]?.v ? Math.round(parseFloat(cells[12].v)).toString() : '0',
-            '3B': cells[13]?.v ? Math.round(parseFloat(cells[13].v)).toString() : '0',
-            HR: cells[14]?.v ? Math.round(parseFloat(cells[14].v)).toString() : '0',
-            RBI: cells[15]?.v ? Math.round(parseFloat(cells[15].v)).toString() : '0',
-            BB: cells[16]?.v ? Math.round(parseFloat(cells[16].v)).toString() : '0',
-            K: cells[17]?.v ? Math.round(parseFloat(cells[17].v)).toString() : '0',
-            IBB: cells[18]?.v ? Math.round(parseFloat(cells[18].v)).toString() : '0',
-            SF: cells[19]?.v ? Math.round(parseFloat(cells[19].v)).toString() : '0',
-            TB: cells[20]?.v ? Math.round(parseFloat(cells[20].v)).toString() : '0',
-            OBP: cells[21]?.v ? parseFloat(cells[21].v).toFixed(3) : '0.000',
-            SLG: cells[22]?.v ? parseFloat(cells[22].v).toFixed(3) : '0.000',
-            OPS: cells[23]?.v ? parseFloat(cells[23].v).toFixed(3) : '0.000',
-            'K PCT': cells[24]?.v ? parseFloat(cells[24].v).toFixed(3) : '0.000',
-            'BB PCT': cells[25]?.v ? parseFloat(cells[25].v).toFixed(3) : '0.000',
-            CONTACT: cells[26]?.v ? parseFloat(cells[26].v).toFixed(3) : '0.000',
-            'AB/HR': cells[27]?.v ? parseFloat(cells[27].v).toFixed(1) : '0.0',
-            'OPS+': cells[28]?.v ? Math.round(parseFloat(cells[28].v)).toString() : '0',
-            ISO: cells[29]?.v ? parseFloat(cells[29].v).toFixed(3) : '0.000',
-            BABIP: cells[30]?.v ? parseFloat(cells[30].v).toFixed(3) : '0.000',
-            wOBA: cells[31]?.v ? parseFloat(cells[31].v).toFixed(3) : '0.000',
-            wRAA: cells[32]?.v ? parseFloat(cells[32].v).toFixed(1) : '0.0',
-            wRC: cells[33]?.v ? parseFloat(cells[33].v).toFixed(1) : '0.0',
-            'wRC+': cells[34]?.v ? Math.round(parseFloat(cells[34].v)).toString() : '0',
-            'wRC+ Percentile': cells[35]?.v || '0',
-            'wOBA (Num)': cells[36]?.v ? parseFloat(cells[36].v).toFixed(1) : '0.0',
-            'wOBA (Den)': cells[37]?.v ? parseFloat(cells[37].v).toFixed(1) : '0.0',
-            'OPS+*PAs': cells[38]?.v ? parseFloat(cells[38].v).toFixed(1) : '0.0',
-            'wRAA*PAs': cells[39]?.v ? parseFloat(cells[39].v).toFixed(1) : '0.0',
-            'wRC*PAs': cells[40]?.v ? parseFloat(cells[40].v).toFixed(1) : '0.0',
-            'wRC+*PAs': cells[41]?.v ? parseFloat(cells[41].v).toFixed(1) : '0.0'
-          }
-        })
-        .filter((item: PlayerBattingData) => {
-          // Only show rows with valid player data
-          return item.First && item.Last && item.Team
-        })
+      const batting: PlayerBattingRow[] = (data || []).filter(
+        (item: PlayerBattingRow) => item.player.name.trim() !== '' && item.team
+      )
 
       setBattingData(batting)
 
-      // Extract unique years and teams
-      const years = [...new Set(batting.map((item: any) => item.Year))] as string[]
+      const years = [...new Set(batting.map((item) => String(item.year)))]
       years.sort((a, b) => parseInt(b) - parseInt(a))
-      const teams = [...new Set(batting.map((item: any) => item.Team))] as string[]
+      const teams = [...new Set(batting.map((item) => item.team))]
       teams.sort()
       
       setAvailableYears(years)
       setAvailableTeams(teams)
-
     } catch (err) {
       console.error('Error fetching batting data:', err)
       setError('Failed to fetch batting data')
@@ -168,16 +91,13 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
     }
   }
 
-  // Filter data based on props
   const filteredData = battingData.filter((item) => {
-    const yearMatch = !selectedYear || item.Year === selectedYear
-    const teamMatch = !selectedTeam || item.Team === selectedTeam
+    const yearMatch = !selectedYear || String(item.year) === selectedYear
+    const teamMatch = !selectedTeam || item.team === selectedTeam
     const playerMatch = !selectedPlayer || 
-      item.First.toLowerCase().includes(selectedPlayer.toLowerCase()) ||
-      item.Last.toLowerCase().includes(selectedPlayer.toLowerCase())
+      item.player.name.toLowerCase().includes(selectedPlayer.toLowerCase())
     
-    // Apply qualifier filter if enabled
-    const qualifierMatch = !qualifierOnly || item['wRC+ Percentile'] !== 'Non-qualifier'
+    const qualifierMatch = !qualifierOnly || (item.wrcPlus && item.wrcPlus > 0)
     
     return yearMatch && teamMatch && playerMatch && qualifierMatch
   })
@@ -223,18 +143,21 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
     <div className="bg-white rounded-lg shadow">
       <div className="px-6 py-4 border-b border-gray-200">
         <h2 className="text-xl font-semibold text-gray-900">Player Batting Data</h2>
-        <p className="text-sm text-gray-600 mt-1">
-          Data from IH tab, cells A700:AP2000
-        </p>
         <div className="mt-2 text-sm text-gray-600">
           <p><strong>Total Records:</strong> {filteredData.length} | <strong>Available Years:</strong> {availableYears.length} | <strong>Available Teams:</strong> {availableTeams.length}</p>
           {qualifierOnly && (
             <p className="text-blue-600 mt-1">
-              <strong>Filter:</strong> Showing qualified players only (excludes "Non-qualifier" in wRC+ Percentile)
+              <strong>Filter:</strong> Showing qualified players only
             </p>
           )}
         </div>
       </div>
+
+      {stale && (
+        <div className="mx-6 mt-4 bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded text-sm">
+          Data may be outdated — showing last known data while we reconnect.
+        </div>
+      )}
       
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
@@ -254,19 +177,19 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredData.slice(0, 20).map((item, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.Year}</td>
+              <tr key={item.id || index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.year}</td>
                 <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {item.First} {item.Last}
+                  {item.player.name}
                 </td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.Team}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.GP}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.PA}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.AVG}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.HR}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.RBI}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.OPS}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item['wRC+']}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.team}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.games}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.plateAppearances}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{(item.avg ?? 0).toFixed(3)}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.homeRuns}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.rbis}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{(item.ops ?? 0).toFixed(3)}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.wrcPlus}</td>
               </tr>
             ))}
           </tbody>

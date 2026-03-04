@@ -2,34 +2,26 @@
 
 import React, { useState, useEffect } from 'react'
 
-interface PlayerPitchingData {
-  Year: string
-  NameID: string
-  First: string
-  Last: string
-  Team: string
-  YearTeam: string
-  GP: string
-  GS: string
-  IP: string
-  R: string
-  ER: string
-  H: string
-  BB: string
-  IBB: string
-  K: string
-  CG: string
-  W: string
-  L: string
-  S: string
-  HLD: string
-  ERA: string
-  WHIP: string
-  'K PCT': string
-  'BB PCT': string
-  'K/BB': string
-  'OPP AVG': string
-  'ERA Percentile': string
+interface PlayerPitchingRow {
+  id: string
+  playerId: string
+  player: { id: string; name: string }
+  year: number
+  team: string
+  games: number
+  inningsPitched: number
+  wins: number
+  losses: number
+  saves: number
+  strikeouts: number
+  walks: number
+  hits: number
+  runs: number
+  earnedRuns: number
+  era: number
+  whip: number
+  oppAvg: number
+  teamLogo: string
 }
 
 interface PlayerPitchingDataProps {
@@ -45,19 +37,17 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
   selectedPlayer,
   qualifierOnly = true
 }) => {
-  const [pitchingData, setPitchingData] = useState<PlayerPitchingData[]>([])
+  const [pitchingData, setPitchingData] = useState<PlayerPitchingRow[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [stale, setStale] = useState(false)
   const [availableYears, setAvailableYears] = useState<string[]>([])
   const [availableTeams, setAvailableTeams] = useState<string[]>([])
 
   useEffect(() => {
-    console.log('PlayerPitchingData: selectedYear changed to:', selectedYear)
     if (selectedYear && typeof selectedYear === 'string' && selectedYear.trim() !== '') {
-      console.log('PlayerPitchingData: Fetching data for year:', selectedYear)
       fetchPitchingData()
     } else {
-      // If no year selected, don't show loading state
       setLoading(false)
     }
   }, [selectedYear])
@@ -67,69 +57,29 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
       setLoading(true)
       setError(null)
 
-      // Fetch pitching data from Google Sheets IP tab
-      const response = await fetch(
-        `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=IP&range=A300:AA999`
-      )
+      const response = await fetch('/api/players?type=pitching&scope=yearly')
       
       if (!response.ok) {
         throw new Error('Failed to fetch pitching data')
       }
 
-      const text = await response.text()
-      const jsonText = text.substring(47).slice(0, -2)
-      const data = JSON.parse(jsonText)
+      const result = await response.json()
+      const { data, stale: isStale } = result
+      setStale(isStale)
 
-      const rows = data.table.rows || []
-      const pitching = rows
-        .map((row: any) => {
-          const cells = row.c || []
-          return {
-            Year: cells[0]?.v || '',
-            NameID: cells[1]?.v || '',
-            First: cells[2]?.v || '',
-            Last: cells[3]?.v || '',
-            Team: cells[4]?.v || '',
-            YearTeam: cells[5]?.v || '',
-            GP: cells[6]?.v ? Math.round(parseFloat(cells[6].v)).toString() : '0',
-            GS: cells[7]?.v ? Math.round(parseFloat(cells[7].v)).toString() : '0',
-            IP: cells[8]?.v ? parseFloat(cells[8].v).toFixed(1) : '0.0',
-            R: cells[9]?.v ? Math.round(parseFloat(cells[9].v)).toString() : '0',
-            ER: cells[10]?.v ? Math.round(parseFloat(cells[10].v)).toString() : '0',
-            H: cells[11]?.v ? Math.round(parseFloat(cells[11].v)).toString() : '0',
-            BB: cells[12]?.v ? Math.round(parseFloat(cells[12].v)).toString() : '0',
-            IBB: cells[13]?.v ? Math.round(parseFloat(cells[13].v)).toString() : '0',
-            K: cells[14]?.v ? Math.round(parseFloat(cells[14].v)).toString() : '0',
-            CG: cells[15]?.v ? Math.round(parseFloat(cells[15].v)).toString() : '0',
-            W: cells[16]?.v ? Math.round(parseFloat(cells[16].v)).toString() : '0',
-            L: cells[17]?.v ? Math.round(parseFloat(cells[17].v)).toString() : '0',
-            S: cells[18]?.v ? Math.round(parseFloat(cells[18].v)).toString() : '0',
-            HLD: cells[19]?.v ? Math.round(parseFloat(cells[19].v)).toString() : '0',
-            ERA: cells[20]?.v ? parseFloat(cells[20].v).toFixed(2) : '0.00',
-            WHIP: cells[21]?.v ? parseFloat(cells[21].v).toFixed(2) : '0.00',
-            'K PCT': cells[22]?.v ? parseFloat(cells[22].v).toFixed(3) : '0.000',
-            'BB PCT': cells[23]?.v ? parseFloat(cells[23].v).toFixed(3) : '0.000',
-            'K/BB': cells[24]?.v ? parseFloat(cells[24].v).toFixed(2) : '0.00',
-            'OPP AVG': cells[25]?.v ? parseFloat(cells[25].v).toFixed(3) : '0.000',
-            'ERA Percentile': cells[26]?.v || '0'
-          }
-        })
-        .filter((item: PlayerPitchingData) => {
-          // Only show rows with valid player data
-          return item.First && item.Last && item.Team
-        })
+      const pitching: PlayerPitchingRow[] = (data || []).filter(
+        (item: PlayerPitchingRow) => item.player.name.trim() !== '' && item.team
+      )
 
       setPitchingData(pitching)
 
-      // Extract unique years and teams
-      const years = [...new Set(pitching.map((item: any) => item.Year))] as string[]
+      const years = [...new Set(pitching.map((item) => String(item.year)))]
       years.sort((a, b) => parseInt(b) - parseInt(a))
-      const teams = [...new Set(pitching.map((item: any) => item.Team))] as string[]
+      const teams = [...new Set(pitching.map((item) => item.team))]
       teams.sort()
       
       setAvailableYears(years)
       setAvailableTeams(teams)
-
     } catch (err) {
       console.error('Error fetching pitching data:', err)
       setError('Failed to fetch pitching data')
@@ -138,18 +88,13 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
     }
   }
 
-  // Filter data based on props
-  const filteredData = pitchingData.filter((item: any) => {
-    if (selectedYear && item.Year !== selectedYear) return false
-    if (selectedTeam && item.Team !== selectedTeam) return false
+  const filteredData = pitchingData.filter((item) => {
+    if (selectedYear && String(item.year) !== selectedYear) return false
+    if (selectedTeam && item.team !== selectedTeam) return false
     if (selectedPlayer) {
-      const fullName = `${item.First} ${item.Last}`.toLowerCase()
-      if (!fullName.includes(selectedPlayer.toLowerCase())) return false
+      if (!item.player.name.toLowerCase().includes(selectedPlayer.toLowerCase())) return false
     }
-    
-    // Apply qualifier filter if enabled
-    if (qualifierOnly && item['ERA Percentile'] === 'Non-qualifier') return false
-    
+    if (qualifierOnly && item.era === 0) return false
     return true
   })
 
@@ -194,18 +139,21 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
     <div className="bg-white rounded-lg shadow">
       <div className="px-6 py-4 border-b border-gray-200">
         <h2 className="text-xl font-semibold text-gray-900">Player Pitching Data</h2>
-        <p className="text-sm text-gray-600 mt-1">
-          Data from IP tab, cells A300:AA999
-        </p>
         <div className="mt-2 text-sm text-gray-600">
           <p><strong>Total Records:</strong> {filteredData.length} | <strong>Available Years:</strong> {availableYears.length} | <strong>Available Teams:</strong> {availableTeams.length}</p>
           {qualifierOnly && (
             <p className="text-blue-600 mt-1">
-              <strong>Filter:</strong> Showing qualified players only (excludes "Non-qualifier" in ERA Percentile)
+              <strong>Filter:</strong> Showing qualified players only
             </p>
           )}
         </div>
       </div>
+
+      {stale && (
+        <div className="mx-6 mt-4 bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded text-sm">
+          Data may be outdated — showing last known data while we reconnect.
+        </div>
+      )}
       
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
@@ -215,7 +163,6 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Team</th>
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">GP</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">GS</th>
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP</th>
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">W</th>
               <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">L</th>
@@ -227,21 +174,20 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredData.slice(0, 20).map((item, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.Year}</td>
+              <tr key={item.id || index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.year}</td>
                 <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {item.First} {item.Last}
+                  {item.player.name}
                 </td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.Team}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.GP}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.GS}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.IP}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.W}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.L}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.K}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.BB}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.ERA}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.WHIP}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.team}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.games}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{(item.inningsPitched ?? 0).toFixed(1)}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.wins}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.losses}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.strikeouts}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.walks}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{(item.era ?? 0).toFixed(2)}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{(item.whip ?? 0).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>

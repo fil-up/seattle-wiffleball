@@ -10,6 +10,7 @@ interface HittingRow {
   playerId: string
   player: { id: string; name: string }
   year?: number
+  seasons?: number
   games: number
   plateAppearances?: number
   atBats: number
@@ -26,9 +27,6 @@ interface HittingRow {
   slg: number
   ops: number
   opsPlus?: number
-  woba?: number
-  wobaNum?: number
-  wobaDen?: number
   wrcPlus?: number
   team?: string
   teamLogo?: string
@@ -39,6 +37,7 @@ interface PitchingRow {
   playerId: string
   player: { id: string; name: string }
   year?: number
+  seasons?: number
   games: number
   inningsPitched: number
   wins: number
@@ -64,189 +63,40 @@ export default function PlayersStats() {
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
   const [qualified, setQualified] = useState(true)
   const [loading, setLoading] = useState(true)
+  const [stale, setStale] = useState(false)
   const [totalsPaQual, setTotalsPaQual] = useState(100)
   const [totalsIpQual, setTotalsIpQual] = useState(75)
   const [search, setSearch] = useState('')
 
-  // Fetch data from Google Sheets
   const fetchData = async (category: 'hitting' | 'pitching', isYearly: boolean) => {
     try {
       setLoading(true)
-      
-      let url: string
-      if (category === 'hitting') {
-        if (isYearly) {
-          // Batting by year: "IH" tab, cells A700:AP2000
-          url = `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=IH&range=A700:AP2000`
-        } else {
-          // Batting all-time totals: "IP" tab, cells C2:AL600
-          url = `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=IP&range=C2:AL600`
-        }
-      } else {
-        if (isYearly) {
-          // Pitching stats by year: "IP" tab, cells A300:AA999
-          url = `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=IP&range=A300:AA999`
-        } else {
-          // Player all-time pitching stats: "IP" tab, cells C1:AA1
-          url = `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=IP&range=C1:AA1`
-        }
-      }
 
-      const response = await fetch(url)
+      const scopeParam = isYearly ? 'yearly' : 'totals'
+      const response = await fetch(`/api/players?type=${category}&scope=${scopeParam}`)
       if (!response.ok) {
         throw new Error('Failed to fetch data')
       }
 
-      const text = await response.text()
-      const jsonText = text.substring(47).slice(0, -2)
-      const data = JSON.parse(jsonText)
+      const result = await response.json()
+      const { data, stale: isStale } = result
+      setStale(isStale)
 
-      const rows = data.table.rows || []
-      let processed: any[] = []
+      let processed: any[] = data || []
 
-      if (category === 'hitting') {
-        if (isYearly) {
-          // Process yearly hitting data
-          processed = rows.map((row: any, index: number) => {
-            const cells = row.c || []
-            return {
-              id: `hitting-${index}`,
-              playerId: cells[1]?.v || '', // Name ID column
-              player: { 
-                id: cells[1]?.v || '', 
-                name: `${cells[2]?.v || ''} ${cells[3]?.v || ''}`.trim() // FIRST + LAST
-              },
-              year: parseInt(cells[0]?.v || '0'), // Year column
-              team: cells[4]?.v || '', // TEAM column
-              games: parseInt(cells[6]?.v || '0'), // GP column
-              plateAppearances: parseInt(cells[8]?.v || '0'), // PA column
-              atBats: parseInt(cells[9]?.v || '0'), // AB column
-              runs: parseInt(cells[10]?.v || '0'), // R column
-              hits: parseInt(cells[11]?.v || '0'), // H column
-              doubles: parseInt(cells[12]?.v || '0'), // 2B column
-              triples: parseInt(cells[13]?.v || '0'), // 3B column
-              homeRuns: parseInt(cells[14]?.v || '0'), // HR column
-              rbis: parseInt(cells[15]?.v || '0'), // RBI column
-              walks: parseInt(cells[16]?.v || '0'), // BB column
-              strikeouts: parseInt(cells[17]?.v || '0'), // K column
-              avg: parseFloat(cells[18]?.v || '0'), // AVG column
-              obp: parseFloat(cells[21]?.v || '0'), // OBP column
-              slg: parseFloat(cells[22]?.v || '0'), // SLG column
-              ops: parseFloat(cells[23]?.v || '0'), // OPS column
-              wrcPlus: parseFloat(cells[34]?.v || '0'), // wRC+ column
-              teamLogo: `/images/teams/${cells[4]?.v || 'default'}-logo.png`
-            }
-          }).filter((row: any) => row.player.name.trim() !== '' && row.year > 0)
-        } else {
-          // Process all-time hitting totals
-          processed = rows.map((row: any, index: number) => {
-            const cells = row.c || []
-            return {
-              id: `hitting-totals-${index}`,
-              playerId: `${cells[0]?.v || ''}-${cells[1]?.v || ''}`, // FIRST + LAST
-              player: { 
-                id: `${cells[0]?.v || ''}-${cells[1]?.v || ''}`, 
-                name: `${cells[0]?.v || ''} ${cells[1]?.v || ''}`.trim()
-              },
-              seasons: parseInt(cells[2]?.v || '0'), // SEASONS column
-              games: parseInt(cells[4]?.v || '0'), // GP column
-              plateAppearances: parseInt(cells[5]?.v || '0'), // PA column
-              atBats: parseInt(cells[6]?.v || '0'), // AB column
-              runs: parseInt(cells[7]?.v || '0'), // R column
-              hits: parseInt(cells[8]?.v || '0'), // H column
-              doubles: parseInt(cells[9]?.v || '0'), // 2B column
-              triples: parseInt(cells[10]?.v || '0'), // 3B column
-              homeRuns: parseInt(cells[11]?.v || '0'), // HR column
-              rbis: parseInt(cells[12]?.v || '0'), // RBI column
-              walks: parseInt(cells[13]?.v || '0'), // BB column
-              strikeouts: parseInt(cells[14]?.v || '0'), // K column
-              avg: parseFloat(cells[15]?.v || '0'), // AVG column
-              obp: parseFloat(cells[18]?.v || '0'), // OBP column
-              slg: parseFloat(cells[19]?.v || '0'), // SLG column
-              ops: parseFloat(cells[20]?.v || '0'), // OPS column
-              wrcPlus: parseFloat(cells[33]?.v || '0'), // wRC+ column
-              teamLogo: `/images/teams/default-logo.png`
-            }
-          }).filter((row: any) => row.player.name.trim() !== '' && row.seasons > 0)
-        }
-      } else {
-        if (isYearly) {
-          // Process yearly pitching data
-          processed = rows.map((row: any, index: number) => {
-            const cells = row.c || []
-            return {
-              id: `pitching-${index}`,
-              playerId: cells[1]?.v || '', // Name ID column
-              player: { 
-                id: cells[1]?.v || '', 
-                name: `${cells[2]?.v || ''} ${cells[3]?.v || ''}`.trim() // FIRST + LAST
-              },
-              year: parseInt(cells[0]?.v || '0'), // Year column
-              team: cells[4]?.v || '', // TEAM column
-              games: parseInt(cells[6]?.v || '0'), // GP column
-              inningsPitched: parseFloat(cells[8]?.v || '0'), // IP column
-              wins: parseInt(cells[11]?.v || '0'), // W column
-              losses: parseInt(cells[12]?.v || '0'), // L column
-              saves: parseInt(cells[13]?.v || '0'), // S column
-              strikeouts: parseInt(cells[14]?.v || '0'), // K column
-              walks: parseInt(cells[15]?.v || '0'), // BB column
-              hits: parseInt(cells[16]?.v || '0'), // H column
-              runs: parseInt(cells[17]?.v || '0'), // R column
-              earnedRuns: parseInt(cells[18]?.v || '0'), // ER column
-              era: parseFloat(cells[19]?.v || '0'), // ERA column
-              whip: parseFloat(cells[20]?.v || '0'), // WHIP column
-              oppAvg: parseFloat(cells[24]?.v || '0'), // OPP AVG column
-              teamLogo: `/images/teams/${cells[4]?.v || 'default'}-logo.png`
-            }
-          }).filter((row: any) => row.player.name.trim() !== '' && row.year > 0)
-        } else {
-          // Process all-time pitching totals
-          processed = rows.map((row: any, index: number) => {
-            const cells = row.c || []
-            return {
-              id: `pitching-totals-${index}`,
-              playerId: `${cells[0]?.v || ''}-${cells[1]?.v || ''}`, // FIRST + LAST
-              player: { 
-                id: `${cells[0]?.v || ''}-${cells[1]?.v || ''}`, 
-                name: `${cells[0]?.v || ''} ${cells[1]?.v || ''}`.trim()
-              },
-              seasons: parseInt(cells[2]?.v || '0'), // SEASONS column
-              games: parseInt(cells[4]?.v || '0'), // GP column
-              inningsPitched: parseFloat(cells[6]?.v || '0'), // IP column
-              wins: parseInt(cells[11]?.v || '0'), // W column
-              losses: parseInt(cells[12]?.v || '0'), // L column
-              saves: parseInt(cells[13]?.v || '0'), // S column
-              strikeouts: parseInt(cells[14]?.v || '0'), // K column
-              walks: parseInt(cells[15]?.v || '0'), // BB column
-              hits: parseInt(cells[16]?.v || '0'), // H column
-              runs: parseInt(cells[17]?.v || '0'), // R column
-              earnedRuns: parseInt(cells[18]?.v || '0'), // ER column
-              era: parseFloat(cells[19]?.v || '0'), // ERA column
-              whip: parseFloat(cells[20]?.v || '0'), // WHIP column
-              oppAvg: parseFloat(cells[24]?.v || '0'), // OPP AVG column
-              teamLogo: `/images/teams/default-logo.png`
-            }
-          }).filter((row: any) => row.player.name.trim() !== '' && row.seasons > 0)
-        }
-      }
-
-      // Apply filters
       if (isYearly && selectedYear) {
         processed = processed.filter((row: any) => row.year === selectedYear)
       }
 
       if (qualified && isYearly) {
         if (category === 'hitting') {
-          // Filter by wRC+ percentile (exclude "Non-qualifier")
           processed = processed.filter((row: any) => row.wrcPlus && row.wrcPlus > 0)
         } else {
-          // Filter by ERA percentile (exclude "Non-qualifier")
           processed = processed.filter((row: any) => row.era && row.era > 0)
         }
       }
 
       if (!isYearly) {
-        // Apply minimum qualifiers for totals
         if (category === 'hitting') {
           processed = processed.filter((row: any) => (row.plateAppearances || 0) >= totalsPaQual)
         } else {
@@ -262,7 +112,6 @@ export default function PlayersStats() {
     }
   }
 
-  // Fetch years for yearly view
   useEffect(() => {
     if (tab === "hitting") {
       fetchData('hitting', true)
@@ -271,13 +120,11 @@ export default function PlayersStats() {
     }
   }, [tab])
 
-  // Fetch data when parameters change
   useEffect(() => {
     const isYearly = scope === "yearly"
     fetchData(tab, isYearly)
   }, [tab, scope, selectedYear, qualified, totalsPaQual, totalsIpQual])
 
-  // Extract unique years from yearly data
   useEffect(() => {
     if (scope === "yearly" && stats.length > 0) {
       const uniqueYears = Array.from(new Set(stats.map(s => s.year).filter(Boolean))).sort((a, b) => b - a)
@@ -288,14 +135,12 @@ export default function PlayersStats() {
     }
   }, [stats, scope, selectedYear])
 
-  // Derived filtered stats by search
   const visibleStats = useMemo(() => {
     if (!search.trim()) return stats
     const q = search.toLowerCase()
     return stats.filter((row: any) => (row.player?.name || '').toLowerCase().includes(q))
   }, [stats, search])
 
-  // Define columns based on tab and scope
   const columns = useMemo(() => {
     if (tab === "hitting") {
       const base = [
@@ -358,6 +203,11 @@ export default function PlayersStats() {
     <div className="min-h-screen bg-gray-50">
       <PageNavigation />
     <div className="container mx-auto px-4 py-8">
+      {stale && (
+        <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+          Data may be outdated — we&apos;re having trouble reaching the latest stats. Showing last known data.
+        </div>
+      )}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Player Statistics</h1>
         <div className="flex items-center gap-3">

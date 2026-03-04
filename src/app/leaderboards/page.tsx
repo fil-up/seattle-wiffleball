@@ -53,7 +53,7 @@ function mapToPlayers(rows: Row[], statKey: string) {
 }
 
 export default function LeaderboardsPage() {
-  const [year, setYear] = useState<string>('all')
+  const [year, setYear] = useState<string>('')
   const [years, setYears] = useState<number[]>([])
   const [hitData, setHitData] = useState<Record<string, Row[]>>({})
   const [pitData, setPitData] = useState<Record<string, Row[]>>({})
@@ -68,10 +68,13 @@ export default function LeaderboardsPage() {
         setStale((prev) => prev || isStale)
         const ys = Array.from(new Set((data as any[]).map((s: any) => s.year).filter(Boolean))).sort((a: number, b: number) => b - a)
         setYears(ys)
+        if (ys.length > 0) setYear(String(ys[0]))
+        else setYear('all')
       })
   }, [])
 
   useEffect(() => {
+    if (!year) return
     setLoading(true)
     const fetchStat = async (category: 'hitting' | 'pitching', statKey: string) => {
       const params = new URLSearchParams()

@@ -7,7 +7,7 @@ import {
   transformTotalsPitching,
 } from '@/lib/sheets'
 
-const ASCENDING_STATS = new Set(['era', 'whip'])
+const ASCENDING_STATS = new Set(['era', 'whip', 'oppAvg'])
 
 function getSortValue(row: Record<string, any>, stat: string): number {
   return typeof row[stat] === 'number' ? row[stat] : 0

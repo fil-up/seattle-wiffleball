@@ -179,6 +179,7 @@ export interface YearlyPitchingRow {
   earnedRuns: number
   era: number
   whip: number
+  k9: number
   oppAvg: number
   teamLogo: string
 }
@@ -200,6 +201,7 @@ export interface TotalsPitchingRow {
   earnedRuns: number
   era: number
   whip: number
+  k9: number
   oppAvg: number
   teamLogo: string
 }
@@ -306,6 +308,8 @@ export function transformYearlyPitching(
       if (!first && !last) return null
 
       const team = cellString(row, colIdx(cm, 'team', 4))
+      const inningsPitched = cellFloat(row, colIdx(cm, 'ip', 8), 1)
+      const strikeouts = cellNumber(row, colIdx(cm, 'k', 14))
       return {
         id: `pitching-${index}`,
         playerId: nameId,
@@ -313,17 +317,18 @@ export function transformYearlyPitching(
         year: cellNumber(row, colIdx(cm, 'year', 0)),
         team,
         games: cellNumber(row, colIdx(cm, 'g', 6)),
-        inningsPitched: cellFloat(row, colIdx(cm, 'ip', 8), 1),
+        inningsPitched,
         wins: cellNumber(row, colIdx(cm, 'w', 11)),
         losses: cellNumber(row, colIdx(cm, 'l', 12)),
         saves: cellNumber(row, colIdx(cm, 'sv', 13)),
-        strikeouts: cellNumber(row, colIdx(cm, 'k', 14)),
+        strikeouts,
         walks: cellNumber(row, colIdx(cm, 'bb', 15)),
         hits: cellNumber(row, colIdx(cm, 'h', 16)),
         runs: cellNumber(row, colIdx(cm, 'r', 17)),
         earnedRuns: cellNumber(row, colIdx(cm, 'er', 18)),
         era: cellFloat(row, colIdx(cm, 'era', 19), 2),
         whip: cellFloat(row, colIdx(cm, 'whip', 20), 2),
+        k9: inningsPitched > 0 ? parseFloat(((strikeouts / inningsPitched) * 9).toFixed(2)) : 0,
         oppAvg: cellFloat(row, colIdx(cm, 'opp avg', 24), 3),
         teamLogo: `/images/teams/${team || 'default'}-logo.png`,
       }
@@ -345,6 +350,8 @@ export function transformTotalsPitching(
       const last = cellString(row, colIdx(cm, 'last', 1))
       if (!first && !last) return null
       const id = `${first}-${last}`
+      const inningsPitched = cellFloat(row, colIdx(cm, 'ip', 6), 1)
+      const strikeouts = cellNumber(row, colIdx(cm, 'k', 14))
 
       return {
         id: `pitching-totals-${index}`,
@@ -352,17 +359,18 @@ export function transformTotalsPitching(
         player: { id, name: `${first} ${last}`.trim() },
         seasons: cellNumber(row, colIdx(cm, 'seasons', 2)),
         games: cellNumber(row, colIdx(cm, 'g', 4)),
-        inningsPitched: cellFloat(row, colIdx(cm, 'ip', 6), 1),
+        inningsPitched,
         wins: cellNumber(row, colIdx(cm, 'w', 11)),
         losses: cellNumber(row, colIdx(cm, 'l', 12)),
         saves: cellNumber(row, colIdx(cm, 'sv', 13)),
-        strikeouts: cellNumber(row, colIdx(cm, 'k', 14)),
+        strikeouts,
         walks: cellNumber(row, colIdx(cm, 'bb', 15)),
         hits: cellNumber(row, colIdx(cm, 'h', 16)),
         runs: cellNumber(row, colIdx(cm, 'r', 17)),
         earnedRuns: cellNumber(row, colIdx(cm, 'er', 18)),
         era: cellFloat(row, colIdx(cm, 'era', 19), 2),
         whip: cellFloat(row, colIdx(cm, 'whip', 20), 2),
+        k9: inningsPitched > 0 ? parseFloat(((strikeouts / inningsPitched) * 9).toFixed(2)) : 0,
         oppAvg: cellFloat(row, colIdx(cm, 'opp avg', 24), 3),
         teamLogo: '/images/teams/default-logo.png',
       }

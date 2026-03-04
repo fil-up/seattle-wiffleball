@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-23)
 ## Current Position
 
 Phase: 2 of 6 (Stats Engine)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-03-04 — Completed 02-01-PLAN.md
+Last activity: 2026-03-04 — Completed 02-02-PLAN.md
 
-Progress: [█████░░░░░░░░░░░░░░░] 22%
+Progress: [█████░░░░░░░░░░░░░░░] 26%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 12 min
-- Total execution time: 0.8 hours
+- Total plans completed: 5
+- Average duration: 11 min
+- Total execution time: 0.9 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
-| 2 - Stats Engine | 1/3 | 5 min | 5 min |
+| 2 - Stats Engine | 2/3 | 10 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (20 min), 01-02 (10 min), 01-03 (10 min), 02-01 (5 min)
+- Last 5 plans: 01-02 (10 min), 01-03 (10 min), 02-01 (5 min), 02-02 (5 min)
 - Trend: Accelerating
 
 *Updated after each plan completion*
@@ -56,6 +56,9 @@ Recent decisions affecting current work:
 - [02-01]: Branch-specific fetchSheet calls for TypeScript type narrowing instead of union-typed transform variable
 - [02-01]: Case-insensitive header matching via toLowerCase in buildColumnMap
 - [02-01]: Fallback indices match existing hardcoded values for zero-change behavior
+- [02-02]: Year list derived from unfiltered allData via useMemo (fixes circular dependency)
+- [02-02]: Single useEffect for fetch triggered by [tab, scope] only (fixes double-fetch)
+- [02-02]: Dynamic qualifier: floor(3.1 * avgGP) PA hitting, floor(1 * avgGP) IP pitching
 
 ### Pending Todos
 
@@ -70,6 +73,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04T13:06:59Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-03-04
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None

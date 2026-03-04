@@ -175,7 +175,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Data Foundation | 3/3 | Complete | 2026-03-03 |
-| 2. Stats Engine | 0/3 | Not started | - |
+| 2. Stats Engine | 2/3 | In progress | - |
 | 3. Core Pages | 0/4 | Not started | - |
 | 4. Content Pages | 0/3 | Not started | - |
 | 5. Design & Polish | 0/3 | Not started | - |

@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Data Foundation** - Consolidate on Google Sheets, remove Prisma/SQLite, centralize config and parsing
 - [x] **Phase 2: Stats Engine** - Fix stat bugs, build accurate batting/pitching tables with working filters
-- [ ] **Phase 3: Core Pages** - Build Home, Teams, Leaderboards pages and embed live/media widgets
+- [x] **Phase 3: Core Pages** - Build Home, Teams, Leaderboards pages and embed live/media widgets
 - [ ] **Phase 4: Content Pages** - Build News, Rules, Archives, Info, and Hall of Fame pages
 - [ ] **Phase 5: Design & Polish** - Visual refinement, responsive layout, theming, and UX consistency
 - [ ] **Phase 6: Infrastructure & Launch** - Cleanup, deploy to Vercel, ensure non-developer maintainability
@@ -177,7 +177,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. Data Foundation | 3/3 | Complete | 2026-03-03 |
 | 2. Stats Engine | 3/3 | Complete | 2026-03-04 |
-| 3. Core Pages | 0/4 | Not started | - |
+| 3. Core Pages | 5/5 | Complete | 2026-03-04 |
 | 4. Content Pages | 0/3 | Not started | - |
 | 5. Design & Polish | 0/3 | Not started | - |
 | 6. Infrastructure & Launch | 0/3 | Not started | - |

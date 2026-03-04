@@ -29,12 +29,12 @@ Requirements for initial release before the May 2026 season.
 
 ### Pages
 
-- [ ] **PAGE-01**: Home page with hero section, standings widget, news preview, featured teams, quick links
+- [x] **PAGE-01**: Home page with hero section, standings widget, news preview, featured teams, quick links
 - [ ] **PAGE-02**: News section with article list and individual article pages
-- [ ] **PAGE-03**: Teams index with all teams, logos, records
-- [ ] **PAGE-04**: Team detail pages with roster, season records by year, team batting/pitching stats
+- [x] **PAGE-03**: Teams index with all teams, logos, records
+- [x] **PAGE-04**: Team detail pages with roster, season records by year, team batting/pitching stats
 - [x] **PAGE-05**: Stats page with full batting and pitching tables with filters
-- [ ] **PAGE-06**: Leaderboards page with top performers by stat category
+- [x] **PAGE-06**: Leaderboards page with top performers by stat category
 - [ ] **PAGE-07**: Rules page with league rules and regulations
 - [ ] **PAGE-08**: Archives page with past seasons, champions, historical records
 - [ ] **PAGE-09**: Info page with about the league, field location, how to join
@@ -42,8 +42,8 @@ Requirements for initial release before the May 2026 season.
 
 ### Live & Media
 
-- [ ] **LIVE-01**: Embed GameChanger widget for schedule and live scores
-- [ ] **LIVE-02**: Embed YouTube video streams for game broadcasts
+- [x] **LIVE-01**: Embed GameChanger widget for schedule and live scores
+- [x] **LIVE-02**: Embed YouTube video streams for game broadcasts
 
 ### Design & UX
 
@@ -111,18 +111,18 @@ Which phases cover which requirements. Updated during roadmap creation.
 | STAT-07 | Phase 5: Design & Polish | Pending |
 | STAT-08 | Phase 5: Design & Polish | Pending |
 | STAT-09 | Phase 5: Design & Polish | Pending |
-| PAGE-01 | Phase 3: Core Pages | Pending |
+| PAGE-01 | Phase 3: Core Pages | Complete |
 | PAGE-02 | Phase 4: Content Pages | Pending |
-| PAGE-03 | Phase 3: Core Pages | Pending |
-| PAGE-04 | Phase 3: Core Pages | Pending |
+| PAGE-03 | Phase 3: Core Pages | Complete |
+| PAGE-04 | Phase 3: Core Pages | Complete |
 | PAGE-05 | Phase 2: Stats Engine | Complete |
-| PAGE-06 | Phase 3: Core Pages | Pending |
+| PAGE-06 | Phase 3: Core Pages | Complete |
 | PAGE-07 | Phase 4: Content Pages | Pending |
 | PAGE-08 | Phase 4: Content Pages | Pending |
 | PAGE-09 | Phase 4: Content Pages | Pending |
 | PAGE-10 | Phase 4: Content Pages | Pending |
-| LIVE-01 | Phase 3: Core Pages | Pending |
-| LIVE-02 | Phase 3: Core Pages | Pending |
+| LIVE-01 | Phase 3: Core Pages | Complete |
+| LIVE-02 | Phase 3: Core Pages | Complete |
 | UX-01 | Phase 5: Design & Polish | Pending |
 | UX-02 | Phase 5: Design & Polish | Pending |
 | UX-03 | Phase 5: Design & Polish | Pending |
@@ -141,4 +141,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-23*
-*Last updated: 2026-03-04 — Phase 2 requirements marked Complete*
+*Last updated: 2026-03-04 — Phase 3 requirements marked Complete*

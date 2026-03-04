@@ -1,45 +1,41 @@
 import { NextResponse } from 'next/server'
+import { fetchSheet, cellString, GvizRow } from '@/lib/sheets'
+
+export const dynamic = 'force-dynamic'
+
+function transformTeams(rows: GvizRow[]) {
+  return rows
+    .map((row) => {
+      const uniqueTeamName = cellString(row, 0)
+      const teamCode = cellString(row, 1)
+      const franchiseName = cellString(row, 2)
+      const franchiseCode = cellString(row, 3)
+      const logoImageName = cellString(row, 4)
+
+      if (!uniqueTeamName || !franchiseName) return null
+
+      return {
+        id: franchiseCode.toLowerCase(),
+        name: franchiseName,
+        abbreviation: franchiseCode,
+        uniqueTeamName,
+        teamCode,
+        logoUrl: logoImageName
+          ? `/images/teams/${logoImageName}`
+          : '/images/teams/default-team-logo.png',
+      }
+    })
+    .filter(Boolean)
+}
 
 export async function GET() {
   try {
-    // Fetch team mapping data from Google Sheets
-    const response = await fetch(
-      `https://docs.google.com/spreadsheets/d/1bkQNmqFBqBqyqwo5vtNZHSDYTwvU1_WSsfE2GlBd3Ek/gviz/tq?tqx=out:json&sheet=Player/Team%20Adj&range=O4:S100`
+    const { data, stale } = await fetchSheet(
+      'Player/Team Adj',
+      'O4:S100',
+      (rows) => transformTeams(rows)
     )
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch team data')
-    }
-
-    const text = await response.text()
-    const jsonText = text.substring(47).slice(0, -2)
-    const data = JSON.parse(jsonText)
-
-    const rows = data.table.rows || []
-    const teams = rows
-      .map((row: any) => {
-        const cells = row.c || []
-        const uniqueTeams = cells[0]?.v || ''
-        const teamCodes = cells[1]?.v || ''
-        const franchiseCurrentName = cells[2]?.v || ''
-        const franchiseCurrentCode = cells[3]?.v || ''
-        const logoImageName = cells[4]?.v || ''
-        
-        // Only return teams with valid data
-        if (!uniqueTeams || !franchiseCurrentName) return null
-
-      return {
-          id: franchiseCurrentCode.toLowerCase(),
-          name: franchiseCurrentName,
-          abbreviation: franchiseCurrentCode,
-          uniqueTeamName: uniqueTeams,
-          teamCode: teamCodes,
-          logoUrl: logoImageName ? `/images/teams/${logoImageName}` : '/images/teams/default-team-logo.png'
-        }
-      })
-      .filter(Boolean) // Remove null entries
-
-    return NextResponse.json(teams)
+    return NextResponse.json({ data, stale })
   } catch (error) {
     console.error('Error fetching teams:', error)
     return NextResponse.json(

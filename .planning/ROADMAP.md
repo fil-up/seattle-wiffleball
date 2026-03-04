@@ -12,7 +12,7 @@ This roadmap takes the existing ~80% complete Next.js site and delivers a produc
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Data Foundation** - Consolidate on Google Sheets, remove Prisma/SQLite, centralize config and parsing
+- [x] **Phase 1: Data Foundation** - Consolidate on Google Sheets, remove Prisma/SQLite, centralize config and parsing
 - [ ] **Phase 2: Stats Engine** - Fix stat bugs, build accurate batting/pitching tables with working filters
 - [ ] **Phase 3: Core Pages** - Build Home, Teams, Leaderboards pages and embed live/media widgets
 - [ ] **Phase 4: Content Pages** - Build News, Rules, Archives, Info, and Hall of Fame pages
@@ -36,7 +36,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 01-01-PLAN.md — Remove Prisma/SQLite artifacts, centralize spreadsheet ID in env var, stub dependent routes
 - [x] 01-02-PLAN.md — Build shared gviz parsing utility (sheets.ts) with caching, rewrite all API routes
-- [ ] 01-03-PLAN.md — Migrate all client components to fetch from API routes, add stale data banners
+- [x] 01-03-PLAN.md — Migrate all client components to fetch from API routes, add stale data banners
 
 ### Phase 2: Stats Engine
 **Goal**: Stats tables show accurate, correctly filtered batting and pitching data built on the new data pipeline
@@ -174,7 +174,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Foundation | 2/3 | In progress | - |
+| 1. Data Foundation | 3/3 | Complete | 2026-03-03 |
 | 2. Stats Engine | 0/3 | Not started | - |
 | 3. Core Pages | 0/4 | Not started | - |
 | 4. Content Pages | 0/3 | Not started | - |

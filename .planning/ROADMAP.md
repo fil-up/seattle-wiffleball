@@ -13,7 +13,7 @@ This roadmap takes the existing ~80% complete Next.js site and delivers a produc
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Data Foundation** - Consolidate on Google Sheets, remove Prisma/SQLite, centralize config and parsing
-- [ ] **Phase 2: Stats Engine** - Fix stat bugs, build accurate batting/pitching tables with working filters
+- [x] **Phase 2: Stats Engine** - Fix stat bugs, build accurate batting/pitching tables with working filters
 - [ ] **Phase 3: Core Pages** - Build Home, Teams, Leaderboards pages and embed live/media widgets
 - [ ] **Phase 4: Content Pages** - Build News, Rules, Archives, Info, and Hall of Fame pages
 - [ ] **Phase 5: Design & Polish** - Visual refinement, responsive layout, theming, and UX consistency
@@ -175,7 +175,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Data Foundation | 3/3 | Complete | 2026-03-03 |
-| 2. Stats Engine | 2/3 | In progress | - |
+| 2. Stats Engine | 3/3 | Complete | 2026-03-04 |
 | 3. Core Pages | 0/4 | Not started | - |
 | 4. Content Pages | 0/3 | Not started | - |
 | 5. Design & Polish | 0/3 | Not started | - |

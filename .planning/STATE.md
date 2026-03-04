@@ -5,33 +5,33 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Accurate, browsable league stats and information — if the numbers are wrong or hard to find, nothing else matters.
-**Current focus:** Phase 2 — Stats Engine
+**Current focus:** Phase 3 — Core Pages
 
 ## Current Position
 
-Phase: 2 of 6 (Stats Engine)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-03-04 — Completed 02-02-PLAN.md
+Phase: 2 of 6 (Stats Engine) — COMPLETE
+Plan: 3 of 3 in phase (all complete)
+Status: Phase complete
+Last activity: 2026-03-04 — Completed 02-03-PLAN.md (final plan in Phase 2)
 
-Progress: [█████░░░░░░░░░░░░░░░] 26%
+Progress: [██████░░░░░░░░░░░░░░] 32%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 11 min
-- Total execution time: 0.9 hours
+- Total plans completed: 6
+- Average duration: 10 min
+- Total execution time: 1.0 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
-| 2 - Stats Engine | 2/3 | 10 min | 5 min |
+| 2 - Stats Engine | 3/3 | 15 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (10 min), 01-03 (10 min), 02-01 (5 min), 02-02 (5 min)
+- Last 5 plans: 01-03 (10 min), 02-01 (5 min), 02-02 (5 min), 02-03 (5 min)
 - Trend: Accelerating
 
 *Updated after each plan completion*
@@ -56,9 +56,12 @@ Recent decisions affecting current work:
 - [02-01]: Branch-specific fetchSheet calls for TypeScript type narrowing instead of union-typed transform variable
 - [02-01]: Case-insensitive header matching via toLowerCase in buildColumnMap
 - [02-01]: Fallback indices match existing hardcoded values for zero-change behavior
-- [02-02]: Year list derived from unfiltered allData via useMemo (fixes circular dependency)
-- [02-02]: Single useEffect for fetch triggered by [tab, scope] only (fixes double-fetch)
-- [02-02]: Dynamic qualifier: floor(3.1 * avgGP) PA hitting, floor(1 * avgGP) IP pitching
+- [02-02]: Year list derived from unfiltered allData via useMemo (fixes circular dependency bug)
+- [02-02]: Single useEffect for fetching, triggered by [tab, scope] only (fixes double-fetch)
+- [02-02]: Dynamic qualifier: floor(3.1 * avgGP) PA for hitting, floor(1 * avgGP) IP for pitching
+- [02-03]: Default hitting sort changed from OPS to wRC+ descending
+- [02-03]: ERA/WHIP/OPP AVG marked sortDescFirst: false; all other stats sortDescFirst: true
+- [02-03]: Page size set to 50 rows (up from TanStack default of 10)
 
 ### Pending Todos
 
@@ -74,5 +77,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-04
-Stopped at: Completed 02-02-PLAN.md
+Stopped at: Completed 02-03-PLAN.md — Phase 2 complete
 Resume file: None

@@ -122,60 +122,60 @@ export default function PlayersStats() {
   const columns = useMemo(() => {
     if (tab === "hitting") {
       const base = [
-        { header: "Player", accessorKey: "player.name", cell: ({ getValue }: any) => getValue() || '' },
-        { header: "Team", accessorKey: "team", cell: ({ getValue }: any) => getValue() || '' },
-  { header: "G", accessorKey: "games" },
-  { header: "PA", accessorKey: "plateAppearances" },
-  { header: "AB", accessorKey: "atBats" },
-  { header: "R", accessorKey: "runs" },
-  { header: "H", accessorKey: "hits" },
-  { header: "2B", accessorKey: "doubles" },
-  { header: "3B", accessorKey: "triples" },
-  { header: "HR", accessorKey: "homeRuns" },
-  { header: "RBI", accessorKey: "rbis" },
-  { header: "BB", accessorKey: "walks" },
-  { header: "SO", accessorKey: "strikeouts" },
-  { header: "AVG", accessorKey: "avg", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
-  { header: "OBP", accessorKey: "obp", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
-  { header: "SLG", accessorKey: "slg", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
-  { header: "OPS", accessorKey: "ops", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
-        { header: "wRC+", accessorKey: "wrcPlus", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(0) }
+        { header: "Player", accessorKey: "player.name", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
+        { header: "Team", accessorKey: "team", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
+        { header: "G", accessorKey: "games", sortDescFirst: true },
+        { header: "PA", accessorKey: "plateAppearances", sortDescFirst: true },
+        { header: "AB", accessorKey: "atBats", sortDescFirst: true },
+        { header: "R", accessorKey: "runs", sortDescFirst: true },
+        { header: "H", accessorKey: "hits", sortDescFirst: true },
+        { header: "2B", accessorKey: "doubles", sortDescFirst: true },
+        { header: "3B", accessorKey: "triples", sortDescFirst: true },
+        { header: "HR", accessorKey: "homeRuns", sortDescFirst: true },
+        { header: "RBI", accessorKey: "rbis", sortDescFirst: true },
+        { header: "BB", accessorKey: "walks", sortDescFirst: true },
+        { header: "SO", accessorKey: "strikeouts", sortDescFirst: true },
+        { header: "AVG", accessorKey: "avg", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
+        { header: "OBP", accessorKey: "obp", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
+        { header: "SLG", accessorKey: "slg", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
+        { header: "OPS", accessorKey: "ops", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
+        { header: "wRC+", accessorKey: "wrcPlus", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(0) },
       ]
-      
+
       if (scope === "totals") {
-        base.splice(1, 0, { header: "Seasons", accessorKey: "seasons" })
+        base.splice(1, 0, { header: "Seasons", accessorKey: "seasons", sortDescFirst: true })
       }
-      
+
       return base
     } else {
       const base = [
-        { header: "Player", accessorKey: "player.name", cell: ({ getValue }: any) => getValue() || '' },
-        { header: "Team", accessorKey: "team", cell: ({ getValue }: any) => getValue() || '' },
-  { header: "G", accessorKey: "games" },
-  { header: "IP", accessorKey: "inningsPitched", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(1) },
-  { header: "W", accessorKey: "wins" },
-  { header: "L", accessorKey: "losses" },
-  { header: "SV", accessorKey: "saves" },
-  { header: "K", accessorKey: "strikeouts" },
-  { header: "BB", accessorKey: "walks" },
-  { header: "H", accessorKey: "hits" },
-  { header: "R", accessorKey: "runs" },
-  { header: "ER", accessorKey: "earnedRuns" },
-  { header: "ERA", accessorKey: "era", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(2) },
-  { header: "WHIP", accessorKey: "whip", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(2) },
-        { header: "OPP AVG", accessorKey: "oppAvg", cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) }
+        { header: "Player", accessorKey: "player.name", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
+        { header: "Team", accessorKey: "team", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
+        { header: "G", accessorKey: "games", sortDescFirst: true },
+        { header: "IP", accessorKey: "inningsPitched", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(1) },
+        { header: "W", accessorKey: "wins", sortDescFirst: true },
+        { header: "L", accessorKey: "losses", sortDescFirst: true },
+        { header: "SV", accessorKey: "saves", sortDescFirst: true },
+        { header: "K", accessorKey: "strikeouts", sortDescFirst: true },
+        { header: "BB", accessorKey: "walks", sortDescFirst: true },
+        { header: "H", accessorKey: "hits", sortDescFirst: true },
+        { header: "R", accessorKey: "runs", sortDescFirst: true },
+        { header: "ER", accessorKey: "earnedRuns", sortDescFirst: true },
+        { header: "ERA", accessorKey: "era", sortDescFirst: false, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(2) },
+        { header: "WHIP", accessorKey: "whip", sortDescFirst: false, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(2) },
+        { header: "OPP AVG", accessorKey: "oppAvg", sortDescFirst: false, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
       ]
 
-        if (scope === "totals") {
-        base.splice(1, 0, { header: "Seasons", accessorKey: "seasons" })
+      if (scope === "totals") {
+        base.splice(1, 0, { header: "Seasons", accessorKey: "seasons", sortDescFirst: true })
       }
-      
+
       return base
     }
   }, [tab, scope])
 
-  const initialSort = tab === "hitting" ? "ops" : "era"
-  const initialSortDesc = tab === "pitching" ? false : true
+  const initialSort = tab === "hitting" ? "wrcPlus" : "era"
+  const initialSortDesc = tab === "hitting"
 
   return (
     <div className="min-h-screen bg-gray-50">

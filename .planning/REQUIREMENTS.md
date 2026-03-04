@@ -9,11 +9,11 @@ Requirements for initial release before the May 2026 season.
 
 ### Data Architecture
 
-- [ ] **DATA-01**: Consolidate on Google Sheets as single data source, removing Prisma/SQLite entirely
-- [ ] **DATA-02**: Centralize spreadsheet ID in environment variable (currently hardcoded in 12+ files)
-- [ ] **DATA-03**: Centralize gviz response parsing into a shared utility (replace fragile substring logic)
-- [ ] **DATA-04**: Proxy all Sheets data through Next.js API routes (no client-side fetches to Google)
-- [ ] **DATA-05**: Add caching layer for Sheets data to avoid hitting Google on every page load
+- [x] **DATA-01**: Consolidate on Google Sheets as single data source, removing Prisma/SQLite entirely
+- [x] **DATA-02**: Centralize spreadsheet ID in environment variable (currently hardcoded in 12+ files)
+- [x] **DATA-03**: Centralize gviz response parsing into a shared utility (replace fragile substring logic)
+- [x] **DATA-04**: Proxy all Sheets data through Next.js API routes (no client-side fetches to Google)
+- [x] **DATA-05**: Add caching layer for Sheets data to avoid hitting Google on every page load
 
 ### Stats & Tables
 
@@ -58,7 +58,7 @@ Requirements for initial release before the May 2026 season.
 - [ ] **INFRA-01**: Deploy to Vercel with proper environment configuration
 - [ ] **INFRA-02**: Remove unused dependencies (sheetrock, graceful-fs)
 - [ ] **INFRA-03**: Remove debug pages and console.logs
-- [ ] **INFRA-04**: Remove Prisma/SQLite entirely (schema, client, dev.db, import script)
+- [x] **INFRA-04**: Remove Prisma/SQLite entirely (schema, client, dev.db, import script)
 - [ ] **INFRA-05**: Clean, maintainable codebase a non-developer can update (news JSON, env vars, image drops)
 
 ## v2 Requirements
@@ -97,11 +97,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 1: Data Foundation | Pending |
-| DATA-02 | Phase 1: Data Foundation | Pending |
-| DATA-03 | Phase 1: Data Foundation | Pending |
-| DATA-04 | Phase 1: Data Foundation | Pending |
-| DATA-05 | Phase 1: Data Foundation | Pending |
+| DATA-01 | Phase 1: Data Foundation | Complete |
+| DATA-02 | Phase 1: Data Foundation | Complete |
+| DATA-03 | Phase 1: Data Foundation | Complete |
+| DATA-04 | Phase 1: Data Foundation | Complete |
+| DATA-05 | Phase 1: Data Foundation | Complete |
 | STAT-01 | Phase 2: Stats Engine | Pending |
 | STAT-02 | Phase 2: Stats Engine | Pending |
 | STAT-03 | Phase 2: Stats Engine | Pending |
@@ -131,7 +131,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-01 | Phase 6: Infrastructure & Launch | Pending |
 | INFRA-02 | Phase 6: Infrastructure & Launch | Pending |
 | INFRA-03 | Phase 6: Infrastructure & Launch | Pending |
-| INFRA-04 | Phase 1: Data Foundation | Pending |
+| INFRA-04 | Phase 1: Data Foundation | Complete |
 | INFRA-05 | Phase 6: Infrastructure & Launch | Pending |
 
 **Coverage:**
@@ -141,4 +141,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-23*
-*Last updated: 2026-02-23 after roadmap creation — traceability complete*
+*Last updated: 2026-03-03 — Phase 1 requirements marked Complete*

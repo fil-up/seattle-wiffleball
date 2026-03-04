@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Accurate, browsable league stats and information — if the numbers are wrong or hard to find, nothing else matters.
-**Current focus:** Phase 3 — Core Pages
+**Current focus:** Phase 3 complete — ready for Phase 4
 
 ## Current Position
 
-Phase: 3 of 6 (Core Pages)
-Plan: 3 of 4 in phase
-Status: In progress
-Last activity: 2026-03-04 — Completed 03-03-PLAN.md
+Phase: 3 of 6 (Core Pages) — COMPLETE
+Plan: 4 of 4 in phase
+Status: Phase complete
+Last activity: 2026-03-04 — Completed 03-02-PLAN.md
 
-Progress: [████████░░░░░░░░░░░░] 42%
+Progress: [██████████░░░░░░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Average duration: 9 min
-- Total execution time: 1.2 hours
+- Total plans completed: 10
+- Average duration: 8 min
+- Total execution time: 1.3 hours
 
 **By Phase:**
 
@@ -29,10 +29,10 @@ Progress: [████████░░░░░░░░░░░░] 42%
 |-------|-------|-------|----------|
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
-| 3 - Core Pages | 2/4 | 12 min | 6 min |
+| 3 - Core Pages | 4/4 | 29 min | 7 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (5 min), 02-03 (5 min), 03-01 (~6 min), 03-03 (6 min)
+- Last 5 plans: 02-03 (5 min), 03-01 (~6 min), 03-03 (6 min), 03-04 (6 min), 03-02 (5 min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -63,6 +63,11 @@ Recent decisions affecting current work:
 - [02-03]: Default hitting sort changed from OPS to wRC+ descending
 - [02-03]: ERA/WHIP/OPP AVG marked sortDescFirst: false; all other stats sortDescFirst: true
 - [02-03]: Page size set to 50 rows (up from TanStack default of 10)
+- [03-01]: GameChangerWidget extracted with ref-based unique IDs and maxGames prop
+- [03-01]: YouTube API uses RSS feed parsing with graceful degradation (empty CHANNEL_ID returns empty array)
+- [03-02]: Featured Teams section removed — standings widget covers team visibility
+- [03-02]: Home page YouTube section conditional — only renders if channel ID configured
+- [03-02]: Quick Links expanded to 4 cards (added Schedule) with 4-column grid
 - [03-03]: Match standings to teams by franchise name (case-insensitive), most recent year
 - [03-03]: Team aggregate OPS averaged; wRC+ averaged only for qualified hitters
 - [03-03]: Players in both hitting/pitching datasets deduplicated, shown as "Both"
@@ -82,5 +87,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-04
-Stopped at: Completed 03-03-PLAN.md
+Stopped at: Completed 03-02-PLAN.md (Phase 3 complete)
 Resume file: None

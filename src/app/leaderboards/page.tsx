@@ -82,11 +82,14 @@ export default function LeaderboardsPage() {
   const [hitData, setHitData] = useState<Record<string, Row[]>>({})
   const [pitData, setPitData] = useState<Record<string, Row[]>>({})
   const [loading, setLoading] = useState(true)
+  const [stale, setStale] = useState(false)
 
   useEffect(() => {
     fetch('/api/stats?category=hitting&limit=50000')
       .then(r => r.json())
-      .then(data => {
+      .then(result => {
+        const { data, stale: isStale } = result
+        setStale((prev) => prev || isStale)
         const ys = Array.from(new Set((data as any[]).map((s: any) => s.year).filter(Boolean))).sort((a, b) => b - a)
         setYears(ys)
       })
@@ -102,7 +105,10 @@ export default function LeaderboardsPage() {
       params.append('limit', '10')
       if (year === 'all') params.append('minSeasons', '3')
       const res = await fetch(`/api/leaderboards?${params}`)
-      return res.json()
+      const result = await res.json()
+      const { data, stale: isStale } = result
+      setStale((prev) => prev || isStale)
+      return data
     }
 
     Promise.all([
@@ -124,6 +130,12 @@ export default function LeaderboardsPage() {
       <PageNavigation />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Leaderboards</h1>
+
+      {stale && (
+        <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+          Data may be outdated — showing last known data while we reconnect.
+        </div>
+      )}
 
       <div className="flex items-center gap-3 mb-6">
         <label className="text-sm">Season</label>

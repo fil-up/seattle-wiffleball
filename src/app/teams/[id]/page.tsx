@@ -5,52 +5,66 @@ import { useParams } from "next/navigation"
 
 const DEFAULT_LOGO = "/images/teams/default-team-logo.png"
 
-type Team = { id: string; name: string; logoUrl?: string; teamStats?: any[]; players?: any[] }
+type TeamInfo = {
+  id: string
+  name: string
+  abbreviation: string
+  uniqueTeamName: string
+  teamCode: string
+  logoUrl: string
+}
 
-type TeamSeason = { year: number; wins: number; losses: number; winningPercentage: number; runsScored: number; runsAllowed: number; runDifferential: number }
-
-type PlayerRow = any
+type StandingsRecord = {
+  team: string
+  year: string
+  wins: number
+  losses: number
+  pct: number
+  rf: number
+  ra: number
+}
 
 export default function TeamPage() {
   const params = useParams() as { id: string }
-  const [team, setTeam] = useState<Team | null>(null)
-  const [year, setYear] = useState<number | null>(null)
-  const [years, setYears] = useState<number[]>([])
-  const [roster, setRoster] = useState<PlayerRow[]>([])
+  const [team, setTeam] = useState<TeamInfo | null>(null)
+  const [standings, setStandings] = useState<StandingsRecord[]>([])
+  const [year, setYear] = useState<string | null>(null)
+  const [years, setYears] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
+  const [stale, setStale] = useState(false)
 
   useEffect(() => {
     if (!params?.id) return
     setLoading(true)
     fetch(`/api/teams/${params.id}`)
       .then(r => r.json())
-      .then((data) => {
-        setTeam(data)
-        const ys = (data.teamStats || []).map((s: TeamSeason) => s.year).sort((a: number, b: number) => b - a)
-        setYears(ys)
-        setYear(ys[0] || null)
+      .then((result) => {
+        const { data, stale: isStale } = result
+        setStale(isStale)
+        setTeam(data.team)
+        setStandings(data.standings || [])
+
+        const ys = (data.standings || []).map((s: StandingsRecord) => s.year).sort((a: string, b: string) => parseInt(b) - parseInt(a))
+        const uniqueYears = [...new Set(ys)] as string[]
+        setYears(uniqueYears)
+        setYear(uniqueYears[0] || null)
         setLoading(false)
       })
   }, [params?.id])
 
-  useEffect(() => {
-    if (!year || !team?.players) return
-    // Build roster with that year's player stats (hitting + pitching condensed)
-    const rows: PlayerRow[] = []
-    for (const pt of team.players) {
-      const p = pt.player
-      const hit = (p.hittingStats || []).find((s: any) => s.year === year)
-      const pit = (p.pitchingStats || []).find((s: any) => s.year === year)
-      if (hit || pit) rows.push({ player: p, hit, pit })
-    }
-    setRoster(rows)
-  }, [year, team])
-
   const seasonSummary = useMemo(() => {
-    if (!team || !year) return null
-    const s = (team.teamStats || []).find((x: TeamSeason) => x.year === year)
-    return s || null
-  }, [team, year])
+    if (!year || standings.length === 0) return null
+    const s = standings.find((x) => x.year === year)
+    if (!s) return null
+    return {
+      wins: s.wins,
+      losses: s.losses,
+      winningPercentage: s.pct,
+      runsScored: s.rf,
+      runsAllowed: s.ra,
+      runDifferential: s.rf - s.ra,
+    }
+  }, [standings, year])
 
   if (loading || !team) return (
     <div className="container mx-auto px-4 py-8">Loading...</div>
@@ -58,19 +72,24 @@ export default function TeamPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {stale && (
+        <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+          Data may be outdated — showing last known data while we reconnect.
+        </div>
+      )}
       <div className="flex items-center gap-4 mb-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={team.logoUrl || DEFAULT_LOGO} alt={`${team.name} logo`} className="w-16 h-16 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).src = DEFAULT_LOGO }} />
         <div>
           <h1 className="text-3xl font-bold text-gray-900">{team.name}</h1>
-          <div className="text-gray-500">Team Page</div>
+          <div className="text-gray-500">{team.abbreviation}</div>
         </div>
       </div>
 
       <div className="flex items-center gap-3 mb-6">
         <label className="text-sm">Season</label>
-        <select value={year || ''} onChange={(e) => setYear(parseInt(e.target.value))} className="border rounded px-2 py-1 text-sm">
-          {years.map(y => (<option key={y} value={String(y)}>{y}</option>))}
+        <select value={year || ''} onChange={(e) => setYear(e.target.value)} className="border rounded px-2 py-1 text-sm">
+          {years.map(y => (<option key={y} value={y}>{y}</option>))}
         </select>
       </div>
 
@@ -86,36 +105,6 @@ export default function TeamPage() {
           </div>
         </div>
       )}
-
-      <div className="bg-white rounded-lg shadow p-4">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">Roster</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead>
-              <tr className="text-xs text-gray-500">
-                <th className="text-left py-1 pr-4">Player</th>
-                <th className="text-right py-1 pr-4">G (H)</th>
-                <th className="text-right py-1 pr-4">OPS</th>
-                <th className="text-right py-1 pr-4">G (P)</th>
-                <th className="text-right py-1 pr-4">ERA</th>
-                <th className="text-right py-1 pr-4">WHIP</th>
-              </tr>
-            </thead>
-            <tbody>
-              {roster.map((r, idx) => (
-                <tr key={r.player.id} className={idx % 2 ? 'bg-gray-50' : 'bg-white'}>
-                  <td className="text-left py-1 pr-4 text-blue-700">{r.player.name}</td>
-                  <td className="text-right py-1 pr-4">{r.hit?.games ?? '-'}</td>
-                  <td className="text-right py-1 pr-4">{typeof r.hit?.ops === 'number' ? r.hit.ops.toFixed(3) : '-'}</td>
-                  <td className="text-right py-1 pr-4">{r.pit?.games ?? '-'}</td>
-                  <td className="text-right py-1 pr-4">{typeof r.pit?.era === 'number' ? r.pit.era.toFixed(2) : '-'}</td>
-                  <td className="text-right py-1 pr-4">{typeof r.pit?.whip === 'number' ? r.pit.whip.toFixed(2) : '-'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   )
 }

@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import StatsFilter from '@/components/StatsFilter'
 import SheetrockStandings from '@/components/SheetrockStandings'
 import PageNavigation from '@/components/PageNavigation'
 
@@ -11,20 +10,12 @@ interface Team {
   name: string
   abbreviation: string
   logoUrl: string
-  currentStats?: {
-    wins: number
-    losses: number
-    winningPercentage: number
-    runsScored: number
-    runsAllowed: number
-    runDifferential: number
-  }
 }
 
 export default function TeamsPage() {
   const [teams, setTeams] = useState<Team[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedYear, setSelectedYear] = useState<string>('2024')
+  const [stale, setStale] = useState(false)
 
   useEffect(() => {
     fetchTeams()
@@ -34,8 +25,10 @@ export default function TeamsPage() {
     try {
       const response = await fetch('/api/teams')
       if (response.ok) {
-        const data = await response.json()
-        setTeams(data)
+        const result = await response.json()
+        const { data, stale: isStale } = result
+        setTeams(data || [])
+        setStale(isStale)
       }
     } catch (error) {
       console.error('Error fetching teams:', error)
@@ -58,6 +51,12 @@ export default function TeamsPage() {
       <PageNavigation />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Teams</h1>
+
+        {stale && (
+          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+            Data may be outdated — showing last known data while we reconnect.
+          </div>
+        )}
         
         {/* Team Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -83,12 +82,6 @@ export default function TeamsPage() {
                       {team.name}
                     </h3>
                     <p className="text-sm text-gray-500">{team.abbreviation}</p>
-                    {team.currentStats && (
-                      <div className="mt-2 text-sm text-gray-600">
-                        <p>Record: {team.currentStats.wins}-{team.currentStats.losses}</p>
-                        <p>PCT: {team.currentStats.winningPercentage?.toFixed(3) || '0.000'}</p>
-                      </div>
-                    )}
                   </div>
                 </div>
           </div>

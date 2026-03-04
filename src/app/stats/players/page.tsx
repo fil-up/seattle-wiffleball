@@ -4,63 +4,16 @@ import { useState, useEffect, useMemo } from "react"
 import StatsTable from "@/components/StatsTable"
 import StatsFilter from "@/components/StatsFilter"
 import PageNavigation from "@/components/PageNavigation"
+import type { YearlyHittingRow, TotalsHittingRow, YearlyPitchingRow, TotalsPitchingRow } from "@/lib/sheets"
 
-interface HittingRow {
-  id: string
-  playerId: string
-  player: { id: string; name: string }
-  year?: number
-  seasons?: number
-  games: number
-  plateAppearances?: number
-  atBats: number
-  runs: number
-  hits: number
-  doubles: number
-  triples: number
-  homeRuns: number
-  rbis: number
-  walks: number
-  strikeouts: number
-  avg: number
-  obp: number
-  slg: number
-  ops: number
-  opsPlus?: number
-  wrcPlus?: number
-  team?: string
-  teamLogo?: string
-}
-
-interface PitchingRow {
-  id: string
-  playerId: string
-  player: { id: string; name: string }
-  year?: number
-  seasons?: number
-  games: number
-  inningsPitched: number
-  wins: number
-  losses: number
-  saves: number
-  strikeouts: number
-  walks: number
-  hits: number
-  runs: number
-  earnedRuns: number
-  era: number
-  whip: number
-  oppAvg?: number
-  team?: string
-  teamLogo?: string
-}
+type StatRow = YearlyHittingRow | TotalsHittingRow | YearlyPitchingRow | TotalsPitchingRow
 
 export default function PlayersStats() {
   const [tab, setTab] = useState<"hitting" | "pitching">("hitting")
   const [scope, setScope] = useState<"yearly" | "totals">("yearly")
-  const [stats, setStats] = useState<any[]>([])
-  const [years, setYears] = useState<number[]>([])
+  const [allData, setAllData] = useState<StatRow[]>([])
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
+  const [selectedTeam, setSelectedTeam] = useState<string | null>(null)
   const [qualified, setQualified] = useState(true)
   const [loading, setLoading] = useState(true)
   const [stale, setStale] = useState(false)
@@ -68,78 +21,103 @@ export default function PlayersStats() {
   const [totalsIpQual, setTotalsIpQual] = useState(75)
   const [search, setSearch] = useState('')
 
-  const fetchData = async (category: 'hitting' | 'pitching', isYearly: boolean) => {
-    try {
-      setLoading(true)
-
-      const scopeParam = isYearly ? 'yearly' : 'totals'
-      const response = await fetch(`/api/players?type=${category}&scope=${scopeParam}`)
-      if (!response.ok) {
-        throw new Error('Failed to fetch data')
-      }
-
-      const result = await response.json()
-      const { data, stale: isStale } = result
-      setStale(isStale)
-
-      let processed: any[] = data || []
-
-      if (isYearly && selectedYear) {
-        processed = processed.filter((row: any) => row.year === selectedYear)
-      }
-
-      if (qualified && isYearly) {
-        if (category === 'hitting') {
-          processed = processed.filter((row: any) => row.wrcPlus && row.wrcPlus > 0)
-        } else {
-          processed = processed.filter((row: any) => row.era && row.era > 0)
-        }
-      }
-
-      if (!isYearly) {
-        if (category === 'hitting') {
-          processed = processed.filter((row: any) => (row.plateAppearances || 0) >= totalsPaQual)
-        } else {
-          processed = processed.filter((row: any) => (row.inningsPitched || 0) >= totalsIpQual)
-        }
-      }
-
-      setStats(processed)
-      setLoading(false)
-    } catch (error) {
-      console.error('Error fetching data:', error)
-      setLoading(false)
-    }
-  }
-
+  // Single fetch effect — only tab and scope trigger re-fetches
   useEffect(() => {
-    if (tab === "hitting") {
-      fetchData('hitting', true)
-    } else {
-      fetchData('pitching', true)
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        const scopeParam = scope === 'yearly' ? 'yearly' : 'totals'
+        const response = await fetch(`/api/players?type=${tab}&scope=${scopeParam}`)
+        if (!response.ok) throw new Error('Failed to fetch data')
+        const result = await response.json()
+        setAllData(result.data || [])
+        setStale(result.stale)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      } finally {
+        setLoading(false)
+      }
     }
+    fetchData()
+  }, [tab, scope])
+
+  // Reset filters on scope change
+  useEffect(() => {
+    setSelectedYear(null)
+    setSelectedTeam(null)
+  }, [scope])
+
+  // Reset team on tab change
+  useEffect(() => {
+    setSelectedTeam(null)
   }, [tab])
 
-  useEffect(() => {
-    const isYearly = scope === "yearly"
-    fetchData(tab, isYearly)
-  }, [tab, scope, selectedYear, qualified, totalsPaQual, totalsIpQual])
+  // Derive year list from UNFILTERED data (fixes year dropdown bug)
+  const years = useMemo(() => {
+    if (scope !== 'yearly') return []
+    const unique = [...new Set((allData as any[]).map((r: any) => r.year).filter(Boolean))]
+    return unique.sort((a: number, b: number) => b - a)
+  }, [allData, scope])
 
+  // Auto-select most recent year when years change and no year is selected
   useEffect(() => {
-    if (scope === "yearly" && stats.length > 0) {
-      const uniqueYears = Array.from(new Set(stats.map(s => s.year).filter(Boolean))).sort((a, b) => b - a)
-      setYears(uniqueYears)
-      if (uniqueYears.length > 0 && !selectedYear) {
-        setSelectedYear(uniqueYears[0])
+    if (years.length > 0 && selectedYear === null) {
+      setSelectedYear(years[0])
+    }
+  }, [years, selectedYear])
+
+  // Derive team list from unfiltered data, scoped to selected year
+  const teams = useMemo(() => {
+    if (scope !== 'yearly' || !selectedYear) return []
+    const yearData = (allData as any[]).filter((r: any) => r.year === selectedYear)
+    return [...new Set(yearData.map((r: any) => r.team).filter(Boolean))].sort() as string[]
+  }, [allData, scope, selectedYear])
+
+  // Dynamic qualifier threshold computation
+  const qualifierThreshold = useMemo(() => {
+    if (scope !== 'yearly' || !selectedYear) return 0
+    const yearPlayers = (allData as any[]).filter((r: any) => r.year === selectedYear && r.games > 0)
+    if (yearPlayers.length === 0) return 0
+    const avgGames = yearPlayers.reduce((sum: number, r: any) => sum + r.games, 0) / yearPlayers.length
+    const multiplier = tab === 'hitting' ? 3.1 : 1.0
+    return Math.floor(multiplier * avgGames)
+  }, [allData, scope, selectedYear, tab])
+
+  // Derive display data from allData + active filters
+  const displayData = useMemo(() => {
+    let filtered = allData as any[]
+
+    if (scope === 'yearly' && selectedYear) {
+      filtered = filtered.filter((r: any) => r.year === selectedYear)
+    }
+
+    if (scope === 'yearly' && selectedTeam) {
+      filtered = filtered.filter((r: any) => r.team === selectedTeam)
+    }
+
+    if (qualified) {
+      if (scope === 'yearly') {
+        if (tab === 'hitting') {
+          filtered = filtered.filter((r: any) => (r.plateAppearances || 0) >= qualifierThreshold)
+        } else {
+          filtered = filtered.filter((r: any) => (r.inningsPitched || 0) >= qualifierThreshold)
+        }
+      } else {
+        if (tab === 'hitting') {
+          filtered = filtered.filter((r: any) => (r.plateAppearances || 0) >= totalsPaQual)
+        } else {
+          filtered = filtered.filter((r: any) => (r.inningsPitched || 0) >= totalsIpQual)
+        }
       }
     }
-  }, [stats, scope, selectedYear])
 
-  const visibleStats = useMemo(() => {
-    if (!search.trim()) return stats
-    const q = search.toLowerCase()
-    return stats.filter((row: any) => (row.player?.name || '').toLowerCase().includes(q))
-  }, [stats, search])
+    if (search.trim()) {
+      const q = search.toLowerCase()
+      filtered = filtered.filter((r: any) => (r.player?.name || '').toLowerCase().includes(q))
+    }
+
+    return filtered
+  }, [allData, scope, selectedYear, selectedTeam, qualified, qualifierThreshold, tab, totalsPaQual, totalsIpQual, search])
 
   const columns = useMemo(() => {
     if (tab === "hitting") {
@@ -252,6 +230,9 @@ export default function PlayersStats() {
         years={years}
         selectedYear={scope === "yearly" ? selectedYear : null}
         onYearChange={setSelectedYear}
+        teams={teams}
+        selectedTeam={selectedTeam}
+        onTeamChange={setSelectedTeam}
         qualified={qualified}
         onQualifiedChange={setQualified}
         showQualified={true}
@@ -259,8 +240,10 @@ export default function PlayersStats() {
 
       {loading ? (
         <div className="text-center py-8">Loading...</div>
+      ) : displayData.length === 0 ? (
+        <div className="text-center py-8 text-gray-500">No players match these filters.</div>
       ) : (
-        <StatsTable data={visibleStats as any[]} columns={columns as any[]} initialSortField={initialSort} initialSortDesc={initialSortDesc} stickyFirstCols={2} columnWidthsPx={[180, 220]} />
+        <StatsTable data={displayData as any[]} columns={columns as any[]} initialSortField={initialSort} initialSortDesc={initialSortDesc} stickyFirstCols={2} columnWidthsPx={[180, 220]} />
       )}
       </div>
     </div>

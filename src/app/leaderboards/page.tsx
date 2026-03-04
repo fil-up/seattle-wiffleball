@@ -152,6 +152,7 @@ export default function LeaderboardsPage() {
           </div>
         </>
       )}
+      </div>
     </div>
   )
 }

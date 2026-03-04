@@ -122,8 +122,10 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
       setPitchingData(pitching)
 
       // Extract unique years and teams
-      const years = [...new Set(pitching.map(item => item.Year))].sort((a, b) => parseInt(b) - parseInt(a))
-      const teams = [...new Set(pitching.map(item => item.Team))].sort()
+      const years = [...new Set(pitching.map((item: any) => item.Year))] as string[]
+      years.sort((a, b) => parseInt(b) - parseInt(a))
+      const teams = [...new Set(pitching.map((item: any) => item.Team))] as string[]
+      teams.sort()
       
       setAvailableYears(years)
       setAvailableTeams(teams)
@@ -137,7 +139,7 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
   }
 
   // Filter data based on props
-  const filteredData = pitchingData.filter(item => {
+  const filteredData = pitchingData.filter((item: any) => {
     if (selectedYear && item.Year !== selectedYear) return false
     if (selectedTeam && item.Team !== selectedTeam) return false
     if (selectedPlayer) {

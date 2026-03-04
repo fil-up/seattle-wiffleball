@@ -80,7 +80,8 @@ const SheetrockStandings: React.FC = () => {
       setStandings(parsedData)
       
       // Extract unique years and set default to most recent
-      const years = [...new Set(parsedData.map(row => row.Year))].sort((a, b) => parseInt(b) - parseInt(a))
+      const years = [...new Set(parsedData.map((row: any) => row.Year))] as string[]
+      years.sort((a, b) => parseInt(b) - parseInt(a))
       setAvailableYears(years)
       if (years.length > 0) {
         setSelectedYear(years[0])
@@ -153,7 +154,7 @@ const SheetrockStandings: React.FC = () => {
     }
   }
 
-  const filteredStandings = standings.filter(row => String(row.Year) === String(selectedYear))
+  const filteredStandings = standings.filter((row: any) => String(row.Year) === String(selectedYear))
 
   if (loading) {
     return (

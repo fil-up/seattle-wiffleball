@@ -152,8 +152,10 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
       setBattingData(batting)
 
       // Extract unique years and teams
-      const years = [...new Set(batting.map(item => item.Year))].sort((a, b) => parseInt(b) - parseInt(a))
-      const teams = [...new Set(batting.map(item => item.Team))].sort()
+      const years = [...new Set(batting.map((item: any) => item.Year))] as string[]
+      years.sort((a, b) => parseInt(b) - parseInt(a))
+      const teams = [...new Set(batting.map((item: any) => item.Team))] as string[]
+      teams.sort()
       
       setAvailableYears(years)
       setAvailableTeams(teams)

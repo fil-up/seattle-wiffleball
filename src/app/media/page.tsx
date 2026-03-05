@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { YouTubeEmbed } from '@/components/YouTubeEmbed'
+import { CardSkeleton } from '@/components/Skeleton'
+import ErrorState from '@/components/ErrorState'
 
 interface Video {
   videoId: string
@@ -12,16 +14,19 @@ interface Video {
 export default function MediaPage() {
   const [videos, setVideos] = useState<Video[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
+    setError(false)
     fetch('/api/youtube?limit=12')
       .then((res) => res.json())
       .then(({ data }) => {
         setVideos(data ?? [])
-        setLoading(false)
       })
-      .catch(() => setLoading(false))
-  }, [])
+      .catch(() => setError(true))
+      .finally(() => setLoading(false))
+  }, [retryCount])
 
   return (
     <div>
@@ -32,13 +37,15 @@ export default function MediaPage() {
           Game highlights, recaps, and league broadcasts.
         </p>
 
-        {loading ? (
+        {error ? (
+          <ErrorState
+            message="Couldn't load videos. Try again?"
+            onRetry={() => { setError(false); setLoading(true); setRetryCount(c => c + 1) }}
+          />
+        ) : loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="bg-surface-secondary rounded-lg aspect-video" />
-                <div className="h-4 bg-surface-secondary rounded mt-3 w-3/4" />
-              </div>
+            {Array.from({ length: 3 }).map((_, i) => (
+              <CardSkeleton key={i} />
             ))}
           </div>
         ) : videos.length === 0 ? (

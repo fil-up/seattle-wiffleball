@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import SeasonAccordion from '@/components/SeasonAccordion'
+import { TableSkeleton } from '@/components/Skeleton'
+import ErrorState from '@/components/ErrorState'
 import archivesData from '@/data/archives.json'
 
 interface YearlyStanding {
@@ -30,8 +32,11 @@ export default function ArchivesPage() {
   const [standings, setStandings] = useState<Record<string, YearlyStanding[]>>({})
   const [loading, setLoading] = useState(true)
   const [stale, setStale] = useState(false)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
+    setError(false)
     fetch('/api/standings?scope=yearly')
       .then((res) => res.json())
       .then((json) => {
@@ -47,9 +52,9 @@ export default function ArchivesPage() {
         setStandings(grouped)
         setStale(json.stale ?? false)
       })
-      .catch(() => {})
+      .catch(() => setError(true))
       .finally(() => setLoading(false))
-  }, [])
+  }, [retryCount])
 
   const archives = (archivesData as ArchiveSeason[]).sort(
     (a, b) => b.year - a.year
@@ -81,10 +86,13 @@ export default function ArchivesPage() {
             </div>
           )}
 
-          {loading ? (
-            <div className="text-center py-12 text-content-secondary">
-              Loading season data...
-            </div>
+          {error ? (
+            <ErrorState
+              message="Couldn't load archive standings. Try again?"
+              onRetry={() => { setError(false); setLoading(true); setRetryCount(c => c + 1) }}
+            />
+          ) : loading ? (
+            <TableSkeleton rows={8} cols={4} />
           ) : allYears.length === 0 ? (
             <div className="text-center py-12 text-content-secondary">
               No archive data available yet.

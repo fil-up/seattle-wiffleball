@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Accurate, browsable league stats and information — if the numbers are wrong or hard to find, nothing else matters.
-**Current focus:** Phase 4 Content Pages — COMPLETE, ready for Phase 5
+**Current focus:** Phase 5 Design & Polish — in progress
 
 ## Current Position
 
-Phase: 4 of 6 (Content Pages) — COMPLETE
-Plan: 3 of 3 in phase
-Status: Phase complete
-Last activity: 2026-03-05 — Completed 04-02-PLAN.md (rules, info, archives pages)
+Phase: 5 of 6 (Design & Polish)
+Plan: 1 of 4 in phase
+Status: In progress
+Last activity: 2026-03-05 — Completed 05-01-PLAN.md (design system foundation)
 
-Progress: [██████████████░░░░░░] 70%
+Progress: [███████████████░░░░░] 71%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
+- Total plans completed: 15
 - Average duration: 7 min
-- Total execution time: ~1.5 hours
+- Total execution time: ~1.6 hours
 
 **By Phase:**
 
@@ -31,10 +31,11 @@ Progress: [██████████████░░░░░░] 70%
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
 | 3 - Core Pages | 5/5 | 32 min | 6 min |
 | 4 - Content Pages | 3/3 | ~15 min | ~5 min |
+| 5 - Design & Polish | 1/4 | 8 min | 8 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-04 (6 min), 03-02 (5 min), 03-05 (3 min), 04-01 (~5 min), 04-03 (~5 min)
-- Trend: Stable/improving
+- Last 5 plans: 03-05 (3 min), 04-01 (~5 min), 04-03 (~5 min), 04-02 (~5 min), 05-01 (8 min)
+- Trend: Stable
 
 *Updated after each plan completion*
 
@@ -83,6 +84,10 @@ Recent decisions affecting current work:
 - [04-02]: @tailwindcss/typography prose classes for rules markdown rendering
 - [04-02]: Archives merges static JSON awards data with dynamic API standings by year
 - [04-02]: Info page join link uses placeholder URL — user replaces with real signup form
+- [05-01]: Providers client wrapper extracts ThemeProvider for SSR compatibility
+- [05-01]: Per-page PageNavigation removed in favor of layout-level SiteNavigation
+- [05-01]: CSS variable values use space-separated RGB channels for Tailwind opacity modifier support
+- [05-01]: Secondary nav links shown at reduced opacity on desktop to distinguish from primary
 
 ### Pending Todos
 
@@ -94,9 +99,10 @@ None yet.
 - No test coverage exists; refactoring in Phase 1 carries regression risk
 - OneDrive sync can corrupt .next cache on Windows — delete .next before builds if errors occur
 - Header labels in colIdx are inferred — need live gviz response verification (fallback indices ensure correctness)
+- No league logo image exists — SiteNavigation uses text branding; logo can be added when available
 
 ## Session Continuity
 
 Last session: 2026-03-05
-Stopped at: Completed 04-02-PLAN.md (Phase 4 complete)
+Stopped at: Completed 05-01-PLAN.md
 Resume file: None

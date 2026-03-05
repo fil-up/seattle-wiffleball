@@ -3,10 +3,19 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { getNewsArticles } from '@/lib/news'
 import { GameChangerWidget } from '@/components/GameChangerWidget'
 import { StandingsWidget } from '@/components/StandingsWidget'
 import { YouTubeEmbed } from '@/components/YouTubeEmbed'
+
+interface NewsArticle {
+  slug: string
+  title: string
+  date: string
+  excerpt: string
+  image?: string
+  tag?: string
+  featured?: boolean
+}
 
 interface Video {
   videoId: string
@@ -15,10 +24,18 @@ interface Video {
 }
 
 export default function Home() {
-  const articles = getNewsArticles()
+  const [articles, setArticles] = useState<NewsArticle[]>([])
+  const [videos, setVideos] = useState<Video[]>([])
+
+  useEffect(() => {
+    fetch('/api/news')
+      .then((res) => res.json())
+      .then((json) => setArticles(json.data || []))
+      .catch((err) => console.error('Error fetching news:', err))
+  }, [])
+
   const featuredArticle = articles[0] ?? null
   const recentArticles = articles.slice(1, 4)
-  const [videos, setVideos] = useState<Video[]>([])
 
   useEffect(() => {
     fetch('/api/youtube?limit=3')

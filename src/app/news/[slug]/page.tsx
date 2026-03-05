@@ -2,11 +2,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getNewsArticleWithHtml, getNewsArticles } from '@/lib/news'
 import { notFound } from 'next/navigation'
+import PageNavigation from '@/components/PageNavigation'
 
 interface ArticlePageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -16,8 +17,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function ArticlePage({ params }: ArticlePageProps) {
-  const article = getNewsArticleWithHtml(params.slug)
+export default async function ArticlePage({ params }: ArticlePageProps) {
+  const { slug } = await params
+  const article = await getNewsArticleWithHtml(slug)
 
   if (!article) {
     notFound()
@@ -25,8 +27,9 @@ export default function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <PageNavigation />
       {/* Header */}
-      <div className="bg-blue-600 text-white py-16">
+      <div className="bg-[#25397B] text-white py-16">
         <div className="container mx-auto px-4">
           <Link 
             href="/news"
@@ -38,7 +41,7 @@ export default function ArticlePage({ params }: ArticlePageProps) {
           <div className="flex items-center space-x-4">
             <div className="text-lg text-blue-100">{article.date}</div>
             {article.featured && (
-              <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+              <span className="bg-[#25397B] bg-opacity-20 text-white text-sm font-medium px-3 py-1 rounded-full">
                 Featured Article
               </span>
             )}
@@ -91,7 +94,7 @@ export default function ArticlePage({ params }: ArticlePageProps) {
               <div className="mt-12 pt-8 border-t border-gray-200">
                 <Link 
                   href="/news"
-                  className="text-blue-600 font-semibold hover:text-blue-800"
+                  className="text-[#25397B] font-semibold hover:text-[#1e2f63]"
                 >
                   ← Back to All News
                 </Link>

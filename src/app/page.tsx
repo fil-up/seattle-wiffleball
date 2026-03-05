@@ -47,61 +47,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Blue Navigation Bar (sticky) */}
-      <div className="sticky top-0 z-50">
-        <div className="bg-[#25397B]">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-end space-x-4 py-3">
-              <Link href="/" className="text-white px-4 py-2 rounded-md font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
-                <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M10 2 2 8v10h6v-6h4v6h6V8z" />
-                </svg>
-                Home
-              </Link>
-              <Link href="/news" className="text-white px-4 py-2 rounded-md font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
-                <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M3 4h12v12H3zM16 6h1a1 1 0 0 1 1 1v7a3 3 0 0 1-3 3H4a2 2 0 0 1-2-2V6h1v9a1 1 0 0 0 1 1h11a2 2 0 0 0 2-2V6z" />
-                  <path d="M5 7h8v2H5zM5 10h8v2H5zM5 13h5v2H5z" />
-                </svg>
-                News
-              </Link>
-              <Link href="/stats/players" className="text-white px-4 py-2 rounded-md font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
-                <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M10 10a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-7 8a7 7 0 1 1 14 0z" />
-                </svg>
-                Players
-              </Link>
-              <Link href="/stats/teams" className="text-white px-4 py-2 rounded-md font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M7 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm10 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3ZM7 13a5 5 0 0 0-5 5v2h6v-2a7 7 0 0 1 3-5.74A6.94 6.94 0 0 0 7 13Zm10 0a6.94 6.94 0 0 0-4 1.26A7 7 0 0 1 16 18v2h6v-2a5 5 0 0 0-5-5Z" />
-                </svg>
-                Teams
-              </Link>
-              <Link href="/leaderboards" className="text-white px-4 py-2 rounded-md font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
-                <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M7 14V6H5v8zm4 0V2H9v12zm4 0V9h-2v5z" />
-                </svg>
-                Leaderboards
-              </Link>
-              <Link href="/schedule" className="text-white px-4 py-2 rounded-md font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
-                <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M6 2a1 1 0 0 0-1 1v1H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1V3a1 1 0 1 0-2 0v1H7V3a1 1 0 0 0-1-1zM4 8h12v8H4V8z" />
-                </svg>
-                Schedule
-              </Link>
-              <Link href="/media" className="text-white px-4 py-2 rounded-md font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
-                <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M6.5 5.5v9l7-4.5-7-4.5zM10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" />
-                </svg>
-                Media
-              </Link>
-            </div>
-          </div>
-          <div className="h-1 w-full" style={{ backgroundColor: '#FFD700' }}></div>
-        </div>
-      </div>
-
+    <div className="min-h-screen bg-surface-secondary">
       {/* Hero Section */}
       <div className="hero-section text-white relative overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -162,9 +108,9 @@ export default function Home() {
       </div>
 
       {/* GameChanger Schedule Widget (compact) */}
-      <div className="bg-white py-16">
+      <div className="bg-surface-card py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Upcoming Games</h2>
+          <h2 className="text-3xl font-bold text-content-primary mb-8">Upcoming Games</h2>
           <div className="w-full">
             <GameChangerWidget maxGames={2} />
           </div>
@@ -174,8 +120,8 @@ export default function Home() {
       {/* News + Standings two-column layout */}
       <div className="container mx-auto px-4 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Latest News</h2>
-          <Link href="/news" className="text-blue-600 font-semibold hover:text-blue-800">
+          <h2 className="text-3xl font-bold text-content-primary">Latest News</h2>
+          <Link href="/news" className="text-brand-navy font-semibold hover:text-brand-navy/80">
             View All News →
           </Link>
         </div>
@@ -184,7 +130,7 @@ export default function Home() {
           <div className="lg:col-span-2 space-y-6">
             {/* Featured article (large card) */}
             {featuredArticle && (
-              <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              <article className="bg-surface-card rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 {featuredArticle.image && (
                   <div className="relative w-full h-64 overflow-hidden">
                     <div className="absolute inset-0">
@@ -211,14 +157,14 @@ export default function Home() {
                 )}
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <div className="text-sm text-gray-500">{featuredArticle.date}</div>
-                    <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                    <div className="text-sm text-content-secondary">{featuredArticle.date}</div>
+                    <span className="bg-brand-navy/10 text-brand-navy text-xs font-medium px-2.5 py-0.5 rounded">
                       Featured
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{featuredArticle.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">{featuredArticle.excerpt}</p>
-                  <Link href={`/news/${featuredArticle.slug}`} className="text-blue-600 font-semibold hover:text-blue-800">
+                  <h3 className="text-xl font-bold text-content-primary mb-3">{featuredArticle.title}</h3>
+                  <p className="text-content-secondary mb-4 leading-relaxed line-clamp-3">{featuredArticle.excerpt}</p>
+                  <Link href={`/news/${featuredArticle.slug}`} className="text-brand-navy font-semibold hover:text-brand-navy/80">
                     Read Full Article →
                   </Link>
                 </div>
@@ -228,7 +174,7 @@ export default function Home() {
             {/* Recent articles (smaller cards) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {recentArticles.map((article) => (
-                <article key={article.slug} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <article key={article.slug} className="bg-surface-card rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   {article.image && (
                     <div className="relative w-full h-36 overflow-hidden">
                       <div className="absolute inset-0">
@@ -252,10 +198,10 @@ export default function Home() {
                     </div>
                   )}
                   <div className="p-4">
-                    <div className="text-xs text-gray-500 mb-2">{article.date}</div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-2 line-clamp-2">{article.title}</h3>
-                    <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">{article.excerpt}</p>
-                    <Link href={`/news/${article.slug}`} className="text-blue-600 font-semibold hover:text-blue-800 text-xs mt-2 inline-block">
+                    <div className="text-xs text-content-secondary mb-2">{article.date}</div>
+                    <h3 className="text-sm font-bold text-content-primary mb-2 line-clamp-2">{article.title}</h3>
+                    <p className="text-content-secondary text-xs leading-relaxed line-clamp-2">{article.excerpt}</p>
+                    <Link href={`/news/${article.slug}`} className="text-brand-navy font-semibold hover:text-brand-navy/80 text-xs mt-2 inline-block">
                       Read More →
                     </Link>
                   </div>
@@ -273,11 +219,11 @@ export default function Home() {
 
       {/* Latest Videos (only renders if YouTube channel is configured) */}
       {videos.length > 0 && (
-        <div className="bg-white py-16">
+        <div className="bg-surface-card py-16">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-gray-900">Latest Videos</h2>
-              <Link href="/media" className="text-blue-600 font-semibold hover:text-blue-800">
+              <h2 className="text-3xl font-bold text-content-primary">Latest Videos</h2>
+              <Link href="/media" className="text-brand-navy font-semibold hover:text-brand-navy/80">
                 View All Media →
               </Link>
             </div>
@@ -285,7 +231,7 @@ export default function Home() {
               {videos.map((video) => (
                 <div key={video.videoId}>
                   <YouTubeEmbed videoId={video.videoId} title={video.title} />
-                  <p className="mt-2 text-sm font-medium text-gray-900">{video.title}</p>
+                  <p className="mt-2 text-sm font-medium text-content-primary">{video.title}</p>
                 </div>
               ))}
             </div>
@@ -294,42 +240,42 @@ export default function Home() {
       )}
 
       {/* Quick Links Section */}
-      <div className="bg-gray-100">
+      <div className="bg-surface-secondary">
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Player Stats</h3>
-              <p className="text-gray-600 mb-4">
+            <div className="bg-surface-card p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold text-content-primary mb-4">Player Stats</h3>
+              <p className="text-content-secondary mb-4">
                 Explore comprehensive player statistics, including batting averages, home runs, and pitching records.
               </p>
-              <Link href="/stats/players" className="text-blue-600 font-semibold hover:text-blue-800">
+              <Link href="/stats/players" className="text-brand-navy font-semibold hover:text-brand-navy/80">
                 View Stats →
               </Link>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Leaderboards</h3>
-              <p className="text-gray-600 mb-4">
+            <div className="bg-surface-card p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold text-content-primary mb-4">Leaderboards</h3>
+              <p className="text-content-secondary mb-4">
                 Check out who&apos;s leading the league in various statistical categories.
               </p>
-              <Link href="/leaderboards" className="text-blue-600 font-semibold hover:text-blue-800">
+              <Link href="/leaderboards" className="text-brand-navy font-semibold hover:text-brand-navy/80">
                 View Leaderboards →
               </Link>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Schedule</h3>
-              <p className="text-gray-600 mb-4">
+            <div className="bg-surface-card p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold text-content-primary mb-4">Schedule</h3>
+              <p className="text-content-secondary mb-4">
                 View upcoming games, live scores, and recent results from the full season schedule.
               </p>
-              <Link href="/schedule" className="text-blue-600 font-semibold hover:text-blue-800">
+              <Link href="/schedule" className="text-brand-navy font-semibold hover:text-brand-navy/80">
                 View Schedule →
               </Link>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">League Rules</h3>
-              <p className="text-gray-600 mb-4">
+            <div className="bg-surface-card p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold text-content-primary mb-4">League Rules</h3>
+              <p className="text-content-secondary mb-4">
                 Learn about our league rules, regulations, and gameplay standards.
               </p>
-              <Link href="/rules" className="text-blue-600 font-semibold hover:text-blue-800">
+              <Link href="/rules" className="text-brand-navy font-semibold hover:text-brand-navy/80">
                 View Rules →
               </Link>
             </div>

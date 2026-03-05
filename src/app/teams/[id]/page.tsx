@@ -213,18 +213,18 @@ export default function TeamPage() {
   )
 
   if (loading || !team) return (
-    <div className="min-h-screen bg-gray-50">
-
-      <div className="container mx-auto px-4 py-8">Loading...</div>
+    <div className="min-h-screen bg-surface-secondary">
+      <div className="container mx-auto px-4 py-8 text-content-secondary">Loading...</div>
     </div>
   )
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-surface-secondary">
 
       <div className="container mx-auto px-4 py-8">
         {stale && (
-          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+          <div className="bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded mb-4 text-sm flex items-center gap-2">
+            <svg className="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             Data may be outdated — showing last known data while we reconnect.
           </div>
         )}
@@ -234,23 +234,23 @@ export default function TeamPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={team.logoUrl || DEFAULT_LOGO} alt={`${team.name} logo`} className="w-16 h-16 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).src = DEFAULT_LOGO }} />
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">{team.name}</h1>
-            <div className="text-gray-500">{team.abbreviation}</div>
+            <h1 className="text-3xl font-bold text-content-primary">{team.name}</h1>
+            <div className="text-content-secondary">{team.abbreviation}</div>
           </div>
         </div>
 
         {/* Year selector */}
         <div className="flex items-center gap-3 mb-6">
-          <label className="text-sm">Season</label>
-          <select value={year || ''} onChange={(e) => setYear(e.target.value)} className="border rounded px-2 py-1 text-sm">
+          <label className="text-sm text-content-secondary">Season</label>
+          <select value={year || ''} onChange={(e) => setYear(e.target.value)} className="border border-border rounded px-2 py-1 text-sm bg-surface-card text-content-primary">
             {years.map(y => (<option key={y} value={y}>{y}</option>))}
           </select>
         </div>
 
         {/* Season Summary */}
         {seasonSummary && (
-          <div className="bg-white rounded-lg shadow p-4 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Season Summary</h2>
+          <div className="bg-surface-card rounded-lg shadow p-4 mb-6">
+            <h2 className="text-xl font-semibold text-content-primary mb-3">Season Summary</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               <StatCard label="Record" value={`${seasonSummary.wins}-${seasonSummary.losses}`} />
               <StatCard label="Win %" value={(seasonSummary.winningPercentage || 0).toFixed(3)} />
@@ -262,22 +262,22 @@ export default function TeamPage() {
         )}
 
         {statsLoading ? (
-          <div className="py-8 text-center text-gray-500">Loading roster and stats...</div>
+          <div className="py-8 text-center text-content-secondary">Loading roster and stats...</div>
         ) : (
           <>
             {/* Roster */}
             <div className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Roster</h2>
+              <h2 className="text-xl font-semibold text-content-primary mb-4">Roster</h2>
               {roster.length === 0 ? (
-                <div className="text-gray-500 text-sm">No roster data available for this season.</div>
+                <div className="text-content-secondary text-sm">No roster data available for this season.</div>
               ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {roster.map((p) => (
                     <Link key={p.playerId} href={`/stats/players/${p.playerId}`}>
-                      <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
-                        <div className="font-medium text-gray-900">{p.name}</div>
-                        <div className="text-xs text-blue-600 font-medium mt-1">{p.role}</div>
-                        <div className="text-sm text-gray-500 mt-2">{p.statLine}</div>
+                      <div className="bg-surface-card rounded-lg shadow-sm border border-border p-4 hover:shadow-md transition-shadow">
+                        <div className="font-medium text-content-primary">{p.name}</div>
+                        <div className="text-xs text-brand-navy font-medium mt-1">{p.role}</div>
+                        <div className="text-sm text-content-secondary mt-2">{p.statLine}</div>
                       </div>
                     </Link>
                   ))}
@@ -288,12 +288,12 @@ export default function TeamPage() {
             {/* Team Stats */}
             {(teamBatting || teamPitching) && (
               <div className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Team Stats</h2>
+                <h2 className="text-xl font-semibold text-content-primary mb-4">Team Stats</h2>
 
                 {/* Team Batting */}
                 {teamBatting && (
-                  <div className="bg-white rounded-lg shadow p-4 mb-6">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">Team Batting</h3>
+                  <div className="bg-surface-card rounded-lg shadow p-4 mb-6">
+                    <h3 className="text-lg font-semibold text-content-primary mb-3">Team Batting</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-4">
                       <StatCard label="G" value={teamBatting.games} />
                       <StatCard label="AVG" value={teamBatting.avg.toFixed(3)} />
@@ -306,7 +306,7 @@ export default function TeamPage() {
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="border-b text-left text-gray-500">
+                          <tr className="border-b border-border text-left text-content-secondary">
                             <th className="py-2 pr-4">Player</th>
                             <th className="py-2 px-2 text-right">G</th>
                             <th className="py-2 px-2 text-right">AVG</th>
@@ -317,9 +317,9 @@ export default function TeamPage() {
                         </thead>
                         <tbody>
                           {sortedHitters.map((h) => (
-                            <tr key={h.playerId} className="border-b last:border-0">
+                            <tr key={h.playerId} className="border-b border-border last:border-0">
                               <td className="py-2 pr-4">
-                                <Link href={`/stats/players/${h.playerId}`} className="text-blue-600 hover:underline">
+                                <Link href={`/stats/players/${h.playerId}`} className="text-brand-navy hover:underline">
                                   {h.player.name}
                                 </Link>
                               </td>
@@ -338,8 +338,8 @@ export default function TeamPage() {
 
                 {/* Team Pitching */}
                 {teamPitching && (
-                  <div className="bg-white rounded-lg shadow p-4 mb-6">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">Team Pitching</h3>
+                  <div className="bg-surface-card rounded-lg shadow p-4 mb-6">
+                    <h3 className="text-lg font-semibold text-content-primary mb-3">Team Pitching</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
                       <StatCard label="ERA" value={teamPitching.era.toFixed(2)} />
                       <StatCard label="WHIP" value={teamPitching.whip.toFixed(2)} />
@@ -350,7 +350,7 @@ export default function TeamPage() {
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="border-b text-left text-gray-500">
+                          <tr className="border-b border-border text-left text-content-secondary">
                             <th className="py-2 pr-4">Player</th>
                             <th className="py-2 px-2 text-right">G</th>
                             <th className="py-2 px-2 text-right">IP</th>
@@ -361,9 +361,9 @@ export default function TeamPage() {
                         </thead>
                         <tbody>
                           {sortedPitchers.map((p) => (
-                            <tr key={p.playerId} className="border-b last:border-0">
+                            <tr key={p.playerId} className="border-b border-border last:border-0">
                               <td className="py-2 pr-4">
-                                <Link href={`/stats/players/${p.playerId}`} className="text-blue-600 hover:underline">
+                                <Link href={`/stats/players/${p.playerId}`} className="text-brand-navy hover:underline">
                                   {p.player.name}
                                 </Link>
                               </td>
@@ -391,8 +391,8 @@ export default function TeamPage() {
 function StatCard({ label, value }: { label: string; value: string | number }) {
   return (
     <div>
-      <div className="text-xs text-gray-500">{label}</div>
-      <div className="text-lg font-semibold">{value}</div>
+      <div className="text-xs text-content-secondary">{label}</div>
+      <div className="text-lg font-semibold text-content-primary">{value}</div>
     </div>
   )
 }

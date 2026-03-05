@@ -93,17 +93,15 @@ const TeamPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-
-        <div className="text-center py-8">Loading...</div>
+      <div className="min-h-screen bg-surface-secondary">
+        <div className="text-center py-8 text-content-secondary">Loading...</div>
       </div>
     )
   }
 
   if (!teamData) {
     return (
-      <div className="min-h-screen bg-gray-50">
-
+      <div className="min-h-screen bg-surface-secondary">
         <div className="text-center py-8">
           <p className="text-red-600">Team not found</p>
         </div>
@@ -116,14 +114,15 @@ const TeamPage: React.FC = () => {
 
       {stale && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+          <div className="bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded mb-4 text-sm flex items-center gap-2">
+            <svg className="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             Data may be outdated — showing last known data while we reconnect.
           </div>
         </div>
       )}
 
       {/* Team Header */}
-      <div className="bg-white shadow">
+      <div className="bg-surface-card shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
             <div className="flex-shrink-0">
@@ -137,8 +136,8 @@ const TeamPage: React.FC = () => {
               </div>
             </div>
             <div className="flex-1 text-center md:text-left">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">{teamData.name}</h1>
-              <p className="text-sm text-gray-500">{teamData.abbreviation}</p>
+              <h1 className="text-4xl font-bold text-content-primary mb-2">{teamData.name}</h1>
+              <p className="text-sm text-content-secondary">{teamData.abbreviation}</p>
             </div>
           </div>
         </div>
@@ -146,24 +145,24 @@ const TeamPage: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Yearly Records Table */}
-        <div className="bg-white rounded-lg shadow mb-8">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">Yearly Records</h2>
+        <div className="bg-surface-card rounded-lg shadow mb-8">
+          <div className="px-6 py-4 border-b border-border">
+            <h2 className="text-xl font-semibold text-content-primary">Yearly Records</h2>
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-border">
+              <thead className="bg-surface-secondary">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">W</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">L</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PCT</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">RF</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">RA</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">DIFF</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">Year</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">W</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">L</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">PCT</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">RF</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">RA</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">DIFF</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-surface-card divide-y divide-border">
                 {yearlyRecords.length > 0 && (
                   <tr className="bg-blue-50 border-b-2 border-blue-200">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-blue-900">TOTAL</td>
@@ -192,14 +191,14 @@ const TeamPage: React.FC = () => {
                   </tr>
                 )}
                 {yearlyRecords.map((record, index) => (
-                  <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{record.year}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{record.wins}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{record.losses}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{(record.pct ?? 0).toFixed(3)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{record.rf}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{record.ra}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{record.rf - record.ra}</td>
+                  <tr key={index} className={index % 2 === 0 ? '' : 'bg-table-stripe'}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-content-primary">{record.year}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-content-primary">{record.wins}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-content-primary">{record.losses}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-content-primary">{(record.pct ?? 0).toFixed(3)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-content-primary">{record.rf}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-content-primary">{record.ra}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-content-primary">{record.rf - record.ra}</td>
                   </tr>
                 ))}
               </tbody>
@@ -209,17 +208,17 @@ const TeamPage: React.FC = () => {
 
         {/* Player Stats Section */}
         <div className="space-y-8">
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-surface-card rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <label htmlFor="year-select" className="text-sm font-medium text-gray-700">
+                <label htmlFor="year-select" className="text-sm font-medium text-content-primary">
                   Select Year:
                 </label>
                 <select
                   id="year-select"
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(e.target.value)}
-                  className="block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="block px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-brand-navy focus:border-brand-navy sm:text-sm bg-surface-card text-content-primary"
                 >
                   <option value="">Select a year</option>
                   {availableYears.map((year) => (
@@ -236,9 +235,9 @@ const TeamPage: React.FC = () => {
                   type="checkbox"
                   checked={qualifiersOnly}
                   onChange={(e) => setQualifiersOnly(e.target.checked)}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-brand-navy focus:ring-brand-navy border-border rounded"
                 />
-                <label htmlFor="qualifiers-only" className="ml-2 text-sm text-gray-700">
+                <label htmlFor="qualifiers-only" className="ml-2 text-sm text-content-primary">
                   Qualifiers Only
                 </label>
               </div>

@@ -180,44 +180,45 @@ export default function PlayersStats() {
     <div>
     <div className="container mx-auto px-4 py-8">
       {stale && (
-        <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+        <div className="bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded mb-4 text-sm flex items-center gap-2">
+          <svg className="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           Data may be outdated — we&apos;re having trouble reaching the latest stats. Showing last known data.
         </div>
       )}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Player Statistics</h1>
+        <h1 className="text-3xl font-bold text-content-primary">Player Statistics</h1>
         <div className="flex items-center gap-3">
           <input
             type="text"
             placeholder="Search player..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border rounded px-3 py-2 text-sm"
+            className="border border-border rounded px-3 py-2 text-sm bg-surface-card text-content-primary"
           />
           <div className="inline-flex rounded-md shadow-sm" role="group">
-              <button className={`px-4 py-2 text-sm font-medium border ${tab === "hitting" ? "bg-[#25397B] text-white" : "bg-white text-gray-700"}`} onClick={() => setTab("hitting")}>Hitting</button>
-              <button className={`px-4 py-2 text-sm font-medium border ${tab === "pitching" ? "bg-[#25397B] text-white" : "bg-white text-gray-700"}`} onClick={() => setTab("pitching")}>Pitching</button>
+              <button className={`px-4 py-2 text-sm font-medium border border-border ${tab === "hitting" ? "bg-brand-navy text-white" : "bg-surface-card text-content-primary"}`} onClick={() => setTab("hitting")}>Hitting</button>
+              <button className={`px-4 py-2 text-sm font-medium border border-border ${tab === "pitching" ? "bg-brand-navy text-white" : "bg-surface-card text-content-primary"}`} onClick={() => setTab("pitching")}>Pitching</button>
           </div>
         </div>
       </div>
 
       <div className="mb-4 flex items-center gap-4">
         <div className="inline-flex rounded-md shadow-sm" role="group">
-          <button className={`px-3 py-1 text-sm font-medium border ${scope === "yearly" ? "bg-gray-200" : "bg-white"}`} onClick={() => setScope("yearly")}>Yearly</button>
-          <button className={`px-3 py-1 text-sm font-medium border ${scope === "totals" ? "bg-gray-200" : "bg-white"}`} onClick={() => setScope("totals")}>Totals (All Years)</button>
+          <button className={`px-3 py-1 text-sm font-medium border border-border ${scope === "yearly" ? "bg-surface-secondary" : "bg-surface-card"}`} onClick={() => setScope("yearly")}>Yearly</button>
+          <button className={`px-3 py-1 text-sm font-medium border border-border ${scope === "totals" ? "bg-surface-secondary" : "bg-surface-card"}`} onClick={() => setScope("totals")}>Totals (All Years)</button>
         </div>
 
         {scope === "totals" && (
           <div className="flex items-center gap-3">
             {tab === "hitting" ? (
               <>
-                <label className="text-sm">Min PA</label>
-                <input type="number" className="border rounded px-2 py-1 w-24" value={totalsPaQual} onChange={(e) => setTotalsPaQual(parseInt(e.target.value || '0', 10))} />
+                <label className="text-sm text-content-secondary">Min PA</label>
+                <input type="number" className="border border-border rounded px-2 py-1 w-24 bg-surface-card text-content-primary" value={totalsPaQual} onChange={(e) => setTotalsPaQual(parseInt(e.target.value || '0', 10))} />
               </>
             ) : (
               <>
-                <label className="text-sm">Min IP</label>
-                <input type="number" className="border rounded px-2 py-1 w-24" value={totalsIpQual} onChange={(e) => setTotalsIpQual(parseInt(e.target.value || '0', 10))} />
+                <label className="text-sm text-content-secondary">Min IP</label>
+                <input type="number" className="border border-border rounded px-2 py-1 w-24 bg-surface-card text-content-primary" value={totalsIpQual} onChange={(e) => setTotalsIpQual(parseInt(e.target.value || '0', 10))} />
               </>
             )}
           </div>
@@ -237,9 +238,9 @@ export default function PlayersStats() {
       />
 
       {loading ? (
-        <div className="text-center py-8">Loading...</div>
+        <div className="text-center py-8 text-content-secondary">Loading...</div>
       ) : displayData.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">No players match these filters.</div>
+        <div className="text-center py-8 text-content-secondary">No players match these filters.</div>
       ) : (
         <StatsTable data={displayData as any[]} columns={columns as any[]} initialSortField={initialSort} initialSortDesc={initialSortDesc} stickyFirstCols={2} columnWidthsPx={[180, 220]} />
       )}

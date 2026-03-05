@@ -105,8 +105,8 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
   if (loading) {
     return (
       <div className="flex justify-center items-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <span className="ml-2 text-gray-600">Loading batting data...</span>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-navy"></div>
+        <span className="ml-2 text-content-secondary">Loading batting data...</span>
       </div>
     )
   }
@@ -140,13 +140,13 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow">
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h2 className="text-xl font-semibold text-gray-900">Player Batting Data</h2>
-        <div className="mt-2 text-sm text-gray-600">
+    <div className="bg-surface-card rounded-lg shadow">
+      <div className="px-6 py-4 border-b border-border">
+        <h2 className="text-xl font-semibold text-content-primary">Player Batting Data</h2>
+        <div className="mt-2 text-sm text-content-secondary">
           <p><strong>Total Records:</strong> {filteredData.length} | <strong>Available Years:</strong> {availableYears.length} | <strong>Available Teams:</strong> {availableTeams.length}</p>
           {qualifierOnly && (
-            <p className="text-blue-600 mt-1">
+            <p className="text-brand-navy mt-1">
               <strong>Filter:</strong> Showing qualified players only
             </p>
           )}
@@ -154,42 +154,43 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
       </div>
 
       {stale && (
-        <div className="mx-6 mt-4 bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded text-sm">
+        <div className="mx-6 mt-4 bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded text-sm flex items-center gap-2">
+          <svg className="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           Data may be outdated — showing last known data while we reconnect.
         </div>
       )}
       
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-border">
+          <thead className="bg-surface-secondary">
             <tr>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Team</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">GP</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PA</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">AVG</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">HR</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">RBI</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">OPS</th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">wRC+</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">Year</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">Name</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">Team</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">GP</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">PA</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">AVG</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">HR</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">RBI</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">OPS</th>
+              <th className="px-3 py-3 text-left text-xs font-medium text-content-secondary uppercase tracking-wider">wRC+</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-surface-card divide-y divide-border">
             {filteredData.slice(0, 20).map((item, index) => (
-              <tr key={item.id || index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.year}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              <tr key={item.id || index} className={index % 2 === 0 ? '' : 'bg-table-stripe'}>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{item.year}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-content-primary">
                   {item.player.name}
                 </td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.team}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.games}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.plateAppearances}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{(item.avg ?? 0).toFixed(3)}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.homeRuns}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.rbis}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{(item.ops ?? 0).toFixed(3)}</td>
-                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-900">{item.wrcPlus}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{item.team}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{item.games}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{item.plateAppearances}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{(item.avg ?? 0).toFixed(3)}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{item.homeRuns}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{item.rbis}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{(item.ops ?? 0).toFixed(3)}</td>
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-content-primary">{item.wrcPlus}</td>
               </tr>
             ))}
           </tbody>
@@ -197,8 +198,8 @@ const PlayerBattingData: React.FC<PlayerBattingDataProps> = ({
       </div>
       
       {filteredData.length > 20 && (
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-          <p className="text-sm text-gray-600">
+        <div className="px-6 py-4 bg-surface-secondary border-t border-border">
+          <p className="text-sm text-content-secondary">
             Showing first 20 of {filteredData.length} records. Use filters to narrow results.
           </p>
         </div>

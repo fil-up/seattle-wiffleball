@@ -16,9 +16,9 @@ interface LeaderboardPodiumProps {
 const PODIUM_CONFIG = [
   {
     order: 1,
-    border: 'border-gray-400',
-    bg: 'bg-gray-50',
-    badgeBg: 'bg-gray-400',
+    border: 'border-content-secondary',
+    bg: 'bg-surface-secondary',
+    badgeBg: 'bg-content-secondary',
     padding: 'pt-4 pb-3',
     textSize: 'text-lg',
     valueSize: 'text-xl',
@@ -26,9 +26,9 @@ const PODIUM_CONFIG = [
   },
   {
     order: 0,
-    border: 'border-yellow-500',
-    bg: 'bg-yellow-50',
-    badgeBg: 'bg-yellow-500',
+    border: 'border-brand-gold',
+    bg: 'bg-brand-gold/10',
+    badgeBg: 'bg-brand-gold',
     padding: 'pt-6 pb-4',
     textSize: 'text-xl',
     valueSize: 'text-2xl',
@@ -37,7 +37,7 @@ const PODIUM_CONFIG = [
   {
     order: 2,
     border: 'border-amber-700',
-    bg: 'bg-orange-50',
+    bg: 'bg-amber-700/10',
     badgeBg: 'bg-amber-700',
     padding: 'pt-3 pb-3',
     textSize: 'text-base',
@@ -55,7 +55,7 @@ export default function LeaderboardPodium({ title, players }: LeaderboardPodiumP
 
   return (
     <div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-3">{title}</h3>
+      <h3 className="text-lg font-semibold text-content-primary mb-3">{title}</h3>
 
       {showPodium ? (
         <div className="flex items-end justify-center gap-3 md:gap-4 mb-4">
@@ -76,14 +76,14 @@ export default function LeaderboardPodium({ title, players }: LeaderboardPodiumP
                 </div>
                 <Link
                   href={`/stats/players/${player.playerId}`}
-                  className="text-blue-700 hover:text-blue-900 font-medium text-sm block truncate"
+                  className="text-brand-navy hover:text-brand-navy/80 font-medium text-sm block truncate"
                 >
                   {player.name}
                 </Link>
                 {player.team && (
-                  <span className="text-xs text-gray-500 block mt-0.5">{player.team}</span>
+                  <span className="text-xs text-content-secondary block mt-0.5">{player.team}</span>
                 )}
-                <div className={`${config.valueSize} font-bold text-gray-900 mt-1`}>
+                <div className={`${config.valueSize} font-bold text-content-primary mt-1`}>
                   {player.value}
                 </div>
               </div>
@@ -95,18 +95,18 @@ export default function LeaderboardPodium({ title, players }: LeaderboardPodiumP
           {podiumPlayers.map((player) => (
             <div
               key={player.playerId + player.rank}
-              className="flex justify-between items-center py-2 border-b border-gray-100"
+              className="flex justify-between items-center py-2 border-b border-border"
             >
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-gray-500 w-6">{player.rank}</span>
+                <span className="text-sm font-medium text-content-secondary w-6">{player.rank}</span>
                 <Link
                   href={`/stats/players/${player.playerId}`}
-                  className="text-sm text-blue-700 hover:text-blue-900"
+                  className="text-sm text-brand-navy hover:text-brand-navy/80"
                 >
                   {player.name}
                 </Link>
               </div>
-              <span className="text-sm font-semibold text-gray-900">{player.value}</span>
+              <span className="text-sm font-semibold text-content-primary">{player.value}</span>
             </div>
           ))}
         </div>
@@ -117,18 +117,18 @@ export default function LeaderboardPodium({ title, players }: LeaderboardPodiumP
           {restPlayers.map((player) => (
             <div
               key={player.playerId + player.rank}
-              className="flex justify-between items-center py-2 border-b border-gray-100"
+              className="flex justify-between items-center py-2 border-b border-border"
             >
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-gray-500 w-6">{player.rank}</span>
+                <span className="text-sm font-medium text-content-secondary w-6">{player.rank}</span>
                 <Link
                   href={`/stats/players/${player.playerId}`}
-                  className="text-sm text-blue-700 hover:text-blue-900"
+                  className="text-sm text-brand-navy hover:text-brand-navy/80"
                 >
                   {player.name}
                 </Link>
               </div>
-              <span className="text-sm font-semibold text-gray-900">{player.value}</span>
+              <span className="text-sm font-semibold text-content-primary">{player.value}</span>
             </div>
           ))}
         </div>

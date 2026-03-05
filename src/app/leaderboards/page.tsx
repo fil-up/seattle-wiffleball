@@ -106,30 +106,31 @@ export default function LeaderboardsPage() {
   return (
     <div>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Leaderboards</h1>
+        <h1 className="text-3xl font-bold text-content-primary mb-6">Leaderboards</h1>
 
         {stale && (
-          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+          <div className="bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded mb-4 text-sm flex items-center gap-2">
+            <svg className="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             Data may be outdated — showing last known data while we reconnect.
           </div>
         )}
 
         <div className="flex items-center gap-3 mb-6">
-          <label className="text-sm">Season</label>
-          <select value={year} onChange={(e) => setYear(e.target.value)} className="border rounded px-2 py-1 text-sm">
+          <label className="text-sm text-content-secondary">Season</label>
+          <select value={year} onChange={(e) => setYear(e.target.value)} className="border border-border rounded px-2 py-1 text-sm bg-surface-card text-content-primary">
             <option value="all">All-Time (min 3 seasons)</option>
             {years.map(y => (<option key={y} value={String(y)}>{y}</option>))}
           </select>
         </div>
 
         {loading ? (
-          <div className="py-8 text-center">Loading...</div>
+          <div className="py-8 text-center text-content-secondary">Loading...</div>
         ) : (
           <>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Hitting</h2>
+            <h2 className="text-xl font-semibold text-content-primary mb-4">Hitting</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
               {HITTING_STATS.map(s => (
-                <div key={s.key} className="bg-white rounded-lg shadow p-4 md:p-6">
+                <div key={s.key} className="bg-surface-card rounded-lg shadow p-4 md:p-6">
                   <LeaderboardPodium
                     title={s.label}
                     players={mapToPlayers(hitData[s.key] || [], s.key)}
@@ -138,10 +139,10 @@ export default function LeaderboardsPage() {
               ))}
             </div>
 
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Pitching</h2>
+            <h2 className="text-xl font-semibold text-content-primary mb-4">Pitching</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {PITCHING_STATS.map(s => (
-                <div key={s.key} className="bg-white rounded-lg shadow p-4 md:p-6">
+                <div key={s.key} className="bg-surface-card rounded-lg shadow p-4 md:p-6">
                   <LeaderboardPodium
                     title={s.label}
                     players={mapToPlayers(pitData[s.key] || [], s.key)}

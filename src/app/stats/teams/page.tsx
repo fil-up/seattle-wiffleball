@@ -39,8 +39,8 @@ export default function TeamsPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <span className="ml-2 text-gray-600">Loading teams...</span>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-navy"></div>
+        <span className="ml-2 text-content-secondary">Loading teams...</span>
       </div>
     )
   }
@@ -48,10 +48,11 @@ export default function TeamsPage() {
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Teams</h1>
+        <h1 className="text-3xl font-bold text-content-primary mb-8">Teams</h1>
 
         {stale && (
-          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">
+          <div className="bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded mb-4 text-sm flex items-center gap-2">
+            <svg className="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             Data may be outdated — showing last known data while we reconnect.
           </div>
         )}
@@ -62,7 +63,7 @@ export default function TeamsPage() {
             <Link 
               key={team.id} 
               href={`/stats/teams/${team.abbreviation.toLowerCase()}`}
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              className="bg-surface-card rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
             >
               <div className="p-6">
                 <div className="flex items-center space-x-4">
@@ -76,10 +77,10 @@ export default function TeamsPage() {
             </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-gray-900 truncate">
+                    <h3 className="text-lg font-semibold text-content-primary truncate">
                       {team.name}
                     </h3>
-                    <p className="text-sm text-gray-500">{team.abbreviation}</p>
+                    <p className="text-sm text-content-secondary">{team.abbreviation}</p>
                   </div>
                 </div>
           </div>
@@ -88,9 +89,9 @@ export default function TeamsPage() {
         </div>
 
         {/* Standings Section */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">League Standings</h2>
+        <div className="bg-surface-card rounded-lg shadow">
+          <div className="px-6 py-4 border-b border-border">
+            <h2 className="text-xl font-semibold text-content-primary">League Standings</h2>
           </div>
           <div className="p-6">
             <SheetrockStandings />

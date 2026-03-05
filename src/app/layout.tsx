@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Seattle Wiffleball League',
+  title: 'Seattle Wiffle',
   description: 'The Premier Wiffleball League of the Pacific Northwest',
 }
 
@@ -26,7 +26,7 @@ export default function RootLayout({
               <div>
                 <h3 className="text-lg font-semibold mb-4">About</h3>
                 <p className="text-gray-400">
-                  Seattle Wiffleball League is the premier wiffleball organization in the Pacific Northwest.
+                  Seattle Wiffle is the premier wiffleball organization in the Pacific Northwest.
                 </p>
               </div>
               <div>
@@ -56,7 +56,7 @@ export default function RootLayout({
               </div>
             </div>
             <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-              © {new Date().getFullYear()} Seattle Wiffleball League. All rights reserved.
+              © {new Date().getFullYear()} Seattle Wiffle. All rights reserved.
             </div>
           </div>
         </footer>

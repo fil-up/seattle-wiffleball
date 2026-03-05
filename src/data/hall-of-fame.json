@@ -1,0 +1,71 @@
+{
+  "_note": "Hall of Fame inductees. Populate careerStats with real numbers (use null for unknown). Add AI-generated bust images to public/images/hall-of-fame/ matching the image path. To add a new inductee, copy the template entry at the bottom and fill in all fields.",
+  "inductees": [
+    {
+      "id": "aaron-hunter",
+      "name": "Aaron Hunter",
+      "inductionYear": 2024,
+      "image": "/images/hall-of-fame/aaron-hunter.png",
+      "bio": "A dominant two-way player who combined elite pitching command with consistent hitting. Former MVP and Cy Young winner, Hunter's career defined an era of Seattle Wiffleball excellence. His presence on the mound was enough to change the complexion of any game, and his bat was equally dangerous.",
+      "seasonsPlayed": 8,
+      "teams": ["100% Real Juice"],
+      "awards": ["MVP", "Cy Young"],
+      "careerStats": {
+        "games": null,
+        "avg": null,
+        "homeRuns": null,
+        "ops": null,
+        "wrcPlus": null,
+        "wins": null,
+        "losses": null,
+        "era": null,
+        "strikeouts": null,
+        "whip": null
+      }
+    },
+    {
+      "id": "epo-olivares",
+      "name": "Epo Olivares",
+      "inductionYear": 2023,
+      "image": "/images/hall-of-fame/epo-olivares.png",
+      "bio": "The league's all-time strikeout king. Olivares built a legacy on the mound with overpowering stuff that left hitters guessing. His career strikeout record may stand for generations, cementing his place among the greatest to ever toe the rubber in Seattle Wiffleball.",
+      "seasonsPlayed": 7,
+      "teams": [],
+      "awards": [],
+      "careerStats": {
+        "games": null,
+        "avg": null,
+        "homeRuns": null,
+        "ops": null,
+        "wrcPlus": null,
+        "wins": null,
+        "losses": null,
+        "era": null,
+        "strikeouts": null,
+        "whip": null
+      }
+    },
+    {
+      "id": "template-player",
+      "name": "Template Player",
+      "inductionYear": 2025,
+      "image": "/images/hall-of-fame/template-player.png",
+      "bio": "Replace this bio with a written paragraph about the player's career, achievements, and legacy in Seattle Wiffleball.",
+      "seasonsPlayed": 0,
+      "teams": ["Team Name"],
+      "awards": ["Award 1", "Award 2"],
+      "careerStats": {
+        "games": null,
+        "avg": null,
+        "homeRuns": null,
+        "ops": null,
+        "wrcPlus": null,
+        "wins": null,
+        "losses": null,
+        "era": null,
+        "strikeouts": null,
+        "whip": null
+      }
+    }
+  ]
+}

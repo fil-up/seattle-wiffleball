@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Stats Engine** - Fix stat bugs, build accurate batting/pitching tables with working filters
 - [x] **Phase 3: Core Pages** - Build Home, Teams, Leaderboards pages and embed live/media widgets
 - [x] **Phase 4: Content Pages** - Build News, Rules, Archives, Info, and Hall of Fame pages
-- [ ] **Phase 5: Design & Polish** - Visual refinement, responsive layout, theming, and UX consistency
+- [x] **Phase 5: Design & Polish** - Visual refinement, responsive layout, theming, and UX consistency
 - [ ] **Phase 6: Infrastructure & Launch** - Cleanup, deploy to Vercel, ensure non-developer maintainability
 
 ## Phase Details
@@ -106,7 +106,7 @@ Plans:
 - [x] 05-01-PLAN.md — Theme system, unified navigation, and shared components (ErrorState, Skeleton)
 - [x] 05-02-PLAN.md — Core page theme migration (home, stats, teams, leaderboards) + loading/error states
 - [x] 05-03-PLAN.md — Content page theme migration (news, rules, archives, info, HoF, schedule, media) + loading/error states
-- [ ] 05-04-PLAN.md — Stats table visual polish (team logos, headshots, awards, dropdowns) + mobile responsive pass
+- [x] 05-04-PLAN.md — Stats table visual polish (team logos, headshots, awards, dropdowns) + mobile responsive pass
 
 ### Phase 6: Infrastructure & Launch
 **Goal**: Site is deployed, cleaned up, and maintainable by the non-developer league owner
@@ -180,7 +180,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Stats Engine | 3/3 | Complete | 2026-03-04 |
 | 3. Core Pages | 5/5 | Complete | 2026-03-04 |
 | 4. Content Pages | 3/3 | Complete | 2026-03-05 |
-| 5. Design & Polish | 3/4 | In progress | - |
+| 5. Design & Polish | 4/4 | Complete | 2026-03-05 |
 | 6. Infrastructure & Launch | 0/3 | Not started | - |
 
 ---

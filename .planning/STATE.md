@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Accurate, browsable league stats and information — if the numbers are wrong or hard to find, nothing else matters.
-**Current focus:** Phase 5 Design & Polish — in progress
+**Current focus:** Phase 5 Design & Polish — Complete pending verification
 
 ## Current Position
 
 Phase: 5 of 6 (Design & Polish)
-Plan: 1 of 4 in phase
-Status: In progress
-Last activity: 2026-03-05 — Completed 05-01-PLAN.md (design system foundation)
+Plan: 4 of 4 in phase
+Status: Complete pending verification
+Last activity: 2026-03-05 — Completed 05-04-PLAN.md (stats polish & mobile responsive)
 
-Progress: [███████████████░░░░░] 71%
+Progress: [███████████████████░] 90%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
+- Total plans completed: 18
 - Average duration: 7 min
-- Total execution time: ~1.6 hours
+- Total execution time: ~2 hours
 
 **By Phase:**
 
@@ -31,11 +31,11 @@ Progress: [███████████████░░░░░] 71%
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
 | 3 - Core Pages | 5/5 | 32 min | 6 min |
 | 4 - Content Pages | 3/3 | ~15 min | ~5 min |
-| 5 - Design & Polish | 1/4 | 8 min | 8 min |
+| 5 - Design & Polish | 4/4 | ~40 min | ~10 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-05 (3 min), 04-01 (~5 min), 04-03 (~5 min), 04-02 (~5 min), 05-01 (8 min)
-- Trend: Stable
+- Last 5 plans: 04-02 (~5 min), 04-03 (~5 min), 05-01 (8 min), 05-02 (~8 min), 05-04 (~12 min)
+- Trend: Slightly increasing (polish tasks are more detailed)
 
 *Updated after each plan completion*
 
@@ -94,6 +94,10 @@ Recent decisions affecting current work:
 - [05-03]: News listing is server-rendered — no client-side skeleton needed (only archives/media have client fetching)
 - [05-03]: Archives stale banner uses bg-brand-gold/10 with border-brand-gold/30
 - [05-03]: SeasonAccordion uses hover:bg-table-hover for consistent interactive feedback
+- [05-04]: Deleted unused PageNavigation.tsx and Navigation.tsx (all imports already removed)
+- [05-04]: Mobile tab interface on team detail uses hidden/block classes for simplicity
+- [05-04]: Award icons as inline SVG components with brand-gold coloring
+- [05-04]: Sticky column cells get explicit bg colors per row index to prevent transparency bleed
 
 ### Pending Todos
 
@@ -110,5 +114,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-05
-Stopped at: Completed 05-03-PLAN.md
+Stopped at: Completed 05-04-PLAN.md — Phase 5 complete
 Resume file: None

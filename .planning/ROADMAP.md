@@ -180,7 +180,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Stats Engine | 3/3 | Complete | 2026-03-04 |
 | 3. Core Pages | 5/5 | Complete | 2026-03-04 |
 | 4. Content Pages | 3/3 | Complete | 2026-03-05 |
-| 5. Design & Polish | 0/3 | Not started | - |
+| 5. Design & Polish | 0/4 | Not started | - |
 | 6. Infrastructure & Launch | 0/3 | Not started | - |
 
 ---

@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Accurate, browsable league stats and information — if the numbers are wrong or hard to find, nothing else matters.
-**Current focus:** Phase 3 gap closure complete — ready for Phase 4
+**Current focus:** Phase 4 Content Pages — hall of fame page complete
 
 ## Current Position
 
-Phase: 3 of 6 (Core Pages) — COMPLETE (including gap closure)
-Plan: 5 of 5 in phase (gap closure plan)
-Status: Phase complete
-Last activity: 2026-03-04 — Completed 03-05-PLAN.md (gap closure)
+Phase: 4 of 6 (Content Pages)
+Plan: 2 of 3 in current phase
+Status: In progress
+Last activity: 2026-03-04 — Completed 04-03-PLAN.md (hall of fame page)
 
-Progress: [███████████░░░░░░░░░] 55%
+Progress: [█████████████░░░░░░░] 65%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
+- Total plans completed: 13
 - Average duration: 7 min
-- Total execution time: 1.35 hours
+- Total execution time: ~1.5 hours
 
 **By Phase:**
 
@@ -30,9 +30,10 @@ Progress: [███████████░░░░░░░░░] 55%
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
 | 3 - Core Pages | 5/5 | 32 min | 6 min |
+| 4 - Content Pages | 2/3 | ~10 min | ~5 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (~6 min), 03-03 (6 min), 03-04 (6 min), 03-02 (5 min), 03-05 (3 min)
+- Last 5 plans: 03-04 (6 min), 03-02 (5 min), 03-05 (3 min), 04-01 (~5 min), 04-03 (~5 min)
 - Trend: Stable/improving
 
 *Updated after each plan completion*
@@ -74,6 +75,11 @@ Recent decisions affecting current work:
 - [03-05]: Plain HTML tables for player detail (no StatsTable) — simpler for static career display
 - [03-05]: Leaderboards year default via empty string init + setYear in years-fetch useEffect
 - [03-05]: Guard leaderboard data fetch with if (!year) return to prevent empty-year fetch
+- [04-03]: Layered Image + initials circle for portrait fallback (server component compatible)
+- [04-03]: Template entries filtered by id prefix for user-editable JSON data pattern
+- [04-01]: News articles as individual .md files in content/news/ with gray-matter frontmatter
+- [04-01]: API route /api/news bridges server-only fs/gray-matter for client-side home page
+- [04-01]: remark + remark-html replaces fragile regex markdown converter
 
 ### Pending Todos
 
@@ -89,5 +95,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-04
-Stopped at: Completed 03-05-PLAN.md (Phase 3 gap closure complete)
+Stopped at: Completed 04-03-PLAN.md (hall of fame page)
 Resume file: None

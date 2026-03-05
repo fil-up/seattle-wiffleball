@@ -88,6 +88,9 @@ Recent decisions affecting current work:
 - [05-01]: Per-page PageNavigation removed in favor of layout-level SiteNavigation
 - [05-01]: CSS variable values use space-separated RGB channels for Tailwind opacity modifier support
 - [05-01]: Secondary nav links shown at reduced opacity on desktop to distinguish from primary
+- [05-03]: News listing is server-rendered — no client-side skeleton needed (only archives/media have client fetching)
+- [05-03]: Archives stale banner uses bg-brand-gold/10 with border-brand-gold/30
+- [05-03]: SeasonAccordion uses hover:bg-table-hover for consistent interactive feedback
 
 ### Pending Todos
 
@@ -104,5 +107,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-05
-Stopped at: Completed 05-01-PLAN.md
+Stopped at: Completed 05-03-PLAN.md
 Resume file: None

@@ -105,7 +105,7 @@ Plans:
 Plans:
 - [x] 05-01-PLAN.md — Theme system, unified navigation, and shared components (ErrorState, Skeleton)
 - [ ] 05-02-PLAN.md — Core page theme migration (home, stats, teams, leaderboards) + loading/error states
-- [ ] 05-03-PLAN.md — Content page theme migration (news, rules, archives, info, HoF, schedule, media) + loading/error states
+- [x] 05-03-PLAN.md — Content page theme migration (news, rules, archives, info, HoF, schedule, media) + loading/error states
 - [ ] 05-04-PLAN.md — Stats table visual polish (team logos, headshots, awards, dropdowns) + mobile responsive pass
 
 ### Phase 6: Infrastructure & Launch

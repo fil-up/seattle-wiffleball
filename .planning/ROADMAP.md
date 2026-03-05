@@ -100,12 +100,13 @@ Plans:
   3. Dropdown selectors for year, team, and stat category are visually polished and consistent site-wide
   4. Every page renders correctly on mobile screens with no horizontal scroll or broken layouts
   5. Site uses a consistent dark/league-branded color theme with uniform navigation across all pages
-**Plans**: 3 plans
+**Plans**: 4 plans
 
 Plans:
-- [ ] 05-01: Stats table visual polish — inline team logos, headshot placeholders, award icons, polished dropdowns
-- [ ] 05-02: Responsive design pass across all pages for mobile
-- [ ] 05-03: Dark/branded color theme, consistent navigation, error states, and loading indicators
+- [ ] 05-01-PLAN.md — Theme system, unified navigation, and shared components (ErrorState, Skeleton)
+- [ ] 05-02-PLAN.md — Core page theme migration (home, stats, teams, leaderboards) + loading/error states
+- [ ] 05-03-PLAN.md — Content page theme migration (news, rules, archives, info, HoF, schedule, media) + loading/error states
+- [ ] 05-04-PLAN.md — Stats table visual polish (team logos, headshots, awards, dropdowns) + mobile responsive pass
 
 ### Phase 6: Infrastructure & Launch
 **Goal**: Site is deployed, cleaned up, and maintainable by the non-developer league owner

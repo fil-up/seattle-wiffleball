@@ -3,11 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  --color-bg-primary: 255 255 255;
+  --color-bg-secondary: 249 250 251;
+  --color-bg-card: 255 255 255;
+  --color-text-primary: 17 24 39;
+  --color-text-secondary: 107 114 128;
+  --color-brand-primary: 37 57 123;
+  --color-brand-accent: 255 215 0;
+  --color-table-stripe: 249 250 251;
+  --color-table-hover: 243 244 246;
+  --color-border: 229 231 235;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+.dark {
+  --color-bg-primary: 17 24 39;
+  --color-bg-secondary: 31 41 55;
+  --color-bg-card: 31 41 55;
+  --color-text-primary: 243 244 246;
+  --color-text-secondary: 156 163 175;
+  --color-brand-primary: 59 91 173;
+  --color-brand-accent: 255 215 0;
+  --color-table-stripe: 31 41 55;
+  --color-table-hover: 55 65 81;
+  --color-border: 55 65 81;
 }

@@ -86,9 +86,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: Build News section — article list and individual article pages
-- [ ] 04-02: Build Rules, Archives, and Info pages
-- [ ] 04-03: Build Hall of Fame page with player busts, stats, and bios
+- [ ] 04-01-PLAN.md — Migrate news system to markdown files with gray-matter + remark, create API route, update consumers
+- [ ] 04-02-PLAN.md — Create Rules, Archives, and Info pages with full content, accordion, and map embed
+- [ ] 04-03-PLAN.md — Create Hall of Fame page with player data, portrait placeholders, stats, and bios
 
 ### Phase 5: Design & Polish
 **Goal**: The site looks modern, league-branded, and works well on phones at the field

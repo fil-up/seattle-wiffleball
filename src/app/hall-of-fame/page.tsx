@@ -24,6 +24,28 @@ interface HallOfFameEntry {
   }
 }
 
+function TrophyIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 15.5a5.5 5.5 0 005.5-5.5V4h2a1 1 0 011 1v2a3 3 0 01-3 3h-.17A6.52 6.52 0 0112 15.5zm0 0a5.5 5.5 0 01-5.5-5.5V4h-2a1 1 0 00-1 1v2a3 3 0 003 3h.17A6.52 6.52 0 0012 15.5zM9 18h6v2H9v-2zm-1 3h8v1H8v-1zM7.5 4h9V10a4.5 4.5 0 11-9 0V4z" />
+    </svg>
+  )
+}
+
+function StarIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  )
+}
+
+const AWARD_ICONS: Record<string, typeof TrophyIcon> = {
+  'MVP': TrophyIcon,
+  'Cy Young': StarIcon,
+  'Batting Title': StarIcon,
+}
+
 function getInitials(name: string): string {
   return name
     .split(' ')
@@ -126,14 +148,19 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
           {/* Awards */}
           {entry.awards.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
-              {entry.awards.map((award) => (
-                <span
-                  key={award}
-                  className="bg-brand-navy/10 text-brand-navy px-3 py-1 rounded-full text-sm font-medium"
-                >
-                  {award}
-                </span>
-              ))}
+              {entry.awards.map((award) => {
+                const Icon = AWARD_ICONS[award]
+                return (
+                  <span
+                    key={award}
+                    className="inline-flex items-center gap-1.5 bg-brand-navy/10 text-brand-navy px-3 py-1 rounded-full text-sm font-medium"
+                    title={award}
+                  >
+                    {Icon && <Icon className="text-brand-gold" />}
+                    {award}
+                  </span>
+                )
+              })}
             </div>
           )}
 

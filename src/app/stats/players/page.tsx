@@ -5,6 +5,9 @@ import StatsTable from "@/components/StatsTable"
 import StatsFilter from "@/components/StatsFilter"
 import { TableSkeleton } from "@/components/Skeleton"
 import ErrorState from "@/components/ErrorState"
+import { resolveTeamByCode } from "@/config/teamCodeLogos"
+import Image from "next/image"
+import Link from "next/link"
 import type { YearlyHittingRow, TotalsHittingRow, YearlyPitchingRow, TotalsPitchingRow } from "@/lib/sheets"
 
 type StatRow = YearlyHittingRow | TotalsHittingRow | YearlyPitchingRow | TotalsPitchingRow
@@ -126,7 +129,18 @@ export default function PlayersStats() {
   const columns = useMemo(() => {
     if (tab === "hitting") {
       const base = [
-        { header: "Player", accessorKey: "player.name", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
+        { header: "Player", accessorKey: "player.name", sortDescFirst: true, cell: ({ row, getValue }: any) => {
+          const name = getValue() || ''
+          const teamCode = row.original?.teamCode || row.original?.team || ''
+          const playerId = row.original?.player?.id
+          const { logoUrl } = resolveTeamByCode(teamCode)
+          return (
+            <div className="flex items-center gap-2">
+              {logoUrl && <Image src={logoUrl} alt="" width={16} height={16} className="flex-shrink-0" unoptimized />}
+              {playerId ? <Link href={`/stats/players/${playerId}`} className="text-brand-navy hover:underline dark:text-blue-400">{name}</Link> : name}
+            </div>
+          )
+        }},
         { header: "Team", accessorKey: "team", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
         { header: "G", accessorKey: "games", sortDescFirst: true },
         { header: "PA", accessorKey: "plateAppearances", sortDescFirst: true },
@@ -153,7 +167,18 @@ export default function PlayersStats() {
       return base
     } else {
       const base = [
-        { header: "Player", accessorKey: "player.name", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
+        { header: "Player", accessorKey: "player.name", sortDescFirst: true, cell: ({ row, getValue }: any) => {
+          const name = getValue() || ''
+          const teamCode = row.original?.teamCode || row.original?.team || ''
+          const playerId = row.original?.player?.id
+          const { logoUrl } = resolveTeamByCode(teamCode)
+          return (
+            <div className="flex items-center gap-2">
+              {logoUrl && <Image src={logoUrl} alt="" width={16} height={16} className="flex-shrink-0" unoptimized />}
+              {playerId ? <Link href={`/stats/players/${playerId}`} className="text-brand-navy hover:underline dark:text-blue-400">{name}</Link> : name}
+            </div>
+          )
+        }},
         { header: "Team", accessorKey: "team", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
         { header: "G", accessorKey: "games", sortDescFirst: true },
         { header: "IP", accessorKey: "inningsPitched", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(1) },

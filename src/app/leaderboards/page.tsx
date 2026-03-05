@@ -114,7 +114,7 @@ export default function LeaderboardsPage() {
   return (
     <div>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-content-primary mb-6">Leaderboards</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-content-primary mb-6">Leaderboards</h1>
 
         {stale && (
           <div className="bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded mb-4 text-sm flex items-center gap-2">
@@ -124,8 +124,8 @@ export default function LeaderboardsPage() {
         )}
 
         <div className="flex items-center gap-3 mb-6">
-          <label className="text-sm text-content-secondary">Season</label>
-          <select value={year} onChange={(e) => setYear(e.target.value)} className="border border-border rounded px-2 py-1 text-sm bg-surface-card text-content-primary">
+          <label className="text-sm font-semibold text-content-primary">Season</label>
+          <select value={year} onChange={(e) => setYear(e.target.value)} className="bg-surface-primary border border-border rounded-md px-3 py-2 text-sm text-content-primary focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-colors">
             <option value="all">All-Time (min 3 seasons)</option>
             {years.map(y => (<option key={y} value={String(y)}>{y}</option>))}
           </select>

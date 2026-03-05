@@ -92,7 +92,7 @@ export default function TeamsIndexPage() {
                     <img
                       src={team.logoUrl || DEFAULT_LOGO}
                       alt={`${team.name} logo`}
-                      className="w-36 h-36 md:w-44 md:h-44 object-contain mb-4 transition-transform duration-300 group-hover:scale-105"
+                      className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain mb-4 transition-transform duration-300 group-hover:scale-105"
                       onError={(e) => { (e.currentTarget as HTMLImageElement).src = DEFAULT_LOGO }}
                     />
                     <h3 className="text-lg font-semibold text-content-primary text-center group-hover:text-brand-navy transition-colors">

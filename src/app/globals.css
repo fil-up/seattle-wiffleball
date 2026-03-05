@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow-x: hidden;
+}
+
 :root {
   --color-bg-primary: 255 255 255;
   --color-bg-secondary: 249 250 251;

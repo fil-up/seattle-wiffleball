@@ -215,19 +215,19 @@ export default function PlayersStats() {
           Data may be outdated — we&apos;re having trouble reaching the latest stats. Showing last known data.
         </div>
       )}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold text-content-primary">Player Statistics</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-content-primary">Player Statistics</h1>
         <div className="flex items-center gap-3">
           <input
             type="text"
             placeholder="Search player..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border border-border rounded px-3 py-2 text-sm bg-surface-card text-content-primary"
+            className="border border-border rounded-md px-3 py-2 text-sm bg-surface-card text-content-primary focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-colors min-w-0 flex-1 sm:flex-none"
           />
-          <div className="inline-flex rounded-md shadow-sm" role="group">
-              <button className={`px-4 py-2 text-sm font-medium border border-border ${tab === "hitting" ? "bg-brand-navy text-white" : "bg-surface-card text-content-primary"}`} onClick={() => setTab("hitting")}>Hitting</button>
-              <button className={`px-4 py-2 text-sm font-medium border border-border ${tab === "pitching" ? "bg-brand-navy text-white" : "bg-surface-card text-content-primary"}`} onClick={() => setTab("pitching")}>Pitching</button>
+          <div className="inline-flex rounded-md shadow-sm flex-shrink-0" role="group">
+              <button className={`px-4 py-2 text-sm font-medium border border-border rounded-l-md transition-colors ${tab === "hitting" ? "bg-brand-navy text-white" : "bg-surface-card text-content-primary"}`} onClick={() => setTab("hitting")}>Hitting</button>
+              <button className={`px-4 py-2 text-sm font-medium border border-border rounded-r-md transition-colors ${tab === "pitching" ? "bg-brand-navy text-white" : "bg-surface-card text-content-primary"}`} onClick={() => setTab("pitching")}>Pitching</button>
           </div>
         </div>
       </div>

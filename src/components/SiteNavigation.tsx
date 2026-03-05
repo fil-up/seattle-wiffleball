@@ -34,6 +34,7 @@ export default function SiteNavigation() {
 
   return (
     <>
+    <div className="sticky top-0 z-50">
       {/* Desktop navigation */}
       <nav className="hidden md:block bg-brand-navy">
         <div className="container mx-auto px-4">
@@ -100,6 +101,7 @@ export default function SiteNavigation() {
       </nav>
       {/* Mobile gold accent line */}
       <div className="md:hidden bg-brand-gold h-[3px]" />
+    </div>
 
       {/* Mobile slide-in panel */}
       <Transition show={mobileOpen} as={Fragment}>

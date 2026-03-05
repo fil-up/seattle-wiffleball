@@ -70,8 +70,8 @@ export default function Home() {
         </div>
 
         <div className="relative z-10">
-          <div className="py-40 px-6">
-            <div className="flex">
+          <div className="py-20 md:py-40 px-4 md:px-6">
+            <div className="flex flex-col md:flex-row">
               <div className="w-full md:w-[20%] flex flex-col items-center">
                 <div className="relative w-40 h-40 md:w-56 md:h-56">
                   <Image

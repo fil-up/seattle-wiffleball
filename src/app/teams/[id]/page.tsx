@@ -69,6 +69,8 @@ type RosterPlayer = {
   statLine: string
 }
 
+type MobileTab = 'roster' | 'batting' | 'pitching' | 'records'
+
 export default function TeamPage() {
   const params = useParams() as { id: string }
   const [team, setTeam] = useState<TeamInfo | null>(null)
@@ -82,6 +84,7 @@ export default function TeamPage() {
   const [error, setError] = useState(false)
   const [retryCount, setRetryCount] = useState(0)
   const [stale, setStale] = useState(false)
+  const [mobileTab, setMobileTab] = useState<MobileTab>('roster')
 
   useEffect(() => {
     if (!params?.id) return
@@ -261,8 +264,8 @@ export default function TeamPage() {
 
         {/* Year selector */}
         <div className="flex items-center gap-3 mb-6">
-          <label className="text-sm text-content-secondary">Season</label>
-          <select value={year || ''} onChange={(e) => setYear(e.target.value)} className="border border-border rounded px-2 py-1 text-sm bg-surface-card text-content-primary">
+          <label className="text-sm font-semibold text-content-primary">Season</label>
+          <select value={year || ''} onChange={(e) => setYear(e.target.value)} className="bg-surface-primary border border-border rounded-md px-3 py-2 text-sm text-content-primary focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-colors">
             {years.map(y => (<option key={y} value={y}>{y}</option>))}
           </select>
         </div>
@@ -285,13 +288,30 @@ export default function TeamPage() {
           <div className="py-8 text-center text-content-secondary">Loading roster and stats...</div>
         ) : (
           <>
+            {/* Mobile tab bar */}
+            <div className="flex overflow-x-auto border-b border-border md:hidden mb-4 -mx-4 px-4">
+              {(['roster', 'batting', 'pitching', 'records'] as MobileTab[]).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setMobileTab(tab)}
+                  className={`px-4 py-3 whitespace-nowrap font-medium text-sm capitalize transition-colors ${
+                    mobileTab === tab
+                      ? 'border-b-2 border-brand-gold text-brand-navy dark:text-brand-gold'
+                      : 'text-content-secondary hover:text-content-primary'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
             {/* Roster */}
-            <div className="mb-8">
+            <div className={`mb-8 ${mobileTab !== 'roster' ? 'hidden md:block' : ''}`}>
               <h2 className="text-xl font-semibold text-content-primary mb-4">Roster</h2>
               {roster.length === 0 ? (
                 <div className="text-content-secondary text-sm">No roster data available for this season.</div>
               ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {roster.map((p) => (
                     <Link key={p.playerId} href={`/stats/players/${p.playerId}`}>
                       <div className="bg-surface-card rounded-lg shadow-sm border border-border p-4 hover:shadow-md transition-shadow">
@@ -305,102 +325,115 @@ export default function TeamPage() {
               )}
             </div>
 
-            {/* Team Stats */}
-            {(teamBatting || teamPitching) && (
-              <div className="mb-8">
-                <h2 className="text-xl font-semibold text-content-primary mb-4">Team Stats</h2>
-
-                {/* Team Batting */}
-                {teamBatting && (
-                  <div className="bg-surface-card rounded-lg shadow p-4 mb-6">
-                    <h3 className="text-lg font-semibold text-content-primary mb-3">Team Batting</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-4">
-                      <StatCard label="G" value={teamBatting.games} />
-                      <StatCard label="AVG" value={teamBatting.avg.toFixed(3)} />
-                      <StatCard label="HR" value={teamBatting.hr} />
-                      <StatCard label="RBI" value={teamBatting.rbi} />
-                      <StatCard label="OPS" value={teamBatting.ops.toFixed(3)} />
-                      <StatCard label="wRC+" value={Math.round(teamBatting.wrcPlus)} />
-                    </div>
-
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-sm">
-                        <thead>
-                          <tr className="border-b border-border text-left text-content-secondary">
-                            <th className="py-2 pr-4">Player</th>
-                            <th className="py-2 px-2 text-right">G</th>
-                            <th className="py-2 px-2 text-right">AVG</th>
-                            <th className="py-2 px-2 text-right">HR</th>
-                            <th className="py-2 px-2 text-right">RBI</th>
-                            <th className="py-2 px-2 text-right">OPS</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {sortedHitters.map((h) => (
-                            <tr key={h.playerId} className="border-b border-border last:border-0">
-                              <td className="py-2 pr-4">
-                                <Link href={`/stats/players/${h.playerId}`} className="text-brand-navy hover:underline">
-                                  {h.player.name}
-                                </Link>
-                              </td>
-                              <td className="py-2 px-2 text-right">{h.games}</td>
-                              <td className="py-2 px-2 text-right">{h.avg.toFixed(3)}</td>
-                              <td className="py-2 px-2 text-right">{h.homeRuns}</td>
-                              <td className="py-2 px-2 text-right">{h.rbis}</td>
-                              <td className="py-2 px-2 text-right">{h.ops.toFixed(3)}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+            {/* Team Batting */}
+            <div className={`mb-8 ${mobileTab !== 'batting' ? 'hidden md:block' : ''}`}>
+              {teamBatting && (
+                <div className="bg-surface-card rounded-lg shadow p-4 mb-6">
+                  <h3 className="text-lg font-semibold text-content-primary mb-3">Team Batting</h3>
+                  <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-4">
+                    <StatCard label="G" value={teamBatting.games} />
+                    <StatCard label="AVG" value={teamBatting.avg.toFixed(3)} />
+                    <StatCard label="HR" value={teamBatting.hr} />
+                    <StatCard label="RBI" value={teamBatting.rbi} />
+                    <StatCard label="OPS" value={teamBatting.ops.toFixed(3)} />
+                    <StatCard label="wRC+" value={Math.round(teamBatting.wrcPlus)} />
                   </div>
-                )}
 
-                {/* Team Pitching */}
-                {teamPitching && (
-                  <div className="bg-surface-card rounded-lg shadow p-4 mb-6">
-                    <h3 className="text-lg font-semibold text-content-primary mb-3">Team Pitching</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
-                      <StatCard label="ERA" value={teamPitching.era.toFixed(2)} />
-                      <StatCard label="WHIP" value={teamPitching.whip.toFixed(2)} />
-                      <StatCard label="K" value={teamPitching.k} />
-                      <StatCard label="W-L" value={teamPitching.record} />
-                    </div>
-
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-sm">
-                        <thead>
-                          <tr className="border-b border-border text-left text-content-secondary">
-                            <th className="py-2 pr-4">Player</th>
-                            <th className="py-2 px-2 text-right">G</th>
-                            <th className="py-2 px-2 text-right">IP</th>
-                            <th className="py-2 px-2 text-right">ERA</th>
-                            <th className="py-2 px-2 text-right">K</th>
-                            <th className="py-2 px-2 text-right">W-L</th>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border text-left text-content-secondary">
+                          <th className="py-2 pr-4">Player</th>
+                          <th className="py-2 px-2 text-right">G</th>
+                          <th className="py-2 px-2 text-right">AVG</th>
+                          <th className="py-2 px-2 text-right">HR</th>
+                          <th className="py-2 px-2 text-right">RBI</th>
+                          <th className="py-2 px-2 text-right">OPS</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {sortedHitters.map((h) => (
+                          <tr key={h.playerId} className="border-b border-border last:border-0 hover:bg-table-hover transition-colors">
+                            <td className="py-2 pr-4">
+                              <Link href={`/stats/players/${h.playerId}`} className="text-brand-navy hover:underline dark:text-blue-400">
+                                {h.player.name}
+                              </Link>
+                            </td>
+                            <td className="py-2 px-2 text-right tabular-nums">{h.games}</td>
+                            <td className="py-2 px-2 text-right tabular-nums">{h.avg.toFixed(3)}</td>
+                            <td className="py-2 px-2 text-right tabular-nums">{h.homeRuns}</td>
+                            <td className="py-2 px-2 text-right tabular-nums">{h.rbis}</td>
+                            <td className="py-2 px-2 text-right tabular-nums">{h.ops.toFixed(3)}</td>
                           </tr>
-                        </thead>
-                        <tbody>
-                          {sortedPitchers.map((p) => (
-                            <tr key={p.playerId} className="border-b border-border last:border-0">
-                              <td className="py-2 pr-4">
-                                <Link href={`/stats/players/${p.playerId}`} className="text-brand-navy hover:underline">
-                                  {p.player.name}
-                                </Link>
-                              </td>
-                              <td className="py-2 px-2 text-right">{p.games}</td>
-                              <td className="py-2 px-2 text-right">{p.inningsPitched.toFixed(1)}</td>
-                              <td className="py-2 px-2 text-right">{p.era.toFixed(2)}</td>
-                              <td className="py-2 px-2 text-right">{p.strikeouts}</td>
-                              <td className="py-2 px-2 text-right">{p.wins}-{p.losses}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                )}
-              </div>
-            )}
+                </div>
+              )}
+            </div>
+
+            {/* Team Pitching */}
+            <div className={`mb-8 ${mobileTab !== 'pitching' ? 'hidden md:block' : ''}`}>
+              {teamPitching && (
+                <div className="bg-surface-card rounded-lg shadow p-4 mb-6">
+                  <h3 className="text-lg font-semibold text-content-primary mb-3">Team Pitching</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
+                    <StatCard label="ERA" value={teamPitching.era.toFixed(2)} />
+                    <StatCard label="WHIP" value={teamPitching.whip.toFixed(2)} />
+                    <StatCard label="K" value={teamPitching.k} />
+                    <StatCard label="W-L" value={teamPitching.record} />
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border text-left text-content-secondary">
+                          <th className="py-2 pr-4">Player</th>
+                          <th className="py-2 px-2 text-right">G</th>
+                          <th className="py-2 px-2 text-right">IP</th>
+                          <th className="py-2 px-2 text-right">ERA</th>
+                          <th className="py-2 px-2 text-right">K</th>
+                          <th className="py-2 px-2 text-right">W-L</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {sortedPitchers.map((p) => (
+                          <tr key={p.playerId} className="border-b border-border last:border-0 hover:bg-table-hover transition-colors">
+                            <td className="py-2 pr-4">
+                              <Link href={`/stats/players/${p.playerId}`} className="text-brand-navy hover:underline dark:text-blue-400">
+                                {p.player.name}
+                              </Link>
+                            </td>
+                            <td className="py-2 px-2 text-right tabular-nums">{p.games}</td>
+                            <td className="py-2 px-2 text-right tabular-nums">{p.inningsPitched.toFixed(1)}</td>
+                            <td className="py-2 px-2 text-right tabular-nums">{p.era.toFixed(2)}</td>
+                            <td className="py-2 px-2 text-right tabular-nums">{p.strikeouts}</td>
+                            <td className="py-2 px-2 text-right tabular-nums">{p.wins}-{p.losses}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Season Records (mobile tab "records") */}
+            <div className={`mb-8 ${mobileTab !== 'records' ? 'hidden md:block' : ''}`}>
+              {seasonSummary && (
+                <div className="bg-surface-card rounded-lg shadow p-4 md:hidden">
+                  <h3 className="text-lg font-semibold text-content-primary mb-3">Season Record</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <StatCard label="Record" value={`${seasonSummary.wins}-${seasonSummary.losses}`} />
+                    <StatCard label="Win %" value={(seasonSummary.winningPercentage || 0).toFixed(3)} />
+                    <StatCard label="Runs Scored" value={seasonSummary.runsScored} />
+                    <StatCard label="Runs Allowed" value={seasonSummary.runsAllowed} />
+                    <StatCard label="Run Diff" value={seasonSummary.runDifferential} />
+                  </div>
+                </div>
+              )}
+            </div>
           </>
         )}
       </div>

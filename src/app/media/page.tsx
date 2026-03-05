@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import PageNavigation from '@/components/PageNavigation'
 import { YouTubeEmbed } from '@/components/YouTubeEmbed'
 
 interface Video {
@@ -25,8 +24,7 @@ export default function MediaPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+    <div>
 
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Media</h1>

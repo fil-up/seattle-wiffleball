@@ -1,9 +1,7 @@
-import PageNavigation from '@/components/PageNavigation'
 
 export default function InfoPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+    <div>
       <div className="bg-[#25397B] text-white py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">League Info</h1>

@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import PageNavigation from '@/components/PageNavigation'
 import hallOfFameData from '@/data/hall-of-fame.json'
 
 interface HallOfFameEntry {
@@ -167,8 +166,7 @@ export default function HallOfFamePage() {
     .sort((a, b) => b.inductionYear - a.inductionYear)
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+    <div>
 
       {/* Header */}
       <div className="bg-[#25397B] text-white py-16">

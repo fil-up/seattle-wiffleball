@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo } from "react"
 import StatsTable from "@/components/StatsTable"
 import StatsFilter from "@/components/StatsFilter"
-import PageNavigation from "@/components/PageNavigation"
 import type { YearlyHittingRow, TotalsHittingRow, YearlyPitchingRow, TotalsPitchingRow } from "@/lib/sheets"
 
 type StatRow = YearlyHittingRow | TotalsHittingRow | YearlyPitchingRow | TotalsPitchingRow
@@ -178,8 +177,7 @@ export default function PlayersStats() {
   const initialSortDesc = tab === "hitting"
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+    <div>
     <div className="container mx-auto px-4 py-8">
       {stale && (
         <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">

@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
-import PageNavigation from "@/components/PageNavigation"
 
 const DEFAULT_LOGO = "/images/teams/default-team-logo.png"
 
@@ -215,14 +214,14 @@ export default function TeamPage() {
 
   if (loading || !team) return (
     <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+
       <div className="container mx-auto px-4 py-8">Loading...</div>
     </div>
   )
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+
       <div className="container mx-auto px-4 py-8">
         {stale && (
           <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded mb-4 text-sm">

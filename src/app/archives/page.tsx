@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import PageNavigation from '@/components/PageNavigation'
 import SeasonAccordion from '@/components/SeasonAccordion'
 import archivesData from '@/data/archives.json'
 
@@ -64,8 +63,7 @@ export default function ArchivesPage() {
   ).sort((a, b) => b - a)
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+    <div>
       <div className="bg-[#25397B] text-white py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Archives</h1>

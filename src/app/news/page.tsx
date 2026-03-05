@@ -1,14 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getNewsArticles } from '@/lib/news'
-import PageNavigation from '@/components/PageNavigation'
 
 export default function NewsPage() {
   const articles = getNewsArticles()
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+    <div>
       {/* Header */}
       <div className="bg-[#25397B] text-white py-16">
         <div className="container mx-auto px-4">

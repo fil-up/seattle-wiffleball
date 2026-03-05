@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import PageNavigation from '@/components/PageNavigation'
 
 interface HittingRow {
   year: number
@@ -89,7 +88,7 @@ export default function PlayerDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <PageNavigation />
+  
         <div className="text-center py-8">Loading...</div>
       </div>
     )
@@ -98,7 +97,7 @@ export default function PlayerDetailPage() {
   if (notFound) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <PageNavigation />
+  
         <div className="max-w-4xl mx-auto px-4 py-8">
           <Link href="/stats/players" className="text-blue-600 hover:text-blue-800 text-sm mb-4 inline-block">&larr; Back to Players</Link>
           <div className="text-center py-12">
@@ -112,7 +111,7 @@ export default function PlayerDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link href="/stats/players" className="text-blue-600 hover:text-blue-800 text-sm mb-4 inline-block">&larr; Back to Players</Link>
 

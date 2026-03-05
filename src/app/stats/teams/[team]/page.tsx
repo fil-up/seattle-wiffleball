@@ -5,7 +5,6 @@ import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import PlayerBattingData from '@/components/PlayerBattingData'
 import PlayerPitchingData from '@/components/PlayerPitchingData'
-import PageNavigation from '@/components/PageNavigation'
 
 interface StandingsRecord {
   team: string
@@ -95,7 +94,7 @@ const TeamPage: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <PageNavigation />
+
         <div className="text-center py-8">Loading...</div>
       </div>
     )
@@ -104,7 +103,7 @@ const TeamPage: React.FC = () => {
   if (!teamData) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <PageNavigation />
+
         <div className="text-center py-8">
           <p className="text-red-600">Team not found</p>
         </div>
@@ -113,8 +112,7 @@ const TeamPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageNavigation />
+    <div>
 
       {stale && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">

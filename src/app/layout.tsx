@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from 'next-themes'
+import Providers from '@/components/Providers'
 import SiteNavigation from '@/components/SiteNavigation'
 import './globals.css'
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen flex flex-col bg-surface-primary text-content-primary`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <Providers>
           <SiteNavigation />
           <main className="flex-1">
             {children}
@@ -64,7 +64,7 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )

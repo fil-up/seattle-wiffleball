@@ -2,75 +2,101 @@
 phase: 04-content-pages
 plan: 02
 subsystem: ui
-tags: [markdown, remark, accordion, google-maps]
+tags: [remark, remark-html, tailwind-typography, google-maps, accordion]
+
 requires:
   - phase: 04-01
-    provides: "Markdown rendering pattern with remark"
+    provides: "Markdown processing pipeline (remark + remark-html already installed)"
 provides:
-  - "Rules page with full official league rules"
-  - "Info page with map and league info"
-  - "Archives page with season history"
-affects: [05-design-polish]
+  - "Rules page rendering full league rulebook from markdown"
+  - "Info page with league description, Cowen Park map, and join link"
+  - "Archives page with expandable season sections and standings data"
+  - "SeasonAccordion reusable component"
+affects: [05-design-polish, 06-infrastructure]
+
 tech-stack:
-  added: []
-  patterns: ["remark markdown rendering", "accordion component", "server-side markdown"]
+  added: ["@tailwindcss/typography"]
+  patterns: ["Server component markdown rendering via remark", "Client accordion with useState toggle", "Mixed data sources (API + static JSON) merged by year"]
+
 key-files:
-  created: [content/rules.md, src/app/rules/page.tsx, src/app/info/page.tsx, src/data/archives.json, src/components/SeasonAccordion.tsx, src/app/archives/page.tsx]
-  modified: []
+  created:
+    - "content/rules.md"
+    - "src/app/rules/page.tsx"
+    - "src/app/info/page.tsx"
+    - "src/data/archives.json"
+    - "src/components/SeasonAccordion.tsx"
+    - "src/app/archives/page.tsx"
+  modified:
+    - "package.json"
+    - "tailwind.config.ts"
+
 key-decisions:
-  - "Used real rules fetched from seattlewiffleball.com instead of placeholder content"
-  - "Archives page uses client-side fetch to standings API for live data merge with static JSON"
-  - "SeasonAccordion is a reusable client component with toggle state"
-duration: 12min
-completed: 2026-03-05
+  - "Used @tailwindcss/typography prose classes for rules markdown rendering"
+  - "Archives page merges static JSON awards data with dynamic API standings by year"
+  - "SeasonAccordion is a simple useState toggle — no external accordion library needed"
+  - "Info page join link uses placeholder URL for user to replace"
+
+duration: 5min
+completed: 2026-03-04
 ---
 
-# Phase 4 Plan 2: Rules, Archives, Info Pages Summary
+# Phase 4 Plan 02: Rules, Info, and Archives Pages Summary
 
-**Built three content pages — Rules (real rulebook via remark), Info (league details + Google Maps), and Archives (season history with accordion + live standings).**
+**Three content pages with markdown rules rendering, Google Maps embed, and accordion-based season archives with live standings data**
 
 ## Performance
-- Duration: ~12 minutes
-- Tasks: 2
-- Files created: 6
+
+- **Duration:** ~5 min
+- **Started:** 2026-03-04
+- **Completed:** 2026-03-04
+- **Tasks:** 2
+- **Files created:** 6
 
 ## Accomplishments
-- Created Rules page rendering the full official Seattle Wiffleball rulebook (16 sections, 0.00–15.00) from markdown via remark
-- Created Info page with league overview, Google Maps embed for Cowen Park, sign-up link, and season info
-- Created Archives page with SeasonAccordion component displaying season-by-season history merged with live standings data from the API
-- All pages follow the established pattern (PageNavigation + branded header + container content)
+- Rules page renders all 16 sections of league rules from content/rules.md via remark + remark-html with prose typography styling
+- Info page displays league description, embedded Google Maps for Cowen Park, season info, and a join link
+- Archives page fetches yearly standings from API, merges with static awards JSON, and renders in expandable accordion sections
+- SeasonAccordion component with open/close toggle, chevron animation, and defaultOpen prop
 
 ## Task Commits
-1. Task 1 (Rules + Info pages) - dd7cd2f
-2. Task 2 (Archives page with accordion) - 26c8c38
+
+1. **Task 1: Create Rules page and Info page** - `dd7cd2f`, `5e18225`
+2. **Task 2: Create Archives page with accordion and standings** - `26c8c38`
 
 ## Files Created/Modified
-- `content/rules.md` — Full official rulebook in markdown
-- `src/app/rules/page.tsx` — Server component rendering rules via remark
-- `src/app/info/page.tsx` — Server component with league info sections
-- `src/data/archives.json` — Placeholder season data for 2015–2025
-- `src/components/SeasonAccordion.tsx` — Reusable accordion client component
-- `src/app/archives/page.tsx` — Client page merging archives data with live standings
+- `content/rules.md` — Full league rules (16 sections, ~100 rules)
+- `src/app/rules/page.tsx` — Async server component rendering markdown
+- `src/app/info/page.tsx` — Server component with map embed and static content
+- `src/data/archives.json` — Season champions/awards data (2015-2025 placeholders)
+- `src/components/SeasonAccordion.tsx` — Client accordion component
+- `src/app/archives/page.tsx` — Client component fetching standings + rendering accordions
+- `package.json` — Added @tailwindcss/typography
+- `tailwind.config.ts` — Added typography plugin
 
 ## Decisions Made
-- Fetched real rules from seattlewiffleball.com/rules.html instead of writing placeholder rules — all 16 sections with exact rule text
-- Archives page is a client component to support client-side standings fetch and accordion interactivity
-- SeasonAccordion uses simple useState toggle rather than a third-party accordion library
-- Standings data sorted by PCT descending within each year
+- Used @tailwindcss/typography for prose styling instead of custom CSS for rules content
+- Archives merges two data sources: `/api/standings?scope=yearly` for W-L records + `archives.json` for champions/awards
+- Simple useState accordion component — no library dependency for a single toggle use case
+- Info page "Sign Up" link uses placeholder URL (`forms.gle/placeholder`) — user replaces with real signup form
 
 ## Deviations from Plan
-- Used actual league rules content instead of placeholder — improves accuracy significantly
-- Archives page link points to `/stats/teams?year=X` rather than a dedicated stats link since that matches existing routing
+
+None — plan executed as written.
 
 ## Issues Encountered
-None — both builds passed cleanly on first attempt.
+
+None.
+
+## User Setup Required
+
+None — no external service configuration required.
 
 ## Next Phase Readiness
-- All three content pages are live and building successfully
-- Rules page has real content ready for production
-- Archives data uses TBD placeholders that should be populated with real champion/award data
-- Ready for Phase 05 design polish
+- All Phase 4 content pages are complete (news, rules, info, archives, hall of fame)
+- Archives awards data is placeholder — user should populate with actual season results
+- Info page join link needs real URL
+- Ready for Phase 5: Design & Polish
 
 ---
 *Phase: 04-content-pages*
-*Completed: 2026-03-05*
+*Completed: 2026-03-04*

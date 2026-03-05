@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Accurate, browsable league stats and information — if the numbers are wrong or hard to find, nothing else matters.
-**Current focus:** Phase 4 Content Pages — hall of fame page complete
+**Current focus:** Phase 4 Content Pages — COMPLETE, ready for Phase 5
 
 ## Current Position
 
-Phase: 4 of 6 (Content Pages)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-03-04 — Completed 04-03-PLAN.md (hall of fame page)
+Phase: 4 of 6 (Content Pages) — COMPLETE
+Plan: 3 of 3 in phase
+Status: Phase complete
+Last activity: 2026-03-05 — Completed 04-02-PLAN.md (rules, info, archives pages)
 
-Progress: [█████████████░░░░░░░] 65%
+Progress: [██████████████░░░░░░] 70%
 
 ## Performance Metrics
 
@@ -30,7 +30,7 @@ Progress: [█████████████░░░░░░░] 65%
 | 1 - Data Foundation | 3/3 | 40 min | 13 min |
 | 2 - Stats Engine | 3/3 | 15 min | 5 min |
 | 3 - Core Pages | 5/5 | 32 min | 6 min |
-| 4 - Content Pages | 2/3 | ~10 min | ~5 min |
+| 4 - Content Pages | 3/3 | ~15 min | ~5 min |
 
 **Recent Trend:**
 - Last 5 plans: 03-04 (6 min), 03-02 (5 min), 03-05 (3 min), 04-01 (~5 min), 04-03 (~5 min)
@@ -80,6 +80,9 @@ Recent decisions affecting current work:
 - [04-01]: News articles as individual .md files in content/news/ with gray-matter frontmatter
 - [04-01]: API route /api/news bridges server-only fs/gray-matter for client-side home page
 - [04-01]: remark + remark-html replaces fragile regex markdown converter
+- [04-02]: @tailwindcss/typography prose classes for rules markdown rendering
+- [04-02]: Archives merges static JSON awards data with dynamic API standings by year
+- [04-02]: Info page join link uses placeholder URL — user replaces with real signup form
 
 ### Pending Todos
 
@@ -94,6 +97,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-04
-Stopped at: Completed 04-03-PLAN.md (hall of fame page)
+Last session: 2026-03-05
+Stopped at: Completed 04-02-PLAN.md (Phase 4 complete)
 Resume file: None

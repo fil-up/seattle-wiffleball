@@ -87,7 +87,7 @@ Plans:
 
 Plans:
 - [x] 04-01-PLAN.md — Migrate news system to markdown files with gray-matter + remark, create API route, update consumers
-- [ ] 04-02-PLAN.md — Create Rules, Archives, and Info pages with full content, accordion, and map embed
+- [x] 04-02-PLAN.md — Create Rules, Archives, and Info pages with full content, accordion, and map embed
 - [x] 04-03-PLAN.md — Create Hall of Fame page with player data, portrait placeholders, stats, and bios
 
 ### Phase 5: Design & Polish
@@ -178,10 +178,11 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Data Foundation | 3/3 | Complete | 2026-03-03 |
 | 2. Stats Engine | 3/3 | Complete | 2026-03-04 |
 | 3. Core Pages | 5/5 | Complete | 2026-03-04 |
-| 4. Content Pages | 2/3 | In progress | - |
+| 4. Content Pages | 3/3 | Complete | 2026-03-05 |
 | 5. Design & Polish | 0/3 | Not started | - |
 | 6. Infrastructure & Launch | 0/3 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-23*
 *Last updated: 2026-03-05*
+

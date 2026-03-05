@@ -5,6 +5,8 @@ import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import PlayerBattingData from '@/components/PlayerBattingData'
 import PlayerPitchingData from '@/components/PlayerPitchingData'
+import { TableSkeleton } from '@/components/Skeleton'
+import ErrorState from '@/components/ErrorState'
 
 interface StandingsRecord {
   team: string
@@ -36,12 +38,14 @@ const TeamPage: React.FC = () => {
   const [qualifiersOnly, setQualifiersOnly] = useState<boolean>(true)
   const [stale, setStale] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
     if (teamSlug) {
       fetchTeamAndStandings()
     }
-  }, [teamSlug])
+  }, [teamSlug, retryCount])
 
   const fetchTeamAndStandings = async () => {
     try {
@@ -86,15 +90,28 @@ const TeamPage: React.FC = () => {
       }
     } catch (err) {
       console.error('Error fetching team data:', err)
+      setError(true)
     } finally {
       setLoading(false)
     }
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-surface-secondary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <ErrorState message="Couldn't load team data." onRetry={() => { setError(false); setRetryCount(c => c + 1) }} />
+        </div>
+      </div>
+    )
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-surface-secondary">
-        <div className="text-center py-8 text-content-secondary">Loading...</div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <TableSkeleton rows={10} cols={8} />
+        </div>
       </div>
     )
   }

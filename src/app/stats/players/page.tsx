@@ -3,6 +3,8 @@
 import { useState, useEffect, useMemo } from "react"
 import StatsTable from "@/components/StatsTable"
 import StatsFilter from "@/components/StatsFilter"
+import { TableSkeleton } from "@/components/Skeleton"
+import ErrorState from "@/components/ErrorState"
 import type { YearlyHittingRow, TotalsHittingRow, YearlyPitchingRow, TotalsPitchingRow } from "@/lib/sheets"
 
 type StatRow = YearlyHittingRow | TotalsHittingRow | YearlyPitchingRow | TotalsPitchingRow
@@ -15,6 +17,8 @@ export default function PlayersStats() {
   const [selectedTeam, setSelectedTeam] = useState<string | null>(null)
   const [qualified, setQualified] = useState(true)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
   const [stale, setStale] = useState(false)
   const [totalsPaQual, setTotalsPaQual] = useState(100)
   const [totalsIpQual, setTotalsIpQual] = useState(75)
@@ -31,14 +35,15 @@ export default function PlayersStats() {
         const result = await response.json()
         setAllData(result.data || [])
         setStale(result.stale)
-      } catch (error) {
-        console.error('Error fetching data:', error)
+      } catch (err) {
+        console.error('Error fetching data:', err)
+        setError(true)
       } finally {
         setLoading(false)
       }
     }
     fetchData()
-  }, [tab, scope])
+  }, [tab, scope, retryCount])
 
   // Reset filters on scope change
   useEffect(() => {
@@ -237,8 +242,10 @@ export default function PlayersStats() {
         showQualified={true}
       />
 
-      {loading ? (
-        <div className="text-center py-8 text-content-secondary">Loading...</div>
+      {error ? (
+        <ErrorState message="Couldn't load player stats." onRetry={() => { setError(false); setRetryCount(c => c + 1) }} />
+      ) : loading ? (
+        <TableSkeleton rows={12} cols={8} />
       ) : displayData.length === 0 ? (
         <div className="text-center py-8 text-content-secondary">No players match these filters.</div>
       ) : (

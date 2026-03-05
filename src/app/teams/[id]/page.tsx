@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
+import { CardSkeleton, TableSkeleton } from "@/components/Skeleton"
+import ErrorState from "@/components/ErrorState"
 
 const DEFAULT_LOGO = "/images/teams/default-team-logo.png"
 
@@ -77,6 +79,8 @@ export default function TeamPage() {
   const [pitchers, setPitchers] = useState<PitchingPlayer[]>([])
   const [loading, setLoading] = useState(true)
   const [statsLoading, setStatsLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
   const [stale, setStale] = useState(false)
 
   useEffect(() => {
@@ -96,7 +100,12 @@ export default function TeamPage() {
         setYear(uniqueYears[0] || null)
         setLoading(false)
       })
-  }, [params?.id])
+      .catch((err) => {
+        console.error('Error fetching team:', err)
+        setError(true)
+        setLoading(false)
+      })
+  }, [params?.id, retryCount])
 
   useEffect(() => {
     if (!year || !team) return
@@ -212,9 +221,20 @@ export default function TeamPage() {
     [pitchers]
   )
 
+  if (error) return (
+    <div className="min-h-screen bg-surface-secondary">
+      <div className="container mx-auto px-4 py-8">
+        <ErrorState message="Couldn't load team data." onRetry={() => { setError(false); setRetryCount(c => c + 1) }} />
+      </div>
+    </div>
+  )
+
   if (loading || !team) return (
     <div className="min-h-screen bg-surface-secondary">
-      <div className="container mx-auto px-4 py-8 text-content-secondary">Loading...</div>
+      <div className="container mx-auto px-4 py-8">
+        <CardSkeleton />
+        <div className="mt-6"><TableSkeleton rows={8} cols={6} /></div>
+      </div>
     </div>
   )
 

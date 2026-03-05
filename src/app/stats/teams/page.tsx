@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import SheetrockStandings from '@/components/SheetrockStandings'
+import { CardSkeleton } from '@/components/Skeleton'
+import ErrorState from '@/components/ErrorState'
 
 interface Team {
   id: string
@@ -14,11 +16,13 @@ interface Team {
 export default function TeamsPage() {
   const [teams, setTeams] = useState<Team[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
   const [stale, setStale] = useState(false)
 
   useEffect(() => {
     fetchTeams()
-  }, [])
+  }, [retryCount])
 
   const fetchTeams = async () => {
     try {
@@ -29,18 +33,28 @@ export default function TeamsPage() {
         setTeams(data || [])
         setStale(isStale)
       }
-    } catch (error) {
-      console.error('Error fetching teams:', error)
+    } catch (err) {
+      console.error('Error fetching teams:', err)
+      setError(true)
     } finally {
       setLoading(false)
     }
   }
 
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <ErrorState message="Couldn't load teams." onRetry={() => { setError(false); setRetryCount(c => c + 1) }} />
+      </div>
+    )
+  }
+
   if (loading) {
     return (
-      <div className="flex justify-center items-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-navy"></div>
-        <span className="ml-2 text-content-secondary">Loading teams...</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
+        </div>
       </div>
     )
   }

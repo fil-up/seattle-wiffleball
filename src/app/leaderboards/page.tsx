@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import LeaderboardPodium from "@/components/LeaderboardPodium"
+import { CardSkeleton } from "@/components/Skeleton"
+import ErrorState from "@/components/ErrorState"
 
 type Row = any
 
@@ -57,6 +59,8 @@ export default function LeaderboardsPage() {
   const [hitData, setHitData] = useState<Record<string, Row[]>>({})
   const [pitData, setPitData] = useState<Record<string, Row[]>>({})
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
   const [stale, setStale] = useState(false)
 
   useEffect(() => {
@@ -100,8 +104,12 @@ export default function LeaderboardsPage() {
       setHitData(h)
       setPitData(p)
       setLoading(false)
+    }).catch((err) => {
+      console.error('Error fetching leaderboards:', err)
+      setError(true)
+      setLoading(false)
     })
-  }, [year])
+  }, [year, retryCount])
 
   return (
     <div>
@@ -123,8 +131,12 @@ export default function LeaderboardsPage() {
           </select>
         </div>
 
-        {loading ? (
-          <div className="py-8 text-center text-content-secondary">Loading...</div>
+        {error ? (
+          <ErrorState message="Couldn't load leaderboards." onRetry={() => { setError(false); setRetryCount(c => c + 1) }} />
+        ) : loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {Array.from({ length: 4 }).map((_, i) => <CardSkeleton key={i} />)}
+          </div>
         ) : (
           <>
             <h2 className="text-xl font-semibold text-content-primary mb-4">Hitting</h2>

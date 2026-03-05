@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { CardSkeleton } from "@/components/Skeleton"
+import ErrorState from "@/components/ErrorState"
 
 type Team = {
   id: string
@@ -23,9 +25,12 @@ export default function TeamsIndexPage() {
   const [teams, setTeams] = useState<Team[]>([])
   const [records, setRecords] = useState<Map<string, StandingsRecord>>(new Map())
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
   const [stale, setStale] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     Promise.all([
       fetch('/api/teams').then(r => r.json()),
       fetch('/api/standings?scope=yearly').then(r => r.json()),
@@ -49,8 +54,12 @@ export default function TeamsIndexPage() {
       }
       setRecords(recordMap)
       setLoading(false)
+    }).catch((err) => {
+      console.error('Error fetching teams:', err)
+      setError(true)
+      setLoading(false)
     })
-  }, [])
+  }, [retryCount])
 
   function getRecord(teamName: string): StandingsRecord | undefined {
     return records.get(teamName.toLowerCase())
@@ -66,8 +75,12 @@ export default function TeamsIndexPage() {
             Data may be outdated — showing last known data while we reconnect.
           </div>
         )}
-        {loading ? (
-          <div className="py-8 text-center text-content-secondary">Loading...</div>
+        {error ? (
+          <ErrorState message="Couldn't load teams." onRetry={() => { setError(false); setRetryCount(c => c + 1) }} />
+        ) : loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)}
+          </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {teams.map((team) => {

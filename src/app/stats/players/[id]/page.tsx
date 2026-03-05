@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
+import { TableSkeleton } from '@/components/Skeleton'
+import ErrorState from '@/components/ErrorState'
 
 interface HittingRow {
   year: number
@@ -55,6 +57,8 @@ export default function PlayerDetailPage() {
   const [playerName, setPlayerName] = useState('')
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
+  const [error, setError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
   const [stale, setStale] = useState(false)
 
   useEffect(() => {
@@ -78,17 +82,30 @@ export default function PlayerDetailPage() {
         setStale(result.stale)
       } catch (err) {
         console.error('Error fetching player:', err)
+        setError(true)
       } finally {
         setLoading(false)
       }
     }
     fetchPlayer()
-  }, [id])
+  }, [id, retryCount])
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-surface-secondary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <ErrorState message="Couldn't load player data." onRetry={() => { setError(false); setRetryCount(c => c + 1) }} />
+        </div>
+      </div>
+    )
+  }
 
   if (loading) {
     return (
       <div className="min-h-screen bg-surface-secondary">
-        <div className="text-center py-8 text-content-secondary">Loading...</div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <TableSkeleton rows={6} cols={5} />
+        </div>
       </div>
     )
   }

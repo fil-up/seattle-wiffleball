@@ -49,12 +49,12 @@ function HittingStats({ stats }: { stats: HallOfFameEntry['careerStats'] }) {
 
   return (
     <div>
-      <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Hitting</h4>
+      <h4 className="text-xs font-semibold text-content-secondary uppercase tracking-wider mb-2">Hitting</h4>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {entries.map((e) => (
-          <div key={e.label} className="bg-gray-50 rounded-md px-3 py-2 text-center">
-            <div className="text-lg font-bold text-gray-900">{e.value}</div>
-            <div className="text-xs text-gray-500">{e.label}</div>
+          <div key={e.label} className="bg-surface-secondary rounded-md px-3 py-2 text-center">
+            <div className="text-lg font-bold text-content-primary">{e.value}</div>
+            <div className="text-xs text-content-secondary">{e.label}</div>
           </div>
         ))}
       </div>
@@ -78,12 +78,12 @@ function PitchingStats({ stats }: { stats: HallOfFameEntry['careerStats'] }) {
 
   return (
     <div>
-      <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Pitching</h4>
+      <h4 className="text-xs font-semibold text-content-secondary uppercase tracking-wider mb-2">Pitching</h4>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {entries.map((e) => (
-          <div key={e.label} className="bg-gray-50 rounded-md px-3 py-2 text-center">
-            <div className="text-lg font-bold text-gray-900">{e.value}</div>
-            <div className="text-xs text-gray-500">{e.label}</div>
+          <div key={e.label} className="bg-surface-secondary rounded-md px-3 py-2 text-center">
+            <div className="text-lg font-bold text-content-primary">{e.value}</div>
+            <div className="text-xs text-content-secondary">{e.label}</div>
           </div>
         ))}
       </div>
@@ -95,12 +95,12 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
   const initials = getInitials(entry.name)
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+    <div className="bg-surface-card rounded-lg shadow-md overflow-hidden mb-8">
       <div className="flex flex-col md:flex-row">
         {/* Bust image / placeholder */}
-        <div className="flex-shrink-0 flex items-center justify-center bg-gray-100 p-6 md:w-72">
+        <div className="flex-shrink-0 flex items-center justify-center bg-surface-secondary p-6 md:w-72">
           <div className="relative w-48 h-48 md:w-56 md:h-56">
-            <div className="absolute inset-0 flex items-center justify-center bg-[#25397B] rounded-full">
+            <div className="absolute inset-0 flex items-center justify-center bg-brand-navy rounded-full">
               <span className="text-white text-4xl font-bold">{initials}</span>
             </div>
             <Image
@@ -116,8 +116,8 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
 
         {/* Content */}
         <div className="flex-1 p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-gray-900">{entry.name}</h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <h2 className="text-2xl font-bold text-content-primary">{entry.name}</h2>
+          <p className="text-sm text-content-secondary mt-1">
             Class of {entry.inductionYear}
             {entry.teams.length > 0 && <> &bull; {entry.teams.join(', ')}</>}
             {entry.seasonsPlayed > 0 && <> &bull; {entry.seasonsPlayed} seasons</>}
@@ -129,7 +129,7 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
               {entry.awards.map((award) => (
                 <span
                   key={award}
-                  className="bg-[#25397B] bg-opacity-10 text-[#25397B] px-3 py-1 rounded-full text-sm font-medium"
+                  className="bg-brand-navy/10 text-brand-navy px-3 py-1 rounded-full text-sm font-medium"
                 >
                   {award}
                 </span>
@@ -138,7 +138,7 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
           )}
 
           {/* Bio */}
-          <p className="text-gray-700 leading-relaxed mt-4">{entry.bio}</p>
+          <p className="text-content-primary leading-relaxed mt-4">{entry.bio}</p>
 
           {/* Career stats */}
           {(entry.careerStats.avg != null ||
@@ -169,7 +169,7 @@ export default function HallOfFamePage() {
     <div>
 
       {/* Header */}
-      <div className="bg-[#25397B] text-white py-16">
+      <div className="bg-brand-navy text-white py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Hall of Fame</h1>
           <p className="text-xl md:text-2xl text-blue-100">
@@ -182,7 +182,7 @@ export default function HallOfFamePage() {
       <div className="container mx-auto px-4 py-16">
         {entries.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-xl text-gray-500">No inductees yet — check back soon</p>
+            <p className="text-xl text-content-secondary">No inductees yet — check back soon</p>
           </div>
         ) : (
           entries.map((entry) => <PlayerCard key={entry.id} entry={entry} />)

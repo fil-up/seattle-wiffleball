@@ -27,7 +27,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <div>
       {/* Header */}
-      <div className="bg-[#25397B] text-white py-16">
+      <div className="bg-brand-navy text-white py-16">
         <div className="container mx-auto px-4">
           <Link 
             href="/news"
@@ -39,7 +39,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <div className="flex items-center space-x-4">
             <div className="text-lg text-blue-100">{article.date}</div>
             {article.featured && (
-              <span className="bg-[#25397B] bg-opacity-20 text-white text-sm font-medium px-3 py-1 rounded-full">
+              <span className="bg-brand-navy/20 text-white text-sm font-medium px-3 py-1 rounded-full">
                 Featured Article
               </span>
             )}
@@ -80,19 +80,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {/* Article Content */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
-          <article className="bg-white rounded-lg shadow-md overflow-hidden">
+          <article className="bg-surface-card rounded-lg shadow-md overflow-hidden">
             <div className="p-8 md:p-12">
-              <div className="prose prose-lg max-w-none">
+              <div className="prose prose-lg dark:prose-invert max-w-none">
                 <div 
                   dangerouslySetInnerHTML={{ __html: article.htmlContent }}
-                  className="text-gray-700 leading-relaxed"
+                  className="text-content-primary leading-relaxed"
                 />
               </div>
               
-              <div className="mt-12 pt-8 border-t border-gray-200">
+              <div className="mt-12 pt-8 border-t border-border">
                 <Link 
                   href="/news"
-                  className="text-[#25397B] font-semibold hover:text-[#1e2f63]"
+                  className="text-brand-navy font-semibold hover:text-brand-navy/80"
                 >
                   ← Back to All News
                 </Link>

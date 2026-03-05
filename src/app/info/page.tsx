@@ -2,7 +2,7 @@
 export default function InfoPage() {
   return (
     <div>
-      <div className="bg-[#25397B] text-white py-16">
+      <div className="bg-brand-navy text-white py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">League Info</h1>
           <p className="text-xl md:text-2xl text-blue-100">
@@ -13,9 +13,9 @@ export default function InfoPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* About the League */}
-          <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-[#25397B] mb-4">About the League</h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+          <div className="bg-surface-card rounded-lg shadow-md p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-brand-navy mb-4">About the League</h2>
+            <div className="space-y-4 text-content-primary leading-relaxed">
               <p>
                 Seattle Wiffleball is the premier competitive wiffleball league in the Pacific
                 Northwest. Founded in 2015, the league brings together players of all skill levels
@@ -37,9 +37,9 @@ export default function InfoPage() {
           </div>
 
           {/* Field Location */}
-          <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-[#25397B] mb-4">Field Location</h2>
-            <p className="text-gray-700 mb-4">
+          <div className="bg-surface-card rounded-lg shadow-md p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-brand-navy mb-4">Field Location</h2>
+            <p className="text-content-primary mb-4">
               All games are played at Cowen Park in the University District neighborhood of Seattle.
               The field features permanent foul poles, a regulation strike zone, and full field setup
               for competitive play.
@@ -59,9 +59,9 @@ export default function InfoPage() {
           </div>
 
           {/* Season Info */}
-          <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-[#25397B] mb-4">Season Info</h2>
-            <div className="text-gray-700 leading-relaxed space-y-4">
+          <div className="bg-surface-card rounded-lg shadow-md p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-brand-navy mb-4">Season Info</h2>
+            <div className="text-content-primary leading-relaxed space-y-4">
               <p>
                 The Seattle Wiffleball season typically runs from <strong>May through August</strong>,
                 with spring training and preseason activities beginning in April. The regular season
@@ -77,9 +77,9 @@ export default function InfoPage() {
           </div>
 
           {/* How to Join */}
-          <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-[#25397B] mb-4">How to Join</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+          <div className="bg-surface-card rounded-lg shadow-md p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-brand-navy mb-4">How to Join</h2>
+            <p className="text-content-primary mb-6 leading-relaxed">
               Interested in playing? New players are welcome each season. Reach out to get connected
               with a team captain or join the league as a free agent. Prior wiffleball experience is
               not required — just bring a competitive spirit and a willingness to learn.
@@ -89,7 +89,7 @@ export default function InfoPage() {
               href="https://forms.gle/placeholder"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-[#25397B] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#1e2f63] transition-colors"
+              className="inline-block bg-brand-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-navy/90 transition-colors"
             >
               Sign Up to Play
             </a>

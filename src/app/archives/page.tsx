@@ -64,7 +64,7 @@ export default function ArchivesPage() {
 
   return (
     <div>
-      <div className="bg-[#25397B] text-white py-16">
+      <div className="bg-brand-navy text-white py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Archives</h1>
           <p className="text-xl md:text-2xl text-blue-100">
@@ -76,17 +76,17 @@ export default function ArchivesPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto space-y-4">
           {stale && (
-            <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-2 rounded-lg text-sm mb-4">
+            <div className="bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded-lg text-sm mb-4">
               Showing cached data — live results may differ.
             </div>
           )}
 
           {loading ? (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-content-secondary">
               Loading season data...
             </div>
           ) : allYears.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-content-secondary">
               No archive data available yet.
             </div>
           ) : (
@@ -122,16 +122,16 @@ export default function ArchivesPage() {
                 >
                   {awards.length > 0 && (
                     <div className="mb-4">
-                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                      <h3 className="text-sm font-semibold text-content-secondary uppercase tracking-wide mb-2">
                         Awards
                       </h3>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {awards.map((award) => (
                           <div key={award.label} className="text-sm">
-                            <span className="font-medium text-gray-700">
+                            <span className="font-medium text-content-primary">
                               {award.label}:
                             </span>{' '}
-                            <span className="text-gray-900">{award.value}</span>
+                            <span className="text-content-primary">{award.value}</span>
                           </div>
                         ))}
                       </div>
@@ -140,23 +140,23 @@ export default function ArchivesPage() {
 
                   {yearStandings && yearStandings.length > 0 ? (
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                      <h3 className="text-sm font-semibold text-content-secondary uppercase tracking-wide mb-2">
                         Standings
                       </h3>
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                           <thead>
-                            <tr className="border-b border-gray-300">
-                              <th className="text-left py-2 pr-4 font-semibold text-gray-700">
+                            <tr className="border-b border-border">
+                              <th className="text-left py-2 pr-4 font-semibold text-content-primary">
                                 Team
                               </th>
-                              <th className="text-right py-2 px-2 font-semibold text-gray-700">
+                              <th className="text-right py-2 px-2 font-semibold text-content-primary">
                                 W
                               </th>
-                              <th className="text-right py-2 px-2 font-semibold text-gray-700">
+                              <th className="text-right py-2 px-2 font-semibold text-content-primary">
                                 L
                               </th>
-                              <th className="text-right py-2 pl-2 font-semibold text-gray-700">
+                              <th className="text-right py-2 pl-2 font-semibold text-content-primary">
                                 PCT
                               </th>
                             </tr>
@@ -165,18 +165,18 @@ export default function ArchivesPage() {
                             {yearStandings.map((s) => (
                               <tr
                                 key={s.team}
-                                className="border-b border-gray-100"
+                                className="border-b border-border/50"
                               >
-                                <td className="py-1.5 pr-4 text-gray-900">
+                                <td className="py-1.5 pr-4 text-content-primary">
                                   {s.team}
                                 </td>
-                                <td className="py-1.5 px-2 text-right text-gray-700">
+                                <td className="py-1.5 px-2 text-right text-content-primary">
                                   {s.wins}
                                 </td>
-                                <td className="py-1.5 px-2 text-right text-gray-700">
+                                <td className="py-1.5 px-2 text-right text-content-primary">
                                   {s.losses}
                                 </td>
-                                <td className="py-1.5 pl-2 text-right text-gray-700">
+                                <td className="py-1.5 pl-2 text-right text-content-primary">
                                   {s.pct.toFixed(3)}
                                 </td>
                               </tr>
@@ -186,7 +186,7 @@ export default function ArchivesPage() {
                       </div>
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-500 italic">
+                    <p className="text-sm text-content-secondary italic">
                       No standings data available for this season.
                     </p>
                   )}
@@ -194,7 +194,7 @@ export default function ArchivesPage() {
                   <div className="mt-4">
                     <Link
                       href={`/stats/teams?year=${year}`}
-                      className="text-sm text-[#25397B] font-medium hover:text-[#1e2f63] transition-colors"
+                      className="text-sm text-brand-navy font-medium hover:text-brand-navy/80 transition-colors"
                     >
                       View full {year} stats →
                     </Link>

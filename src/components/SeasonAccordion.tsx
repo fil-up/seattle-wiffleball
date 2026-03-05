@@ -18,20 +18,20 @@ export default function SeasonAccordion({
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
+    <div className="border border-border rounded-lg overflow-hidden">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full flex items-center justify-between px-6 py-4 bg-white hover:bg-gray-50 transition-colors text-left"
+        className="w-full flex items-center justify-between px-6 py-4 bg-surface-card hover:bg-table-hover transition-colors text-left"
       >
         <div className="flex items-center gap-4">
-          <span className="text-xl font-bold text-gray-900">{year}</span>
-          <span className="text-gray-500">—</span>
-          <span className="text-gray-700 font-medium">
-            Champion: <span className="text-[#25397B]">{champion}</span>
+          <span className="text-xl font-bold text-content-primary">{year}</span>
+          <span className="text-content-secondary">—</span>
+          <span className="text-content-primary font-medium">
+            Champion: <span className="text-brand-navy">{champion}</span>
           </span>
         </div>
         <svg
-          className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
+          className={`w-5 h-5 text-content-secondary transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
           }`}
           fill="none"
@@ -47,7 +47,7 @@ export default function SeasonAccordion({
         </svg>
       </button>
       {isOpen && (
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+        <div className="px-6 py-4 bg-surface-secondary border-t border-border">
           {children}
         </div>
       )}

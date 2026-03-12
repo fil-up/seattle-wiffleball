@@ -116,13 +116,13 @@ Plans:
   1. Site is live on Vercel with correct environment variables and builds without errors
   2. No unused dependencies (sheetrock, graceful-fs) remain in package.json
   3. No debug pages or console.log statements exist in production code
-  4. Non-developer owner can update news (edit JSON file), change environment variables, and drop in team/player images without touching code
+  4. Non-developer owner can update news (edit markdown file), change environment variables, and drop in team/player images without touching code
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01: Codebase cleanup — remove unused dependencies, debug console.logs, and dead code
-- [ ] 06-02: Deploy to Vercel with environment configuration
-- [ ] 06-03: Document maintenance procedures for non-developer owner
+- [ ] 06-01-PLAN.md — Codebase cleanup: delete debug routes/components, rename SheetrockStandings to StandingsTable
+- [ ] 06-02-PLAN.md — Deploy to Vercel with environment configuration and verify live site
+- [ ] 06-03-PLAN.md — Create OWNER.md maintenance guide for non-developer league owner
 
 ## Coverage Map
 
@@ -181,9 +181,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Core Pages | 5/5 | Complete | 2026-03-04 |
 | 4. Content Pages | 3/3 | Complete | 2026-03-05 |
 | 5. Design & Polish | 4/4 | Complete | 2026-03-05 |
-| 6. Infrastructure & Launch | 0/3 | Not started | - |
+| 6. Infrastructure & Launch | 0/3 | Planning | - |
 
 ---
 *Roadmap created: 2026-02-23*
-*Last updated: 2026-03-05*
-
+*Last updated: 2026-03-12*

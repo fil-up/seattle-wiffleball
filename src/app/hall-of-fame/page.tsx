@@ -153,10 +153,10 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
                 return (
                   <span
                     key={award}
-                    className="inline-flex items-center gap-1.5 bg-brand-navy/10 text-brand-navy px-3 py-1 rounded-full text-sm font-medium"
+                    className="inline-flex items-center gap-1.5 bg-brand-navy/10 dark:bg-brand-gold/20 text-brand-navy dark:text-brand-gold px-3 py-1 rounded-full text-sm font-medium"
                     title={award}
                   >
-                    {Icon && <Icon className="text-brand-gold" />}
+                    {Icon && <Icon className="fill-brand-gold" />}
                     {award}
                   </span>
                 )

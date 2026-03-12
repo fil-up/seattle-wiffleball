@@ -128,7 +128,7 @@ export default function TeamPage() {
       setPitchers(teamPitchers)
       setStale(prev => prev || hittingResult.stale || pitchingResult.stale)
       setStatsLoading(false)
-    })
+    }).catch(() => setStatsLoading(false))
   }, [year, team])
 
   const seasonSummary = useMemo(() => {

@@ -62,11 +62,11 @@ export default function StatsTable<T>({
   }, [stickyFirstCols, columnWidthsPx])
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-border">
+    <div className="overflow-auto max-h-[75vh] rounded-lg border border-border">
       <table className="min-w-full">
-        <thead className="sticky top-0 z-30 bg-brand-navy">
+        <thead className="sticky top-0 z-30">
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <tr key={headerGroup.id} className="bg-brand-navy">
               {headerGroup.headers.map((header, idx) => (
                 <th
                   key={header.id}

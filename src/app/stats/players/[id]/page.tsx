@@ -114,7 +114,7 @@ export default function PlayerDetailPage() {
     return (
       <div className="min-h-screen bg-surface-secondary">
         <div className="max-w-4xl mx-auto px-4 py-8">
-          <Link href="/stats/players" className="text-brand-navy hover:text-brand-navy/80 text-sm mb-4 inline-block">&larr; Back to Players</Link>
+          <Link href="/stats/players" className="text-brand-navy dark:text-brand-gold hover:text-brand-navy/80 dark:hover:text-brand-gold/80 text-sm mb-4 inline-block">&larr; Back to Players</Link>
           <div className="text-center py-12">
             <h1 className="text-2xl font-bold text-content-primary mb-2">Player Not Found</h1>
             <p className="text-content-secondary">No player exists with this ID.</p>
@@ -128,7 +128,7 @@ export default function PlayerDetailPage() {
     <div className="min-h-screen bg-surface-secondary">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link href="/stats/players" className="text-brand-navy hover:text-brand-navy/80 text-sm mb-4 inline-block">&larr; Back to Players</Link>
+        <Link href="/stats/players" className="text-brand-navy dark:text-brand-gold hover:text-brand-navy/80 dark:hover:text-brand-gold/80 text-sm mb-4 inline-block">&larr; Back to Players</Link>
 
         {stale && (
           <div className="bg-brand-gold/10 border border-brand-gold/30 text-content-primary px-4 py-2 rounded mb-4 text-sm flex items-center gap-2">
@@ -154,8 +154,8 @@ export default function PlayerDetailPage() {
             </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-border">
-                <thead className="bg-brand-navy sticky top-0 z-10">
-                  <tr>
+                <thead className="sticky top-0 z-10">
+                  <tr className="bg-brand-navy">
                     {['Year', 'Team', 'G', 'PA', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'AVG', 'OBP', 'SLG', 'OPS', 'wRC+'].map((h) => (
                       <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap">{h}</th>
                     ))}
@@ -197,8 +197,8 @@ export default function PlayerDetailPage() {
             </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-border">
-                <thead className="bg-brand-navy sticky top-0 z-10">
-                  <tr>
+                <thead className="sticky top-0 z-10">
+                  <tr className="bg-brand-navy">
                     {['Year', 'Team', 'G', 'IP', 'W', 'L', 'SV', 'K', 'BB', 'H', 'R', 'ER', 'ERA', 'WHIP', 'OPP AVG', 'K/9'].map((h) => (
                       <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap">{h}</th>
                     ))}

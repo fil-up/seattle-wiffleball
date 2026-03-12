@@ -73,12 +73,19 @@ export async function GET(
       return NextResponse.json({ error: 'Team not found' }, { status: 404 })
     }
 
+    // Collect all unique team names for this franchise (one per season)
+    const allUniqueTeamNames = new Set(
+      teamsResult.data
+        .filter((t) => t && (t.id === id || t.abbreviation.toLowerCase() === id))
+        .map((t) => t!.uniqueTeamName)
+    )
+
     const standings = standingsResult.data.filter(
       (s) =>
         s &&
         (s.team === team.name ||
-          s.team === team.uniqueTeamName ||
-          s.team.toLowerCase() === team.name.toLowerCase())
+          s.team.toLowerCase() === team.name.toLowerCase() ||
+          allUniqueTeamNames.has(s.team))
     )
 
     return NextResponse.json({

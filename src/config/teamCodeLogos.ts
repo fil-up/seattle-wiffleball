@@ -13,6 +13,7 @@ export const TEAM_CODE_MAP: Record<string, TeamCodeMeta> = {
   "WH": { name: "Wiffle House", logo: "wiffle-house-logo.png" },
   "SK": { name: "Skull Knights", logo: "berzerkers-logo.png" },
   "DAS": { name: "Dingers and Swingers", logo: "american-dreams-logo.png" },
+  "AD": { name: "American Dreams", logo: "american-dreams-logo.png" },
   "SD": { name: "Swing Dome", logo: "swingdome-logo.png" },
   "CC": { name: "Caught Cooking", logo: "caught-cooking-logo.png" },
 }

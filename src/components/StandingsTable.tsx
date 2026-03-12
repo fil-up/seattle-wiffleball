@@ -34,7 +34,7 @@ interface AllTimeRow {
   berth: number
 }
 
-const SheetrockStandings: React.FC = () => {
+const StandingsTable: React.FC = () => {
   const [standings, setStandings] = useState<YearlyStandingsRow[]>([])
   const [allTimeStandings, setAllTimeStandings] = useState<AllTimeRow[]>([])
   const [loading, setLoading] = useState(true)
@@ -53,7 +53,7 @@ const SheetrockStandings: React.FC = () => {
     try {
       setLoading(true)
       const response = await fetch('/api/standings?scope=yearly')
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch standings data')
       }
@@ -64,14 +64,14 @@ const SheetrockStandings: React.FC = () => {
 
       const parsedData: YearlyStandingsRow[] = data || []
       setStandings(parsedData)
-      
+
       const years = [...new Set(parsedData.map((row) => row.year))]
       years.sort((a, b) => parseInt(b) - parseInt(a))
       setAvailableYears(years)
       if (years.length > 0) {
         setSelectedYear(years[0])
       }
-      
+
       setLoading(false)
     } catch (err) {
       console.error('Error fetching standings:', err)
@@ -83,7 +83,7 @@ const SheetrockStandings: React.FC = () => {
   const fetchAllTimeStandings = async () => {
     try {
       const response = await fetch('/api/standings?scope=alltime')
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch all-time standings data')
       }
@@ -117,7 +117,7 @@ const SheetrockStandings: React.FC = () => {
     return (
       <div className="text-center py-8">
         <p className="text-red-600 mb-4">{error}</p>
-        <button 
+        <button
           onClick={fetchStandings}
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
@@ -199,7 +199,7 @@ const SheetrockStandings: React.FC = () => {
                 {filteredStandings.map((row, index) => {
                   const runDiff = row.rf - row.ra
                   const displayPct = row.pct !== null ? row.pct.toFixed(3) : (row.wins + row.losses > 0 ? (row.wins / (row.wins + row.losses)).toFixed(3) : '0.000')
-                  
+
                   return (
                     <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -252,7 +252,7 @@ const SheetrockStandings: React.FC = () => {
                     const playoffRecord = (row.playoffsW > 0 || row.playoffsL > 0) ? `${row.playoffsW}-${row.playoffsL}` : '0-0'
                     const seriesRecord = (row.seriesW > 0 || row.seriesL > 0) ? `${row.seriesW}-${row.seriesL}` : '0-0'
                     const wsRecord = row.wsApp > 0 ? `${row.wsWin}-${row.wsApp - row.wsWin}` : '0-0'
-                    
+
                     return (
                       <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -281,4 +281,4 @@ const SheetrockStandings: React.FC = () => {
   )
 }
 
-export default SheetrockStandings
+export default StandingsTable

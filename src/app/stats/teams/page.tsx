@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import SheetrockStandings from '@/components/SheetrockStandings'
+import StandingsTable from '@/components/StandingsTable'
 import { CardSkeleton } from '@/components/Skeleton'
 import ErrorState from '@/components/ErrorState'
 
@@ -108,7 +108,7 @@ export default function TeamsPage() {
             <h2 className="text-xl font-semibold text-content-primary">League Standings</h2>
           </div>
           <div className="p-6">
-            <SheetrockStandings />
+            <StandingsTable />
           </div>
         </div>
       </div>

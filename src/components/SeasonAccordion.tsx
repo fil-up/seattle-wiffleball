@@ -27,7 +27,7 @@ export default function SeasonAccordion({
           <span className="text-xl font-bold text-content-primary">{year}</span>
           <span className="text-content-secondary">—</span>
           <span className="text-content-primary font-medium">
-            Champion: <span className="text-brand-navy">{champion}</span>
+            Champion: <span className="text-brand-navy dark:text-brand-gold">{champion}</span>
           </span>
         </div>
         <svg

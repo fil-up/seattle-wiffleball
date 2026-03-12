@@ -121,7 +121,7 @@ export default function Home() {
       <div className="container mx-auto px-4 py-16">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold text-content-primary">Latest News</h2>
-          <Link href="/news" className="text-brand-navy font-semibold hover:text-brand-navy/80">
+          <Link href="/news" className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80">
             View All News →
           </Link>
         </div>
@@ -158,13 +158,13 @@ export default function Home() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-sm text-content-secondary">{featuredArticle.date}</div>
-                    <span className="bg-brand-navy/10 text-brand-navy text-xs font-medium px-2.5 py-0.5 rounded">
+                    <span className="bg-brand-navy/10 dark:bg-brand-gold/20 text-brand-navy dark:text-brand-gold text-xs font-medium px-2.5 py-0.5 rounded">
                       Featured
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-content-primary mb-3">{featuredArticle.title}</h3>
                   <p className="text-content-secondary mb-4 leading-relaxed line-clamp-3">{featuredArticle.excerpt}</p>
-                  <Link href={`/news/${featuredArticle.slug}`} className="text-brand-navy font-semibold hover:text-brand-navy/80">
+                  <Link href={`/news/${featuredArticle.slug}`} className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80">
                     Read Full Article →
                   </Link>
                 </div>
@@ -201,7 +201,7 @@ export default function Home() {
                     <div className="text-xs text-content-secondary mb-2">{article.date}</div>
                     <h3 className="text-sm font-bold text-content-primary mb-2 line-clamp-2">{article.title}</h3>
                     <p className="text-content-secondary text-xs leading-relaxed line-clamp-2">{article.excerpt}</p>
-                    <Link href={`/news/${article.slug}`} className="text-brand-navy font-semibold hover:text-brand-navy/80 text-xs mt-2 inline-block">
+                    <Link href={`/news/${article.slug}`} className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80 text-xs mt-2 inline-block">
                       Read More →
                     </Link>
                   </div>
@@ -223,7 +223,7 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-3xl font-bold text-content-primary">Latest Videos</h2>
-              <Link href="/media" className="text-brand-navy font-semibold hover:text-brand-navy/80">
+              <Link href="/media" className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80">
                 View All Media →
               </Link>
             </div>
@@ -248,7 +248,7 @@ export default function Home() {
               <p className="text-content-secondary mb-4">
                 Explore comprehensive player statistics, including batting averages, home runs, and pitching records.
               </p>
-              <Link href="/stats/players" className="text-brand-navy font-semibold hover:text-brand-navy/80">
+              <Link href="/stats/players" className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80">
                 View Stats →
               </Link>
             </div>
@@ -257,7 +257,7 @@ export default function Home() {
               <p className="text-content-secondary mb-4">
                 Check out who&apos;s leading the league in various statistical categories.
               </p>
-              <Link href="/leaderboards" className="text-brand-navy font-semibold hover:text-brand-navy/80">
+              <Link href="/leaderboards" className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80">
                 View Leaderboards →
               </Link>
             </div>
@@ -266,7 +266,7 @@ export default function Home() {
               <p className="text-content-secondary mb-4">
                 View upcoming games, live scores, and recent results from the full season schedule.
               </p>
-              <Link href="/schedule" className="text-brand-navy font-semibold hover:text-brand-navy/80">
+              <Link href="/schedule" className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80">
                 View Schedule →
               </Link>
             </div>
@@ -275,7 +275,7 @@ export default function Home() {
               <p className="text-content-secondary mb-4">
                 Learn about our league rules, regulations, and gameplay standards.
               </p>
-              <Link href="/rules" className="text-brand-navy font-semibold hover:text-brand-navy/80">
+              <Link href="/rules" className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80">
                 View Rules →
               </Link>
             </div>

@@ -76,7 +76,7 @@ export default function LeaderboardPodium({ title, players }: LeaderboardPodiumP
                 </div>
                 <Link
                   href={`/stats/players/${player.playerId}`}
-                  className="text-brand-navy hover:text-brand-navy/80 font-medium text-sm block truncate"
+                  className="text-brand-navy dark:text-brand-gold hover:text-brand-navy/80 dark:hover:text-brand-gold/80 font-medium text-sm block truncate"
                 >
                   {player.name}
                 </Link>
@@ -101,7 +101,7 @@ export default function LeaderboardPodium({ title, players }: LeaderboardPodiumP
                 <span className="text-sm font-medium text-content-secondary w-6">{player.rank}</span>
                 <Link
                   href={`/stats/players/${player.playerId}`}
-                  className="text-sm text-brand-navy hover:text-brand-navy/80"
+                  className="text-sm text-brand-navy dark:text-brand-gold hover:text-brand-navy/80 dark:hover:text-brand-gold/80"
                 >
                   {player.name}
                 </Link>
@@ -123,7 +123,7 @@ export default function LeaderboardPodium({ title, players }: LeaderboardPodiumP
                 <span className="text-sm font-medium text-content-secondary w-6">{player.rank}</span>
                 <Link
                   href={`/stats/players/${player.playerId}`}
-                  className="text-sm text-brand-navy hover:text-brand-navy/80"
+                  className="text-sm text-brand-navy dark:text-brand-gold hover:text-brand-navy/80 dark:hover:text-brand-gold/80"
                 >
                   {player.name}
                 </Link>

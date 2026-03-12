@@ -92,7 +92,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <div className="mt-12 pt-8 border-t border-border">
                 <Link 
                   href="/news"
-                  className="text-brand-navy font-semibold hover:text-brand-navy/80"
+                  className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80"
                 >
                   ← Back to All News
                 </Link>

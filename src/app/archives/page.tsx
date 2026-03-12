@@ -202,7 +202,7 @@ export default function ArchivesPage() {
                   <div className="mt-4">
                     <Link
                       href={`/stats/teams?year=${year}`}
-                      className="text-sm text-brand-navy font-medium hover:text-brand-navy/80 transition-colors"
+                      className="text-sm text-brand-navy dark:text-brand-gold font-medium hover:text-brand-navy/80 dark:hover:text-brand-gold/80 transition-colors"
                     >
                       View full {year} stats →
                     </Link>

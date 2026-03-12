@@ -95,7 +95,7 @@ export default function TeamsIndexPage() {
                       className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain mb-4 transition-transform duration-300 group-hover:scale-105"
                       onError={(e) => { (e.currentTarget as HTMLImageElement).src = DEFAULT_LOGO }}
                     />
-                    <h3 className="text-lg font-semibold text-content-primary text-center group-hover:text-brand-navy transition-colors">
+                    <h3 className="text-lg font-semibold text-content-primary text-center group-hover:text-brand-navy dark:group-hover:text-brand-gold transition-colors">
                       {team.name}
                     </h3>
                     <div className="mt-2 flex flex-col items-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { resolveTeamByCode } from '@/config/teamCodeLogos'
 
 interface StandingsEntry {
   team: string
@@ -9,6 +11,18 @@ interface StandingsEntry {
   wins: number
   losses: number
   pct: number
+}
+
+function resolveStandingsTeam(teamStr: string): { logoUrl?: string } {
+  const byCode = resolveTeamByCode(teamStr)
+  if (byCode.logoUrl) return byCode
+  const altCodes: Record<string, string> = {
+    'AD': 'DAS', '100% Real Juice': '100', 'Wiffle House': 'WH', 'Bilabial Stops': 'BS',
+    'Swing Dome': 'SD', 'Sheryl Crows': 'SHRL', "Chicken n' Wiffles": 'CNW',
+    'West Coast Washout': 'WCW', 'Caught Cooking': 'CC',
+  }
+  const code = altCodes[teamStr] || altCodes[teamStr.toUpperCase()]
+  return code ? resolveTeamByCode(code) : {}
 }
 
 export function StandingsWidget() {
@@ -62,7 +76,7 @@ export function StandingsWidget() {
     <div className="bg-surface-card rounded-lg shadow p-4">
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-bold text-content-primary">Standings {year}</h3>
-        <Link href="/stats/teams" className="text-brand-navy text-xs font-semibold hover:text-brand-navy/80">
+        <Link href="/stats/teams" className="text-brand-navy dark:text-brand-gold text-xs font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80">
           Full Standings →
         </Link>
       </div>
@@ -76,14 +90,22 @@ export function StandingsWidget() {
           </tr>
         </thead>
         <tbody>
-          {standings.map((entry, i) => (
-            <tr key={entry.team} className="border-t border-border">
-              <td className="py-1.5 pr-2 text-content-secondary text-xs">{i + 1}</td>
-              <td className="py-1.5 font-medium text-content-primary truncate max-w-[120px]">{entry.team}</td>
-              <td className="py-1.5 text-right text-content-secondary">{entry.wins}-{entry.losses}</td>
-              <td className="py-1.5 text-right font-mono text-content-primary">{entry.pct.toFixed(3)}</td>
-            </tr>
-          ))}
+          {standings.map((entry, i) => {
+            const { logoUrl } = resolveStandingsTeam(entry.team)
+            return (
+              <tr key={entry.team} className="border-t border-border">
+                <td className="py-1.5 pr-2 text-content-secondary text-xs">{i + 1}</td>
+                <td className="py-1.5 font-medium text-content-primary truncate max-w-[120px]">
+                  <div className="flex items-center gap-2">
+                    {logoUrl && <Image src={logoUrl} alt="" width={20} height={20} className="flex-shrink-0 rounded" unoptimized />}
+                    <span>{entry.team}</span>
+                  </div>
+                </td>
+                <td className="py-1.5 text-right text-content-secondary">{entry.wins}-{entry.losses}</td>
+                <td className="py-1.5 text-right font-mono text-content-primary">{entry.pct.toFixed(3)}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>

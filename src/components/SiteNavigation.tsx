@@ -34,7 +34,7 @@ export default function SiteNavigation() {
 
   return (
     <>
-    <div className="sticky top-0 z-50">
+    <div className="sticky top-0 z-[100] bg-brand-navy">
       {/* Desktop navigation */}
       <nav className="hidden md:block bg-brand-navy">
         <div className="container mx-auto px-4">
@@ -115,7 +115,7 @@ export default function SiteNavigation() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/50" />
+            <div className="fixed inset-0 bg-black/70" />
           </TransitionChild>
 
           <TransitionChild
@@ -127,7 +127,7 @@ export default function SiteNavigation() {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <DialogPanel className="fixed inset-y-0 right-0 w-72 bg-surface-primary shadow-xl">
+            <DialogPanel className="fixed inset-y-0 right-0 w-72 bg-surface-primary shadow-xl opacity-100">
               <div className="flex items-center justify-between p-4 border-b border-border">
                 <span className="font-bold text-content-primary">Menu</span>
                 <button

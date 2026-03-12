@@ -22,6 +22,7 @@ export async function GET(request: NextRequest) {
       searchParams.get('stat') || (category === 'hitting' ? 'ops' : 'era')
     const limit = parseInt(searchParams.get('limit') || '10', 10)
     const minSeasons = parseInt(searchParams.get('minSeasons') || '0', 10)
+    const qualified = searchParams.get('qualified') !== 'false'
 
     const isHitting = category === 'hitting'
     const isAllTime = !year || year === 'all'
@@ -39,6 +40,14 @@ export async function GET(request: NextRequest) {
       if (minSeasons > 0) {
         data = data.filter((r) => (r.seasons ?? 0) >= minSeasons)
       }
+
+      if (qualified) {
+        if (isHitting) {
+          data = data.filter((r) => (r.plateAppearances ?? 0) >= 100)
+        } else {
+          data = data.filter((r) => (r.inningsPitched ?? 0) >= 75)
+        }
+      }
     } else {
       const result = isHitting
         ? await fetchSheet('IH', 'A700:AP2000', transformYearlyHitting)
@@ -47,6 +56,21 @@ export async function GET(request: NextRequest) {
       stale = result.stale
 
       data = data.filter((r) => String(r.year) === year)
+
+      if (qualified) {
+        const yearPlayers = data.filter((r) => (r.games ?? 0) > 0)
+        const avgGames =
+          yearPlayers.length > 0
+            ? yearPlayers.reduce((s, r) => s + (r.games ?? 0), 0) / yearPlayers.length
+            : 0
+        const multiplier = isHitting ? 3.1 : 1.0
+        const threshold = Math.floor(multiplier * avgGames)
+        if (isHitting) {
+          data = data.filter((r) => (r.plateAppearances ?? 0) >= threshold)
+        } else {
+          data = data.filter((r) => (r.inningsPitched ?? 0) >= threshold)
+        }
+      }
     }
 
     const ascending = ASCENDING_STATS.has(stat)

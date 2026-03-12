@@ -142,7 +142,7 @@ const PlayerPitchingData: React.FC<PlayerPitchingDataProps> = ({
         <div className="mt-2 text-sm text-content-secondary">
           <p><strong>Total Records:</strong> {filteredData.length} | <strong>Available Years:</strong> {availableYears.length} | <strong>Available Teams:</strong> {availableTeams.length}</p>
           {qualifierOnly && (
-            <p className="text-brand-navy mt-1">
+            <p className="text-brand-navy dark:text-brand-gold mt-1">
               <strong>Filter:</strong> Showing qualified players only
             </p>
           )}

@@ -34,13 +34,19 @@ const FORMATTERS: Record<string, (v: number) => string> = {
   whip: v => v.toFixed(2),
   k9: v => v.toFixed(2),
   inningsPitched: v => v.toFixed(1),
-  wrcPlus: v => v.toFixed(0),
+  wrcPlus: v => Math.round(v).toString(),
+  homeRuns: v => Math.round(v).toString(),
+  rbis: v => Math.round(v).toString(),
+  strikeouts: v => Math.round(v).toString(),
+  wins: v => Math.round(v).toString(),
+  hits: v => Math.round(v).toString(),
+  runs: v => Math.round(v).toString(),
 }
 
 function formatStat(key: string, value: unknown): string {
   if (typeof value !== 'number') return String(value ?? '')
   const formatter = FORMATTERS[key]
-  return formatter ? formatter(value) : String(value)
+  return formatter ? formatter(value) : Math.round(value).toString()
 }
 
 function mapToPlayers(rows: Row[], statKey: string) {
@@ -85,6 +91,7 @@ export default function LeaderboardsPage() {
       params.append('year', year)
       params.append('stat', statKey)
       params.append('limit', '10')
+      params.append('qualified', 'true')
       if (year === 'all') params.append('minSeasons', '3')
       const res = await fetch(`/api/leaderboards?${params}`)
       const result = await res.json()

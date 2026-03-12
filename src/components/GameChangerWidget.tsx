@@ -43,7 +43,7 @@ export function GameChangerWidget({ maxGames = 4, className }: GameChangerWidget
 
   return (
     <div id={targetId.current} className={className}>
-      <div className="text-center p-8 text-gray-500">
+      <div className="text-center p-8 text-content-secondary">
         Loading schedule from GameChanger...
       </div>
     </div>

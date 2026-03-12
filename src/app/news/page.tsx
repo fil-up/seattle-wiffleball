@@ -50,7 +50,7 @@ export default function NewsPage() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="text-sm text-content-secondary">{article.date}</div>
                   {article.featured && (
-                                      <span className="bg-brand-navy/20 text-brand-navy text-xs font-medium px-2.5 py-0.5 rounded">
+                                      <span className="bg-brand-navy/20 dark:bg-brand-gold/20 text-brand-navy dark:text-brand-gold text-xs font-medium px-2.5 py-0.5 rounded">
                     Featured
                   </span>
                   )}
@@ -63,7 +63,7 @@ export default function NewsPage() {
                 </p>
                 <Link 
                   href={`/news/${article.slug}`}
-                  className="text-brand-navy font-semibold hover:text-brand-navy/80"
+                  className="text-brand-navy dark:text-brand-gold font-semibold hover:text-brand-navy/80 dark:hover:text-brand-gold/80"
                 >
                   Read Full Article →
                 </Link>

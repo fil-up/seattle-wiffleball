@@ -142,17 +142,17 @@ export default function PlayersStats() {
           )
         }},
         { header: "Team", accessorKey: "team", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
-        { header: "G", accessorKey: "games", sortDescFirst: true },
-        { header: "PA", accessorKey: "plateAppearances", sortDescFirst: true },
-        { header: "AB", accessorKey: "atBats", sortDescFirst: true },
-        { header: "R", accessorKey: "runs", sortDescFirst: true },
-        { header: "H", accessorKey: "hits", sortDescFirst: true },
-        { header: "2B", accessorKey: "doubles", sortDescFirst: true },
-        { header: "3B", accessorKey: "triples", sortDescFirst: true },
-        { header: "HR", accessorKey: "homeRuns", sortDescFirst: true },
-        { header: "RBI", accessorKey: "rbis", sortDescFirst: true },
-        { header: "BB", accessorKey: "walks", sortDescFirst: true },
-        { header: "SO", accessorKey: "strikeouts", sortDescFirst: true },
+        { header: "G", accessorKey: "games", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "PA", accessorKey: "plateAppearances", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "AB", accessorKey: "atBats", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "R", accessorKey: "runs", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "H", accessorKey: "hits", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "2B", accessorKey: "doubles", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "3B", accessorKey: "triples", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "HR", accessorKey: "homeRuns", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "RBI", accessorKey: "rbis", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "BB", accessorKey: "walks", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "SO", accessorKey: "strikeouts", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
         { header: "AVG", accessorKey: "avg", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
         { header: "OBP", accessorKey: "obp", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
         { header: "SLG", accessorKey: "slg", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
@@ -161,7 +161,7 @@ export default function PlayersStats() {
       ]
 
       if (scope === "totals") {
-        base.splice(1, 0, { header: "Seasons", accessorKey: "seasons", sortDescFirst: true })
+        base.splice(1, 0, { header: "Seasons", accessorKey: "seasons", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) })
       }
 
       return base
@@ -180,23 +180,23 @@ export default function PlayersStats() {
           )
         }},
         { header: "Team", accessorKey: "team", sortDescFirst: true, cell: ({ getValue }: any) => getValue() || '' },
-        { header: "G", accessorKey: "games", sortDescFirst: true },
+        { header: "G", accessorKey: "games", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
         { header: "IP", accessorKey: "inningsPitched", sortDescFirst: true, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(1) },
-        { header: "W", accessorKey: "wins", sortDescFirst: true },
-        { header: "L", accessorKey: "losses", sortDescFirst: true },
-        { header: "SV", accessorKey: "saves", sortDescFirst: true },
-        { header: "K", accessorKey: "strikeouts", sortDescFirst: true },
-        { header: "BB", accessorKey: "walks", sortDescFirst: true },
-        { header: "H", accessorKey: "hits", sortDescFirst: true },
-        { header: "R", accessorKey: "runs", sortDescFirst: true },
-        { header: "ER", accessorKey: "earnedRuns", sortDescFirst: true },
+        { header: "W", accessorKey: "wins", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "L", accessorKey: "losses", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "SV", accessorKey: "saves", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "K", accessorKey: "strikeouts", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "BB", accessorKey: "walks", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "H", accessorKey: "hits", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "R", accessorKey: "runs", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
+        { header: "ER", accessorKey: "earnedRuns", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) },
         { header: "ERA", accessorKey: "era", sortDescFirst: false, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(2) },
         { header: "WHIP", accessorKey: "whip", sortDescFirst: false, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(2) },
         { header: "OPP AVG", accessorKey: "oppAvg", sortDescFirst: false, cell: ({ getValue }: any) => (getValue() ?? 0).toFixed(3) },
       ]
 
       if (scope === "totals") {
-        base.splice(1, 0, { header: "Seasons", accessorKey: "seasons", sortDescFirst: true })
+        base.splice(1, 0, { header: "Seasons", accessorKey: "seasons", sortDescFirst: true, cell: ({ getValue }: any) => Math.round(getValue() ?? 0) })
       }
 
       return base
@@ -274,7 +274,7 @@ export default function PlayersStats() {
       ) : displayData.length === 0 ? (
         <div className="text-center py-8 text-content-secondary">No players match these filters.</div>
       ) : (
-        <StatsTable data={displayData as any[]} columns={columns as any[]} initialSortField={initialSort} initialSortDesc={initialSortDesc} stickyFirstCols={2} columnWidthsPx={[180, 220]} />
+        <StatsTable data={displayData as any[]} columns={columns as any[]} initialSortField={initialSort} initialSortDesc={initialSortDesc} stickyFirstCols={1} columnWidthsPx={[200]} />
       )}
       </div>
     </div>

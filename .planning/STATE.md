@@ -99,6 +99,8 @@ Recent decisions affecting current work:
 - [05-04]: Mobile tab interface on team detail uses hidden/block classes for simplicity
 - [05-04]: Award icons as inline SVG components with brand-gold coloring
 - [05-04]: Sticky column cells get explicit bg colors per row index to prevent transparency bleed
+- [06-01]: Renamed SheetrockStandings to StandingsTable — legacy name referenced internal dev tool no longer in project
+- [06-01]: PlayerBattingData and PlayerPitchingData preserved despite debug-sounding names — both are production components used in stats/teams/[team]
 
 ### Pending Todos
 
@@ -115,5 +117,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-12
-Stopped at: Completed 06-03-PLAN.md — owner maintenance guide
+Stopped at: Completed 06-01-PLAN.md — codebase cleanup (debug routes deleted, SheetrockStandings renamed)
 Resume file: None

@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Accurate, browsable league stats and information — if the numbers are wrong or hard to find, nothing else matters.
-**Current focus:** Phase 5 Design & Polish — Complete pending verification
+**Current focus:** Phase 6 Infrastructure & Launch — Complete ✓
 
 ## Current Position
 

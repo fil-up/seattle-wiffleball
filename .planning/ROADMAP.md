@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Core Pages** - Build Home, Teams, Leaderboards pages and embed live/media widgets
 - [x] **Phase 4: Content Pages** - Build News, Rules, Archives, Info, and Hall of Fame pages
 - [x] **Phase 5: Design & Polish** - Visual refinement, responsive layout, theming, and UX consistency
-- [ ] **Phase 6: Infrastructure & Launch** - Cleanup, deploy to Vercel, ensure non-developer maintainability
+- [x] **Phase 6: Infrastructure & Launch** - Cleanup, deploy to Vercel, ensure non-developer maintainability
 
 ## Phase Details
 
@@ -181,8 +181,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Core Pages | 5/5 | Complete | 2026-03-04 |
 | 4. Content Pages | 3/3 | Complete | 2026-03-05 |
 | 5. Design & Polish | 4/4 | Complete | 2026-03-05 |
-| 6. Infrastructure & Launch | 0/3 | Planning | - |
+| 6. Infrastructure & Launch | 3/3 | Complete | 2026-03-13 |
 
 ---
 *Roadmap created: 2026-02-23*
-*Last updated: 2026-03-12*
+*Last updated: 2026-03-13*

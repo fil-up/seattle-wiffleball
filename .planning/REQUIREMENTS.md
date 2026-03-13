@@ -47,19 +47,19 @@ Requirements for initial release before the May 2026 season.
 
 ### Design & UX
 
-- [ ] **UX-01**: Modern, polished stats tables (striped rows, hover effects, clean typography)
-- [ ] **UX-02**: Responsive design that works on mobile
-- [ ] **UX-03**: Consistent navigation across all pages
-- [ ] **UX-04**: Dark/league-branded color theme
-- [ ] **UX-05**: Proper error states and loading indicators on all pages
+- [x] **UX-01**: Modern, polished stats tables (striped rows, hover effects, clean typography)
+- [x] **UX-02**: Responsive design that works on mobile
+- [x] **UX-03**: Consistent navigation across all pages
+- [x] **UX-04**: Dark/league-branded color theme
+- [x] **UX-05**: Proper error states and loading indicators on all pages
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: Deploy to Vercel with proper environment configuration
-- [ ] **INFRA-02**: Remove unused dependencies (sheetrock, graceful-fs)
-- [ ] **INFRA-03**: Remove debug pages and console.logs
+- [x] **INFRA-01**: Deploy to Vercel with proper environment configuration
+- [x] **INFRA-02**: Remove unused dependencies (sheetrock, graceful-fs)
+- [x] **INFRA-03**: Remove debug pages and console.logs
 - [x] **INFRA-04**: Remove Prisma/SQLite entirely (schema, client, dev.db, import script)
-- [ ] **INFRA-05**: Clean, maintainable codebase a non-developer can update (news JSON, env vars, image drops)
+- [x] **INFRA-05**: Clean, maintainable codebase a non-developer can update (news JSON, env vars, image drops)
 
 ## v2 Requirements
 
@@ -107,10 +107,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | STAT-03 | Phase 2: Stats Engine | Complete |
 | STAT-04 | Phase 2: Stats Engine | Complete |
 | STAT-05 | Phase 2: Stats Engine | Complete |
-| STAT-06 | Phase 5: Design & Polish | Pending |
-| STAT-07 | Phase 5: Design & Polish | Pending |
-| STAT-08 | Phase 5: Design & Polish | Pending |
-| STAT-09 | Phase 5: Design & Polish | Pending |
+| STAT-06 | Phase 5: Design & Polish | Complete |
+| STAT-07 | Phase 5: Design & Polish | Complete |
+| STAT-08 | Phase 5: Design & Polish | Complete |
+| STAT-09 | Phase 5: Design & Polish | Complete |
 | PAGE-01 | Phase 3: Core Pages | Complete |
 | PAGE-02 | Phase 4: Content Pages | Complete |
 | PAGE-03 | Phase 3: Core Pages | Complete |
@@ -123,16 +123,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PAGE-10 | Phase 4: Content Pages | Complete |
 | LIVE-01 | Phase 3: Core Pages | Complete |
 | LIVE-02 | Phase 3: Core Pages | Complete |
-| UX-01 | Phase 5: Design & Polish | Pending |
-| UX-02 | Phase 5: Design & Polish | Pending |
-| UX-03 | Phase 5: Design & Polish | Pending |
-| UX-04 | Phase 5: Design & Polish | Pending |
-| UX-05 | Phase 5: Design & Polish | Pending |
-| INFRA-01 | Phase 6: Infrastructure & Launch | Pending |
-| INFRA-02 | Phase 6: Infrastructure & Launch | Pending |
-| INFRA-03 | Phase 6: Infrastructure & Launch | Pending |
+| UX-01 | Phase 5: Design & Polish | Complete |
+| UX-02 | Phase 5: Design & Polish | Complete |
+| UX-03 | Phase 5: Design & Polish | Complete |
+| UX-04 | Phase 5: Design & Polish | Complete |
+| UX-05 | Phase 5: Design & Polish | Complete |
+| INFRA-01 | Phase 6: Infrastructure & Launch | Complete |
+| INFRA-02 | Phase 6: Infrastructure & Launch | Complete |
+| INFRA-03 | Phase 6: Infrastructure & Launch | Complete |
 | INFRA-04 | Phase 1: Data Foundation | Complete |
-| INFRA-05 | Phase 6: Infrastructure & Launch | Pending |
+| INFRA-05 | Phase 6: Infrastructure & Launch | Complete |
 
 **Coverage:**
 - v1 requirements: 36 total

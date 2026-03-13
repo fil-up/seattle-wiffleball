@@ -93,11 +93,11 @@ export default function StatsTable<T>({
               ? rIdx % 2 === 0 ? 'bg-surface-primary' : 'bg-table-stripe'
               : 'bg-surface-primary'
             return (
-              <tr key={row.id} className={`${rowBg} hover:bg-table-hover transition-colors`}>
+              <tr key={row.id} className={`group ${rowBg} hover:bg-table-hover transition-colors`}>
                 {row.getVisibleCells().map((cell, idx) => (
                   <td
                     key={cell.id}
-                    className={`px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums ${idx < stickyFirstCols ? `sticky z-10 ${rIdx % 2 === 0 ? 'bg-surface-primary' : 'bg-table-stripe'}` : ''}`}
+                    className={`px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums ${idx < stickyFirstCols ? `sticky z-10 group-hover:bg-table-hover transition-colors ${rIdx % 2 === 0 ? 'bg-surface-primary' : 'bg-table-stripe'}` : ''}`}
                     style={idx < stickyFirstCols ? { left: stickyLefts[idx], minWidth: (columnWidthsPx[idx] ?? 160) } : { minWidth: (columnWidthsPx[idx] ?? undefined) }}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

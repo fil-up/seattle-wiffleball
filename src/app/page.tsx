@@ -49,15 +49,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-surface-secondary">
       {/* Hero Section */}
-      <div className="hero-section text-white relative overflow-hidden min-h-[300px]">
+      <div className="hero-section text-white relative overflow-hidden">
         <img
           src="/images/game-highlights.gif"
           alt=""
-          className="w-full block min-h-[300px] object-cover"
+          className="w-full block"
         />
 
         <div className="absolute inset-0 z-10 flex flex-col">
-          <div className="flex-1 flex items-center px-4 md:px-8 py-8">
+          <div className="flex-1 flex items-center px-4 md:px-8 py-4 md:py-8">
             <div className="flex flex-row items-center gap-4 md:gap-8 w-full">
               {/* Logo + EST. 2015 — scales with the container */}
               <div className="flex-shrink-0 flex flex-col items-center w-[12vw] min-w-[64px] max-w-[180px]">
@@ -101,7 +101,7 @@ export default function Home() {
           </div>
 
           {/* Nav tiles */}
-          <div className="grid grid-cols-4 gap-2 md:gap-3 px-4 md:px-8 pb-4 md:pb-6">
+          <div className="grid grid-cols-4 gap-1.5 md:gap-3 px-3 md:px-8 pb-3 md:pb-6">
             {[
               { label: 'News', href: '/news', subtitle: 'Articles, recaps and events' },
               { label: 'Stats', href: '/stats/players', subtitle: 'Player stats by year' },
@@ -111,9 +111,9 @@ export default function Home() {
               <Link
                 key={tile.href}
                 href={tile.href}
-                className="flex flex-col items-center justify-center text-center py-3 md:py-5 px-2 bg-brand-navy/40 hover:bg-brand-navy/70 backdrop-blur-sm transition-colors rounded-xl"
+                className="flex flex-col items-center justify-center text-center py-2 md:py-5 px-1 md:px-2 bg-brand-navy/40 hover:bg-brand-navy/70 backdrop-blur-sm transition-colors rounded-lg md:rounded-xl"
               >
-                <span className="text-white font-bold text-sm md:text-base">{tile.label}</span>
+                <span className="text-white font-bold text-xs md:text-base">{tile.label}</span>
                 <span className="hidden md:block text-white/70 text-xs mt-0.5">{tile.subtitle}</span>
               </Link>
             ))}

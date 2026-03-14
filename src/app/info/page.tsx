@@ -2,14 +2,7 @@
 export default function InfoPage() {
   return (
     <div>
-      <div className="bg-brand-navy text-white py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">League Info</h1>
-          <p className="text-xl md:text-2xl text-blue-100">
-            Everything you need to know about Seattle Wiffleball
-          </p>
-        </div>
-      </div>
+
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* About the League */}

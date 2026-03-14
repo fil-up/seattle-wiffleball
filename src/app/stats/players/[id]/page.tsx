@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { TableSkeleton } from '@/components/Skeleton'
 import ErrorState from '@/components/ErrorState'
+import { resolveTeamByCode } from '@/config/teamCodeLogos'
 
 interface HittingRow {
   year: number
@@ -48,7 +50,8 @@ interface PitchingRow {
   player: { id: string; name: string }
 }
 
-// Award display names and ordering
+// --- Award config ---
+
 const AWARD_DISPLAY: Record<string, string> = {
   'All Star': 'All-Star',
   'Karl Koch Most Improved Batter': 'Most Improved Batter',
@@ -135,6 +138,31 @@ function AwardPill({ awardKey, years }: { awardKey: string; years: number[] }) {
     </span>
   )
 }
+
+// --- Team cell ---
+
+function TeamCell({ code }: { code: string }) {
+  const { name, logoUrl } = resolveTeamByCode(code)
+  return (
+    <div className="flex items-center gap-2">
+      {logoUrl && (
+        <Image
+          src={logoUrl}
+          alt={name ?? code}
+          width={20}
+          height={20}
+          className="object-contain flex-shrink-0"
+          unoptimized
+        />
+      )}
+      <span>{code}</span>
+    </div>
+  )
+}
+
+// --- Sticky column widths ---
+const YEAR_W = 72   // px — "2025" + px-4 padding
+const TEAM_W = 130  // px — logo + abbreviation + px-4 padding
 
 export default function PlayerDetailPage() {
   const params = useParams()
@@ -260,6 +288,7 @@ export default function PlayerDetailPage() {
           )}
         </div>
 
+        {/* Hitting table */}
         {hitting.length > 0 && (
           <div className="bg-surface-card rounded-lg border border-border shadow-sm mb-8">
             <div className="px-6 py-4 border-b border-border">
@@ -267,42 +296,72 @@ export default function PlayerDetailPage() {
             </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-border">
-                <thead className="sticky top-0 z-10">
+                <thead className="sticky top-0 z-30">
                   <tr className="bg-brand-navy">
-                    {['Year', 'Team', 'G', 'PA', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'AVG', 'OBP', 'SLG', 'OPS', 'wRC+'].map((h) => (
+                    {/* Sticky: Year */}
+                    <th
+                      className="px-4 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap sticky left-0 z-40 bg-brand-navy"
+                      style={{ minWidth: YEAR_W }}
+                    >
+                      Year
+                    </th>
+                    {/* Sticky: Team */}
+                    <th
+                      className="px-4 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap sticky z-40 bg-brand-navy"
+                      style={{ left: YEAR_W, minWidth: TEAM_W }}
+                    >
+                      Team
+                    </th>
+                    {['G', 'PA', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'AVG', 'OBP', 'SLG', 'OPS', 'wRC+'].map((h) => (
                       <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="bg-surface-card divide-y divide-border">
-                  {hitting.map((row, i) => (
-                    <tr key={row.year} className={`${i % 2 === 0 ? 'bg-surface-card' : 'bg-table-stripe'} hover:bg-table-hover transition-colors`}>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-content-primary">{row.year}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary">{row.team}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.games}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.plateAppearances}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.atBats}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.runs}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.hits}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.doubles}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.triples}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.homeRuns}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.rbis}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.walks}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.strikeouts}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.avg ?? 0).toFixed(3)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.obp ?? 0).toFixed(3)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.slg ?? 0).toFixed(3)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.ops ?? 0).toFixed(3)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.wrcPlus ?? 0).toFixed(0)}</td>
-                    </tr>
-                  ))}
+                <tbody className="divide-y divide-border">
+                  {hitting.map((row, i) => {
+                    const rowBg = i % 2 === 0 ? 'bg-surface-card' : 'bg-table-stripe'
+                    return (
+                      <tr key={row.year} className={`group ${rowBg} hover:bg-table-hover transition-colors`}>
+                        {/* Sticky: Year */}
+                        <td
+                          className={`px-4 py-3 whitespace-nowrap text-sm font-medium text-content-primary sticky left-0 z-20 ${rowBg} group-hover:bg-table-hover transition-colors`}
+                          style={{ minWidth: YEAR_W }}
+                        >
+                          {row.year}
+                        </td>
+                        {/* Sticky: Team */}
+                        <td
+                          className={`px-4 py-3 whitespace-nowrap text-sm text-content-primary sticky z-20 ${rowBg} group-hover:bg-table-hover transition-colors`}
+                          style={{ left: YEAR_W, minWidth: TEAM_W }}
+                        >
+                          <TeamCell code={row.team} />
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.games)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.plateAppearances)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.atBats)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.runs)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.hits)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.doubles)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.triples)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.homeRuns)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.rbis)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.walks)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.strikeouts)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.avg ?? 0).toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.obp ?? 0).toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.slg ?? 0).toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.ops ?? 0).toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.wrcPlus ?? 0)}</td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
           </div>
         )}
 
+        {/* Pitching table */}
         {pitching.length > 0 && (
           <div className="bg-surface-card rounded-lg border border-border shadow-sm mb-8">
             <div className="px-6 py-4 border-b border-border">
@@ -310,34 +369,63 @@ export default function PlayerDetailPage() {
             </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-border">
-                <thead className="sticky top-0 z-10">
+                <thead className="sticky top-0 z-30">
                   <tr className="bg-brand-navy">
-                    {['Year', 'Team', 'G', 'IP', 'W', 'L', 'SV', 'K', 'BB', 'H', 'R', 'ER', 'ERA', 'WHIP', 'OPP AVG', 'K/9'].map((h) => (
+                    {/* Sticky: Year */}
+                    <th
+                      className="px-4 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap sticky left-0 z-40 bg-brand-navy"
+                      style={{ minWidth: YEAR_W }}
+                    >
+                      Year
+                    </th>
+                    {/* Sticky: Team */}
+                    <th
+                      className="px-4 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap sticky z-40 bg-brand-navy"
+                      style={{ left: YEAR_W, minWidth: TEAM_W }}
+                    >
+                      Team
+                    </th>
+                    {['G', 'IP', 'W', 'L', 'SV', 'K', 'BB', 'H', 'R', 'ER', 'ERA', 'WHIP', 'OPP AVG', 'K/9'].map((h) => (
                       <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="bg-surface-card divide-y divide-border">
-                  {pitching.map((row, i) => (
-                    <tr key={row.year} className={`${i % 2 === 0 ? 'bg-surface-card' : 'bg-table-stripe'} hover:bg-table-hover transition-colors`}>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-content-primary">{row.year}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary">{row.team}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.games}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.inningsPitched ?? 0).toFixed(1)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.wins}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.losses}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.saves}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.strikeouts}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.walks}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.hits}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.runs}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{row.earnedRuns}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.era ?? 0).toFixed(2)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.whip ?? 0).toFixed(2)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.oppAvg ?? 0).toFixed(3)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.k9 ?? 0).toFixed(2)}</td>
-                    </tr>
-                  ))}
+                <tbody className="divide-y divide-border">
+                  {pitching.map((row, i) => {
+                    const rowBg = i % 2 === 0 ? 'bg-surface-card' : 'bg-table-stripe'
+                    return (
+                      <tr key={row.year} className={`group ${rowBg} hover:bg-table-hover transition-colors`}>
+                        {/* Sticky: Year */}
+                        <td
+                          className={`px-4 py-3 whitespace-nowrap text-sm font-medium text-content-primary sticky left-0 z-20 ${rowBg} group-hover:bg-table-hover transition-colors`}
+                          style={{ minWidth: YEAR_W }}
+                        >
+                          {row.year}
+                        </td>
+                        {/* Sticky: Team */}
+                        <td
+                          className={`px-4 py-3 whitespace-nowrap text-sm text-content-primary sticky z-20 ${rowBg} group-hover:bg-table-hover transition-colors`}
+                          style={{ left: YEAR_W, minWidth: TEAM_W }}
+                        >
+                          <TeamCell code={row.team} />
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.games)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.inningsPitched ?? 0).toFixed(1)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.wins)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.losses)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.saves)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.strikeouts)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.walks)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.hits)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.runs)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{Math.round(row.earnedRuns)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.era ?? 0).toFixed(2)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.whip ?? 0).toFixed(2)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.oppAvg ?? 0).toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-primary tabular-nums">{(row.k9 ?? 0).toFixed(2)}</td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>

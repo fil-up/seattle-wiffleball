@@ -94,7 +94,7 @@ export default function Home() {
           </div>
 
           {/* Nav tiles */}
-          <div className="grid grid-cols-4 divide-x divide-white/20 border-t border-white/20 z-30">
+          <div className="grid grid-cols-4 gap-2 md:gap-3 px-4 md:px-8 pb-4 md:pb-6 z-30">
             {[
               { label: 'News', href: '/news', subtitle: 'Articles, recaps and events' },
               { label: 'Stats', href: '/stats/players', subtitle: 'Player stats by year' },
@@ -104,7 +104,7 @@ export default function Home() {
               <Link
                 key={tile.href}
                 href={tile.href}
-                className="flex flex-col items-center justify-center text-center py-3 md:py-5 px-2 bg-black/40 hover:bg-brand-navy/70 backdrop-blur-sm transition-colors"
+                className="flex flex-col items-center justify-center text-center py-3 md:py-5 px-2 bg-black/50 hover:bg-brand-navy/70 backdrop-blur-sm transition-colors rounded-xl"
               >
                 <span className="text-white font-bold text-sm md:text-base">{tile.label}</span>
                 <span className="hidden md:block text-white/70 text-xs mt-0.5">{tile.subtitle}</span>

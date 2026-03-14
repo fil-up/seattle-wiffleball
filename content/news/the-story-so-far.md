@@ -1,13 +1,10 @@
 ---
 title: "The story so far..."
 date: "2025-06-12"
-excerpt: "###### Grant Bronsdon, Editor-in-Chief We're solidly halfway through the season, so what better time to release power rankings? Things can change quickly, though, so you still gotta bring it week in…"
+excerpt: "We're solidly halfway through the season, so what better time to release power rankings? Things can change quickly, though, so you still gotta bring it week in and week out. And if you don’t like…"
+author: "Grant Bronsdon, Editor-in-Chief"
 ---
 
-###### Grant Bronsdon, Editor-in-Chief
-
-                 
-                    
 We're solidly halfway through the season, so what better time to release power rankings? Things can change quickly, though, so you still gotta bring it week in and week out. And if you don’t like your team’s ranking…please throw me strikes down the middle when you play the Crows. That'll show 'em.
 
                  

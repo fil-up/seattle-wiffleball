@@ -1,19 +1,11 @@
 ---
 title: "Week 4: June Swoon"
 date: "2019-06-02"
-excerpt: "The month of June welcomed us with another obscenely beautiful day for wiffleball. This week had a little bit of everything -- debuts, nailbiters, comebacks, walkoffs, and mercies, all with a…"
+excerpt: "Sheryl Crows 7 || Mighty Knucks 6 (F/5) It took a miraculous strand rate and a comeback for the ages, but it's done: The Sheryl Crows have finally recorded their first wins. In a doubleheader sweep…"
+author: "GRANT BRONSDON, Sheryl Crows"
 ---
 
-The month of June welcomed us with another obscenely beautiful day for wiffleball. This week had a little bit of everything -- debuts, nailbiters, comebacks, walkoffs, and mercies, all with a heaping helping of strikeouts and dingers. 100% Real Juice and RBI Steaks continue to pace the league, but a few fresh teams showed off their intention to contend.
-
-                 
-                
-### By the Skin of their Beaks (A Murder Most Fowl)
-
-                
-###### GRANT BRONSDON, Sheryl Crows
-
-                  Sheryl Crows 7 || Mighty Knucks 6 (F/5) 
+Sheryl Crows 7 || Mighty Knucks 6 (F/5) 
                     
 It took a miraculous strand rate and a comeback for the ages, but it's done: The Sheryl Crows have finally recorded their first wins.
 

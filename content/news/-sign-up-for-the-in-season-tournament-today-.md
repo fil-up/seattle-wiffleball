@@ -1,15 +1,10 @@
 ---
 title: "📣 Sign up for the In-Season Tournament TODAY! 📣"
 date: "2025-06-19"
-excerpt: "###### Seattle Wiffleball League Office The 2nd Annual Seattle Wiffle In-Season Tournament is in less than two weeks! From 10am to 6pm on Sunday June 29th, Cowen Park will host two fields for a…"
+excerpt: "The 2nd Annual Seattle Wiffle In-Season Tournament is in less than two weeks! From 10am to 6pm on Sunday June 29th, Cowen Park will host two fields for a chaotic scramble to the $100 per player…"
+author: "Seattle Wiffleball League Office"
 ---
 
-###### Seattle Wiffleball League Office
-
-                   
-
-                     
-                        
 The 2nd Annual Seattle Wiffle In-Season Tournament is in less than two weeks! From 10am to 6pm on Sunday June 29th, Cowen Park will host two fields for a chaotic scramble to the $100 per player grand prize.
 
                      

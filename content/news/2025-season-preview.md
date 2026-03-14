@@ -1,13 +1,11 @@
 ---
 title: "2025 Season Preview"
 date: "2025-05-17"
-excerpt: "###### Grant Bronsdon, Editor-in-Chief 10 teams...one Leaning Golden Man Picture the scene: Freshly-mown grass. A twelve-pack on the ground. Yellow bats strewn everywhere. A few picnickers beyond…"
+excerpt: "10 teams...one Leaning Golden Man Picture the scene: Freshly-mown grass. A twelve-pack on the ground. Yellow bats strewn everywhere. A few picnickers beyond those classic blue fences, snickering…"
+author: "Grant Bronsdon, Editor-in-Chief"
 ---
 
-###### Grant Bronsdon, Editor-in-Chief
-
-                   
-                     10 teams...one Leaning Golden Man 
+10 teams...one Leaning Golden Man 
                     
 Picture the scene: Freshly-mown grass. A twelve-pack on the ground. Yellow bats strewn everywhere. A few picnickers beyond those classic blue fences, snickering about the pool noodle foul poles that have become a hallmark every Sunday.
 

@@ -1,13 +1,10 @@
 ---
 title: "Kind of New and Somewhat Improved: A 2019 Season Preview"
 date: "2019-05-04"
-excerpt: "###### PRESTON SAHABU, Seattle Wiffle The wind blows through a little fresher. The sun hangs around a little longer. Cowen Park dries out and leaves an actual field behind. Soft plastic connects…"
+excerpt: "The wind blows through a little fresher. The sun hangs around a little longer. Cowen Park dries out and leaves an actual field behind. Soft plastic connects with hard plastic. It is that time of…"
+author: "PRESTON SAHABU, Seattle Wiffle"
 ---
 
-###### PRESTON SAHABU, Seattle Wiffle
-
-                 
-                    
 The wind blows through a little fresher. The sun hangs around a little longer. Cowen Park dries out and leaves an actual field behind. Soft plastic connects with hard plastic. It is that time of year, friends: wiffleball is back.
 
                     

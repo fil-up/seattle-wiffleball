@@ -1,7 +1,8 @@
 ---
 title: "Round One Playoff Preview"
 date: "2025-08-15"
-excerpt: "###### Seattle Wiffleball League Office"
+excerpt: ""
+author: "Seattle Wiffleball League Office"
 ---
 
-###### Seattle Wiffleball League Office
+

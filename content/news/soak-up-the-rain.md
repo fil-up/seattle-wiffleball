@@ -1,13 +1,11 @@
 ---
 title: "SOAK UP THE RAIN:"
 date: "2022-05-18"
-excerpt: "###### Preston Sahabu, Commissioner Early outbursts, late heroics, and characteristic grittiness have the Crows off to a great start. In a world careening through chaos, it can be reassuring to have…"
+excerpt: "Early outbursts, late heroics, and characteristic grittiness have the Crows off to a great start. In a world careening through chaos, it can be reassuring to have a seasonal rhythm that keeps us…"
+author: "Preston Sahabu, Commissioner"
 ---
 
-###### Preston Sahabu, Commissioner
-
-                   
-                      Early outbursts, late heroics, and characteristic grittiness have the Crows off to a great start.  
+Early outbursts, late heroics, and characteristic grittiness have the Crows off to a great start.  
                     
 In a world careening through chaos, it can be reassuring to have a seasonal rhythm that keeps us grounded in the local and ordinary. And so it is with a heart full of innocence and competitiveness that Seattle Wiffleball soldiers into its eighth year. This season began on the first Sunday of May, with an off-day for Mother’s Day and a downpour of a third week, resulting in the first POWER RANKINGS of the year:
 

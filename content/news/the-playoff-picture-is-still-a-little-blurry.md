@@ -1,17 +1,10 @@
 ---
 title: "The Playoff Picture is Still a Little Blurry"
 date: "2025-08-08"
-excerpt: "###### Phillip Thomas, Commissioner With just one week left in the regular season, two playoff seeds are locked in—Wiffle House at #1 and the Crows at #6. The rest is still up in the air and the…"
+excerpt: "With just one week left in the regular season, two playoff seeds are locked in—Wiffle House at #1 and the Crows at #6. The rest is still up in the air and the final weekend will decide where they…"
+author: "Phillip Thomas, Commissioner"
 ---
 
-###### Phillip Thomas, Commissioner
-
-                   
-
-                    
-
-                     
-                        
 With just one week left in the regular season, two playoff seeds are locked in—Wiffle House at #1 and the Crows at #6.
 
                         

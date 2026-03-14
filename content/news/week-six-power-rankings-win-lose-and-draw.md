@@ -1,15 +1,11 @@
 ---
 title: "WEEK SIX POWER RANKINGS: WIN, LOSE, AND DRAW"
 date: "2023-06-27"
-excerpt: "###### Preston Sahabu, Commissioner 1. Wiffle House (9-1) Quinn Thomas took the mound. The House had just been shut out by the Stops for their first loss of the season. The Stops smelled blood in…"
+excerpt: "1. Wiffle House (9-1) Quinn Thomas took the mound. The House had just been shut out by the Stops for their first loss of the season. The Stops smelled blood in the water, top seed and crucial…"
+author: "Preston Sahabu, Commissioner"
 ---
 
-###### Preston Sahabu, Commissioner
-
-                 
-                      
-                 
-                   1. Wiffle House (9-1) 
+1. Wiffle House (9-1) 
                     
  Quinn Thomas  took the mound. The House had just been shut out by the Stops for their first loss of the season. The Stops smelled blood in the water, top seed and crucial tiebreaker within their grasp. Quinn Thomas took the mound. He punched eleven tickets and posted his second straight shut out.  Reed McFeely  stroked the clutch hit and  Sam Thomas  scrambled home. The reigning champs sit on the throne, for now. The Wiffle Iron is on the line in two weeks against Chicken & Wiffles.
 

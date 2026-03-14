@@ -1,11 +1,11 @@
 ---
-title: "Final Standings"
-date: "2016-06-01"
-excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15 3 .833 -- -- &#160; &#160;y-Cannonball Coming 13 5 .722 2 -- &#160; &#160;y-Dingers 13 5 .722 2 -- &#160; &#160;y-RBI Steaks 12…"
+title: Final Standings
+date: '2016-06-01'
+excerpt: '      W L PCT GB WCGB    x-100% Real Juice 15 3 .833 -- --    y-Cannonball Coming 13 5 .722 2 --    y-Dingers 13 5 .722 2 --    y-RBI Steaks 12…'
 ---
 
-&#160; 
-  &#160; &#160;  
+  
+       
   W  
   L  
   PCT  
@@ -13,8 +13,8 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
   WCGB  
  
  
- &#160;  
-  &#160;x-100% Real Juice  
+    
+   x-100% Real Juice  
   15  
   3  
   .833  
@@ -22,8 +22,8 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
   --  
  
  
-  &#160; 
-  &#160;y-Cannonball Coming  
+    
+   y-Cannonball Coming  
   13  
   5  
   .722  
@@ -31,8 +31,8 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
   --  
  
  
- &#160;  
-  &#160;y-Dingers  
+    
+   y-Dingers  
   13  
   5  
   .722  
@@ -40,8 +40,8 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
   --  
  
  
- &#160;  
-  &#160;y-RBI Steaks  
+    
+   y-RBI Steaks  
   12  
   6  
   .666  
@@ -49,8 +49,8 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
   --  
  
  
- &#160;  
-  &#160;West Coast Washout  
+    
+   West Coast Washout  
   9  
   9  
   .500  
@@ -59,7 +59,7 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
  
  
    
-  &#160;Get A Wiff  
+   Get A Wiff  
   8  
   10  
   .444  
@@ -67,17 +67,17 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
   4  
  
  
- &#160;  
-  &#160;Wiffle Junction  
+    
+   Wiffle Junction  
   7  
- &#160; 11  
+   11  
   .389  
   8  
   5  
  
  
-  &#160;   
-  &#160;Chicken'n'Wiffles  
+      
+   Chicken'n'Wiffles  
   4  
   14  
   .222  
@@ -85,8 +85,8 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
   8  
  
  
- &#160;  
-  &#160;Bungalow Boys  
+    
+   Bungalow Boys  
   0  
   18  
   .000  
@@ -96,16 +96,16 @@ excerpt: "&#160; &#160; &#160; W L PCT GB WCGB &#160; &#160;x-100% Real Juice 15
  
  
 
-&#160;
+ 
 
 
  x - Clinched #1 Seed 
 
 
- y - &#160;Clinched Playoff Berth 
+ y -  Clinched Playoff Berth 
 
 
- &#160; 
+   
 
  
  

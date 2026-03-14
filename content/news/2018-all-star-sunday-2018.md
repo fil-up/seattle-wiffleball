@@ -1,7 +1,7 @@
 ---
-title: "All-Star Sunday 2018"
-date: "2018-06-01"
-excerpt: "Dad Strength: a home run derby story PRESTON SAHABU , Seattle Wiffle &#160; With the World Series over, everyone turned their attention to the rest of All-Star Sunday, which included a fabulous…"
+title: All-Star Sunday 2018
+date: '2018-06-01'
+excerpt: 'Dad Strength: a home run derby story PRESTON SAHABU , Seattle Wiffle   With the World Series over, everyone turned their attention to the rest of All-Star Sunday, which included a fabulous…'
 ---
 
 Dad Strength: a home run derby story 
@@ -10,13 +10,13 @@ Dad Strength: a home run derby story
  PRESTON SAHABU  , Seattle Wiffle 
 
 
- &#160; 
+   
 
 
  With the World Series over, everyone turned their attention to the rest of All-Star Sunday, which included a fabulous summer cookout spread. Enormous thanks to all those that contributed, from those that brought prepared dishes to others that oversaw the grilling. Smoke rose from the coals, adding to the forest fire atmosphere. 
 
 
- &#160; 
+   
 
 
    
@@ -25,13 +25,13 @@ Dad Strength: a home run derby story
   Delicious, delicious food, coming to a park near you.  
 
 
- &#160; 
+   
 
 
  Hitting dingers is hard. Plastic bats were not meant to hit plastic balls with one hundred foot authority. Yet every time we hold this derby, I see things that I have never seen before. Balls do more than sneak over the orange construction wire -- they ascend to another plane of existence, over and over again. It is a beautiful violence. 
 
 
- &#160; 
+   
 
 
  Taking up the timing and MC duties, I announced the first round as an open call: anybody could spend two minutes swinging for the fences, with a soft-tosser of their choice. Many stepped in and gave it their best effort, but only six were able to get more than one home run and out of the first round: 
@@ -45,13 +45,13 @@ Dad Strength: a home run derby story
   Paul Rogers (2)  
  
 
- &#160; 
+   
 
 
  A full half of the finalists hailed from Cannonball Coming: Meagher, Koch, and Rogers. They lived up to the team name and flexed the dad swag. Rish and Salvo made the cut from West Coast Washout, moving on from World Series into #DingerLyfe. Matt Morris led the way, representing 100% Real Juice as last year&#8217;s champion, looking for the repeat. 
 
 
- &#160; 
+   
 
 
  With six contenders, we decided to hold a second round to cull the field to two finalists, though we would accept more if there was a tie. Three minutes were put on the clock, and my did they put on a show. 
@@ -62,13 +62,13 @@ Dad Strength: a home run derby story
   Dan Rish (6)  
  
 
- &#160; 
+   
 
 
  Dad strength surged to the fore once again. Morris was eliminated, removing a favorite from the field. Smart money would have been on Notorious K.O.C.H., at least until newcomer Rogers ripped off seven. Rish snuck into the final with a tie, while Patrick Meagher made a valiant effort to join the final but got stuck on five. 
 
 
- &#160; 
+   
 
 
    
@@ -77,19 +77,19 @@ Dad Strength: a home run derby story
  Karl crushes a liner in the Derby. Dan shags a ball (or two). 
 
 
- &#160; 
+   
 
 
  In an effort to encourage more moonshots in the final, the format was changed to the traditional ten outs of past derbies. Karl obliged with four enormous dongers.   Having seen the formats side by side, I am now fully on #TeamTimed, but there&#8217;s potential in the ten out format for the first round. Until next year! 
 
 
- &#160; 
+   
 
 
     HOME RUN DERBY CHAMPION :    Karl Koch (4)    
 
 
-&#160;
+ 
 
 
  
@@ -103,19 +103,19 @@ Dad Strength: a home run derby story
  PRESTON SAHABU  , Seattle Wiffle 
 
 
- &#160; 
+   
 
 
  By the end of All-Star Sunday, everybody had been thoroughly steamed, smoked, and washed in the mid-August weather. An All-Star Game sounded exhausting, but we had close up the season with a proper competition. Anybody who was still around and down to play was allowed in -- a final league game for the whole league. 
 
 
- &#160; 
+   
 
 
  The players lined up on the third-base line, with Captains Aaron Hunter and Jeremy Salvo presiding, and a draft was held: 
 
 
- &#160; 
+   
 
 
  Hot Pants 
@@ -130,7 +130,7 @@ Dad Strength: a home run derby story
   Eric Sanford  
  
 
- &#160; 
+   
 
 
  OPRChW (100% RBI Chicken &#8216;n&#8217; Washouts) 
@@ -145,7 +145,7 @@ Dad Strength: a home run derby story
   Andy Siegel  
  
 
-&#160;
+ 
 
 
    
@@ -154,73 +154,73 @@ Dad Strength: a home run derby story
   Jeremy is ready to kick ass and play an All-Star Game.  
 
 
- &#160; 
+   
 
 
   The final score is lost to time, though we are confident that OPRChW won. Presented here are a series of memories without a narrative, each its own tribute to the fun and joy of wiffleball.  
 
 
- &#160; 
+   
 
 
  The speed gun was discarded &#8220;for funsies&#8221;. Andrew jumped in gleefully as one of the few pitchers with a functioning arm, fireballing strikes at eighty miles an hour. Two walks, three strikeouts, straight gas homie. 
 
 
- &#160; 
+   
 
 
  Pearson tried to use a yellow bat. After one Andrew fastball, he noped and chucked it to the side, &#8220;like John Kruk in the &#8216;91 All-Star Game.&#8221; 
 
 
- &#160; 
+   
 
 
  It seemed that every pitcher&#8217;s arm was broken, from the World Series or the last week&#8217;s games. So naturally, everybody started throwing eephuses. They were not good. Even &#8220;Molasses&#8221; Dan tried to get in on the action. 
 
 
- &#160; 
+   
 
 
  Pearson was on defense and collided with Jimmy as he was rounding the bases on a Dan double. Dan promised he would score on the next hit, no matter where it was. Sure enough, he stopped at third. We rightfully ragged him for it. 
 
 
- &#160; 
+   
 
 
  Hits were dropping into weird places. A double landed on a fallen section of the fence. Moro parachuted one right onto the foul line. 
 
 
- &#160; 
+   
 
 
  Andrew started jogging home, a peg attempt having flown far beyond him. He was pegged just before he touched the plate. Instant karma from the wiffleball gods. 
 
 
- &#160; 
+   
 
 
  Andy got on his horse and galloped across the outfield. He flew into the fence for the catch. 
 
 
- &#160; 
+   
 
 
  Andrew dove for a grounder while being hurdled by Greg. He somehow grabbed the ball and did a sweeping tagging above him for the out. 
 
 
- &#160; 
+   
 
 
  A swan dive by Dan over Andrew and right next to Moro. It was graceful on its own, but he also caught the ball. 
 
 
- &#160; 
+   
 
 
  Jeremy was on the mound. He and Pearson had a Crouching Tiger, Hidden Dragon faceoff.  *checks notes*   &#8220;yeah that sounds right&#8221;  
 
 
-&#160;
+ 
 
 
  Epo entered for the OPRChW save, with the bases loaded and two outs. A parallel to World Series, Game 2. The out was recorded, the hands were shaken, the sun was setting, the day was over. 
@@ -232,19 +232,19 @@ Dad Strength: a home run derby story
  
  
 
-&#160;
+ 
 
 
  World Series & All-Star Game Preview 
 
 
- &#160; 
+   
 
 
    
 
 
- &#160; 
+   
 
 
  (1) 100% Real Juice vs (3) West Coast Washout 
@@ -253,25 +253,25 @@ Dad Strength: a home run derby story
   8/19, 11:00AM  
 
 
- &#160; 
+   
 
 
  100% Real Juice easily dispatched the Sons of Pitches last week, maintaining their near-perfect record. It would be hard to construct a much better team than theirs: lethal offense, smothering defense, and dueling aces in Aaron Hunter and Epo Olivarez. But in their one loss of the season, their bats were neutralized by a riseball and excellent fielding, while the defense and pitching were pried open with great baserunning. 
 
 
- &#160; 
+   
 
 
  Fortunately for West Coast Washout, they fit that bill exactly and are peaking at the right time. Dan Rish will look to dial in his riser as Jeremy Salvo continues to get on base and cause mayhem on the basepaths.  
 
 
- &#160; 
+   
 
 
  Slight edge goes to the Juice with their season-long track record, but this is going to be an amazing series. 
 
 
-&#160;
+ 
 
 
  FUN FACTS 
@@ -280,12 +280,12 @@ Dad Strength: a home run derby story
   This is the first World Series not featuring the RBI Steaks.  
   100% Real Juice is 2-4 all-time in the playoffs. All four losses were to the Steaks, by a combined total of five runs.  
   West Coast Washout is 6-2 all-time in the playoffs.  
-  #1 seeds have made the World Series twice. &#160;They are 0-2.  
+  #1 seeds have made the World Series twice.  They are 0-2.  
   The lowest seed to ever win the World Series was #3 Dinger Squad in 2016.  
   100% Real Juice leads 4-2 in their all-time series with the Washout, and currently hold a three-game win streak.  
  
 
-&#160;
+ 
 
 
  Seattle Wiffleball All-Star Game 
@@ -294,13 +294,13 @@ Dad Strength: a home run derby story
    8/19, 3:00PM   
 
 
- &#160; 
+   
 
 
  New this year, the All-Star Game will feature a schoolyard draft! Captains will select their teams in alternating order just before play begins, with the second and third picks packaged together to balance out the first pick. 
 
 
-&#160;
+ 
 
 
  The All-Star Game has always been a time for the league to come together, load up on shenanigans, showcase amazing talent, and display great sportsmanship -- don&#8217;t miss it!

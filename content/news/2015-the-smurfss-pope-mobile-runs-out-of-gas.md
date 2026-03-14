@@ -1,15 +1,15 @@
 ---
-title: "The Smurfs's Pope-Mobile Runs Out of Gas"
-date: "2015-06-01"
-excerpt: "&#160; &#160; &#160; Pitcher of the Week: Matt Pearson &#160; Defensive Player of the Week: Elijah Ybarra &#160; &#160; &#160; Offensive Player of the Week: Matt Soucy &#160; Winter is Coming: Grab…"
+title: The Smurfs's Pope-Mobile Runs Out of Gas
+date: '2015-06-01'
+excerpt: '      Pitcher of the Week: Matt Pearson   Defensive Player of the Week: Elijah Ybarra       Offensive Player of the Week: Matt Soucy   Winter is Coming: Grab…'
 ---
 
-&#160;
+ 
 
  
  
  
- &#160;  &#160;  
+       
  
 
   Pitcher of the Week: Matt Pearson  
@@ -17,23 +17,23 @@ excerpt: "&#160; &#160; &#160; Pitcher of the Week: Matt Pearson &#160; Defensiv
  
  
  
- &#160;  
+    
  
 
   Defensive Player of the Week: Elijah Ybarra  
 
 
- &#160; 
+   
 
  
  
  
  
 
-&#160; 
+  
 
 
- &#160; 
+   
 
  
  
@@ -41,7 +41,7 @@ excerpt: "&#160; &#160; &#160; Pitcher of the Week: Matt Pearson &#160; Defensiv
   Offensive Player of the Week: Matt Soucy  
 
 
-  &#160;  
+     
 
  
  
@@ -60,22 +60,22 @@ excerpt: "&#160; &#160; &#160; Pitcher of the Week: Matt Pearson &#160; Defensiv
  Grab Your Speed Gun 
 
 
-The simultaneous best and worst idea of the all-star festivities passed without injuries. &#160;The radar gun competition was concieved in part to see what the league would look like without a speed limit. &#160;Based on this contest, it might not be pretty, with unhittably fast strikes and plenteous balls. &#160;The contest consisted of participants throwing 12 pitches, with the score coming from the average of the fastest five strikes. &#160;Hurling fewer than five strikes resulted in the inclusion of zeroes in the average, a penalty which sealed the fate of one legitimate contender.
+The simultaneous best and worst idea of the all-star festivities passed without injuries.  The radar gun competition was concieved in part to see what the league would look like without a speed limit.  Based on this contest, it might not be pretty, with unhittably fast strikes and plenteous balls.  The contest consisted of participants throwing 12 pitches, with the score coming from the average of the fastest five strikes.  Hurling fewer than five strikes resulted in the inclusion of zeroes in the average, a penalty which sealed the fate of one legitimate contender.
 
 
-For four weeks, the Bungalow Boys' Matt Soucy was the leader in the clubhouse. &#160;Knowing that Soucy would be one of the parties interested in competing, he was allowed to record his twelve pitches after play on August 2nd due to his imminent departure. &#160;His five fastest strikes averaged 81.8 mph, with one pitch registering at 90 mph.&#160;
+For four weeks, the Bungalow Boys' Matt Soucy was the leader in the clubhouse.  Knowing that Soucy would be one of the parties interested in competing, he was allowed to record his twelve pitches after play on August 2nd due to his imminent departure.  His five fastest strikes averaged 81.8 mph, with one pitch registering at 90 mph. 
 
 
-After withstanding the best efforts of four challengers, Soucy's mark of 81.8 mph still had to stand against several World Series pitchers. &#160;Both Riley Brindle and Nick Winn of the RBI Steaks elected not to participate after warming up for the contest, but both Washout starters went for gold. &#160;As anyone who faced the Washout staff would know, Andrew Winter provided the threat.
+After withstanding the best efforts of four challengers, Soucy's mark of 81.8 mph still had to stand against several World Series pitchers.  Both Riley Brindle and Nick Winn of the RBI Steaks elected not to participate after warming up for the contest, but both Washout starters went for gold.  As anyone who faced the Washout staff would know, Andrew Winter provided the threat.
 
 
-Winter's first five pitches saw four strikes above 80 mph, but after his fifth, his average sat at 79.4 mph. &#160;The clincher came on the 9th pitch, an 87 mph strike. &#160;His score of 82.8 mph was never in danger, as Daniel Rish threw consistently but failed to throw an outlier hard enough to boost his average.
+Winter's first five pitches saw four strikes above 80 mph, but after his fifth, his average sat at 79.4 mph.  The clincher came on the 9th pitch, an 87 mph strike.  His score of 82.8 mph was never in danger, as Daniel Rish threw consistently but failed to throw an outlier hard enough to boost his average.
 
  
  
  
- &#160; 
- Score&#160; 
+   
+ Score  
  Raw Average Speed 
  Standard Deviation 
  High Speed 
@@ -140,22 +140,22 @@ Winter's first five pitches saw four strikes above 80 mph, but after his fifth, 
  
  
 
-&#160;
+ 
 
 
  McGrath, Rish to the wire in HR Derby 
 
 
-The pace of homerun production started low in the league's first homerun derby, with three hitters [Pearson, Saul, and Thomson] shut out and eliminated in the first round. &#160;Liam Munro, Daniel Rish, and Aidan Welch led participants with 3 HRs each.
+The pace of homerun production started low in the league's first homerun derby, with three hitters [Pearson, Saul, and Thomson] shut out and eliminated in the first round.  Liam Munro, Daniel Rish, and Aidan Welch led participants with 3 HRs each.
 
 
 The final two rounds were cumulative, with participants needing at least one second round homer to advance. Max Berner-Hays was the lone victim of the second round.
 
 
-Zac Harris hit two second round homers, which would lead the way until Rish parked six. &#160;All other advancing hitters hit a single second round homer, leaving Rish sitting pretty heading into the final round.
+Zac Harris hit two second round homers, which would lead the way until Rish parked six.  All other advancing hitters hit a single second round homer, leaving Rish sitting pretty heading into the final round.
 
 
-Craig McGrath, the first hitter of the final round, proved that Rish's lead was in fact not insurmountable by surmounting it. &#160;He hit six final round homeruns to tie Rish for a single-round record, and positioned himself as the man to beat in the process with 7 total homers. &#160;The regular season leaders, Aidan Welch and Zac Harris, did not offer resistance. &#160;Welch finished tied for bronze with Liam Munro. &#160;As the final batter, Rish tied McGrath partway through his final round, and regained the lead with four outs left, using the remainder of the round to push his cumulative total to 11 over the final two rounds.
+Craig McGrath, the first hitter of the final round, proved that Rish's lead was in fact not insurmountable by surmounting it.  He hit six final round homeruns to tie Rish for a single-round record, and positioned himself as the man to beat in the process with 7 total homers.  The regular season leaders, Aidan Welch and Zac Harris, did not offer resistance.  Welch finished tied for bronze with Liam Munro.  As the final batter, Rish tied McGrath partway through his final round, and regained the lead with four outs left, using the remainder of the round to push his cumulative total to 11 over the final two rounds.
 
 
 Matt Pearson manned the mound for Rish, with Kevin Saul doing the duty for fellow Wiff Waffer McGrath.
@@ -167,4 +167,4 @@ Matt Pearson manned the mound for Rish, with Kevin Saul doing the duty for fello
  
  
 
-&#160;
+ 

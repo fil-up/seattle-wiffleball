@@ -1,13 +1,11 @@
 ---
 title: "🔥 Opening Day 2025!!! 🔥"
 date: "2025-05-10"
-excerpt: "###### Phillip Thomas, Commissioner New team. Familiar faces. Unfinished business 😤 Matchup 1: Caught Cooking vs Bilabial Stops The league’s newest squad enters with intensity, urgency, and a…"
+excerpt: "New team. Familiar faces. Unfinished business 😤 Matchup 1: Caught Cooking vs Bilabial Stops The league’s newest squad enters with intensity, urgency, and a loaded roster ready to serve. But you…"
+author: "Phillip Thomas, Commissioner"
 ---
 
-###### Phillip Thomas, Commissioner
-
-                   
-                     New team. Familiar faces. Unfinished business 😤 
+New team. Familiar faces. Unfinished business 😤 
                     
  Matchup 1: Caught Cooking vs Bilabial Stops
                         The league’s newest squad enters with intensity, urgency, and a loaded roster ready to serve. But you can’t have too many cooks in the kitchen when it comes to facing the Stops. Rogers and company return hungrier than ever, ready to eat that chip on their shoulder. 🧑‍🍳 

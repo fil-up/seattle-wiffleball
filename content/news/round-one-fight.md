@@ -1,13 +1,11 @@
 ---
 title: "Round one. Fight!"
 date: "2022-08-18"
-excerpt: "###### Preston Sahabu, Commissioner Swingdome (formerly known as RBI Steaks) rolled into the playoffs in style, finishing the season 8-1 in their last 9 games while unveiling their snazzy rebrand to…"
+excerpt: "Swingdome (formerly known as RBI Steaks) rolled into the playoffs in style, finishing the season 8-1 in their last 9 games while unveiling their snazzy rebrand to great fanfare. ### 11:00 AM – (6)…"
+author: "Preston Sahabu, Commissioner"
 ---
 
-###### Preston Sahabu, Commissioner
-
-                   
-                     Swingdome (formerly known as RBI Steaks) rolled into the playoffs in style, finishing the season 8-1 in their last 9 games while unveiling their snazzy rebrand to great fanfare. 
+Swingdome (formerly known as RBI Steaks) rolled into the playoffs in style, finishing the season 8-1 in their last 9 games while unveiling their snazzy rebrand to great fanfare. 
                     
 ### 11:00 AM – (6) Skull Knights @ (3) West Coast Washout
 

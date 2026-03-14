@@ -1,16 +1,16 @@
 ---
-title: "Seeyas"
-date: "2015-06-01"
-excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; x-RBI Steaks 15 5 .750 -- -- &#160; z-Wiff Waff 10 10 .500 5 2 &#160; &#160; &#160;Smurfs 7 13 .350 8 5 &#160; &#160;…"
+title: Seeyas
+date: '2015-06-01'
+excerpt: '       Anthracite Division W L PCT GB WCGB   x-RBI Steaks 15 5 .750 -- --   z-Wiff Waff 10 10 .500 5 2      Smurfs 7 13 .350 8 5    …'
 ---
 
-&#160;
+ 
 
  
  
  
- &#160; 
-  &#160; &#160;Anthracite Division  
+   
+     Anthracite Division  
   W  
   L  
   PCT  
@@ -18,7 +18,7 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
   WCGB  
  
  
- &#160;  
+    
   x-RBI Steaks  
   15  
   5  
@@ -27,7 +27,7 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
   --  
  
  
- &#160;  
+    
   z-Wiff Waff  
   10  
   10  
@@ -36,8 +36,8 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
   2  
  
  
-  &#160; 
-  &#160; &#160;Smurfs  
+    
+     Smurfs  
   7  
   13  
   .350  
@@ -45,8 +45,8 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
   5  
  
  
- &#160;  
-  &#160; &#160;Chicken'n'Wiffles  
+    
+     Chicken'n'Wiffles  
   4  
   16  
   .200  
@@ -54,8 +54,8 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
   8  
  
  
- &#160; 
-   &#160; &#160;Seeyas Division   
+   
+      Seeyas Division   
   W  
   L  
   PCT  
@@ -63,7 +63,7 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
   WCGB  
  
  
-   &#160;  
+      
   x-West Coast Washout  
   14  
   6  
@@ -72,16 +72,16 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
   --  
  
  
-  &#160; 
+    
   y-Dinger Squad  
   14  
- &#160; 6  
+   6  
   .700  
   --  
- &#160; --  
+   --  
  
  
-   &#160;  
+      
   y-Bungalow Boys  
   12  
   8  
@@ -90,8 +90,8 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
   --  
  
  
-  &#160; 
-  &#160; Blue Sox  
+    
+    Blue Sox  
   4  
   16  
   .200  
@@ -101,7 +101,7 @@ excerpt: "&#160; &#160; &#160; &#160;Anthracite Division W L PCT GB WCGB &#160; 
  
  
 
-&#160;
+ 
 
 
 x - Cliched Division
@@ -123,7 +123,7 @@ z - Advance to Playoffs in place of Bungalow Boys
    #1 SEED   
 
 
-  Anthracite Division: &#160; 
+  Anthracite Division:   
 
  
      
@@ -135,7 +135,7 @@ z - Advance to Playoffs in place of Bungalow Boys
  Remaining Opponents: 
 
 
- Blue Sox&#160; 
+ Blue Sox  
 
  
  
@@ -193,7 +193,7 @@ z - Advance to Playoffs in place of Bungalow Boys
  Wild-Card 1: 
 
  
-  &#160;   
+      
  
 
  Record: 11-7 
@@ -239,16 +239,16 @@ z - Advance to Playoffs in place of Bungalow Boys
  
  
 
-&#160;
+ 
 
 
-&#160;*Note: &#160;The 2015 divisions are named in honor of the leagues whose existence allowed Seattle Wiffleball a reality.
+ *Note:  The 2015 divisions are named in honor of the leagues whose existence allowed Seattle Wiffleball a reality.
 
 
-The Seeyas Division is named in tribute to Carl Coffee, founder of Wiffle in Southeast Michigan ( WSEM ), and integral member of the NWLA, the National Wiffleball League Association. &#160;It alludes to his trademark homerun call. &#160;The name was chosen by West Coast Washout player Jason Matt, a former WSEM player. &#160;
+The Seeyas Division is named in tribute to Carl Coffee, founder of Wiffle in Southeast Michigan ( WSEM ), and integral member of the NWLA, the National Wiffleball League Association.  It alludes to his trademark homerun call.  The name was chosen by West Coast Washout player Jason Matt, a former WSEM player.  
 
 
-The Anthracite Division is named in honor of two leagues in Northeastern Pennsylvania, a region renowned in the first half of the twentieth century for its anthracite coal, the fuel that made America its steel, and therefore its manufacturing power. &#160;Seattle Wiffleball commissioner Daniel Rish made his bones in Backyard Wiffle Ball ( BWBLPA ) of Wilkes-Barre, PA, before moving the Mountaintop, PA Susquehanna River League ( SRL ), a league he watched Westside Washout teammate Beau Reznak create (with substantial help from fellow teammate and father Bill Reznak).
+The Anthracite Division is named in honor of two leagues in Northeastern Pennsylvania, a region renowned in the first half of the twentieth century for its anthracite coal, the fuel that made America its steel, and therefore its manufacturing power.  Seattle Wiffleball commissioner Daniel Rish made his bones in Backyard Wiffle Ball ( BWBLPA ) of Wilkes-Barre, PA, before moving the Mountaintop, PA Susquehanna River League ( SRL ), a league he watched Westside Washout teammate Beau Reznak create (with substantial help from fellow teammate and father Bill Reznak).
 
 
-The story comes together in early 2015, as a &#160;conversation between Beau Reznak and Carl Coffee led to my knowledge that there was already one wiffle aficionado in Seattle in Jason Matt. &#160;This knowledge was the catalyst for the creation of Seattle Wiffleball, as it shifted from a casual "what-if" scenario into a months-long campaign of poster-hanging propaganda.
+The story comes together in early 2015, as a  conversation between Beau Reznak and Carl Coffee led to my knowledge that there was already one wiffle aficionado in Seattle in Jason Matt.  This knowledge was the catalyst for the creation of Seattle Wiffleball, as it shifted from a casual "what-if" scenario into a months-long campaign of poster-hanging propaganda.

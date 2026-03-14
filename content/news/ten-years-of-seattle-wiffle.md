@@ -1,13 +1,11 @@
 ---
 title: "TEN YEARS OF SEATTLE WIFFLE"
 date: "2024-06-29"
-excerpt: "###### Preston Sahabu, Commissioner Never forget where you came from. Ten years ago, plain text posters began appearing on telephone poles and street lampposts around Seattle. This summer, by some…"
+excerpt: "Never forget where you came from. Ten years ago, plain text posters began appearing on telephone poles and street lampposts around Seattle. This summer, by some miracle of the Cowen gods, we will…"
+author: "Preston Sahabu, Commissioner"
 ---
 
-###### Preston Sahabu, Commissioner
-
-                   
-                     Never forget where you came from. 
+Never forget where you came from. 
                     
  Ten years ago, plain text posters began appearing on telephone poles and street lampposts around Seattle. This summer, by some miracle of the Cowen gods, we will complete an uninterrupted decade of sport, chaos, and community. It's time to celebrate. 
 

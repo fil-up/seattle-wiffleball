@@ -1,13 +1,10 @@
 ---
 title: "The New Seattle Wiffleball Website: Launched Like a James Shields Fastball"
 date: "2019-05-04"
-excerpt: "###### JEREMY SALVO, Seattle Wiffle I don't know what I was thinking when I decided to create a new league website from scratch, but here it is. Scores, league leaders, and standings are no longer…"
+excerpt: "I don't know what I was thinking when I decided to create a new league website from scratch, but here it is. Scores, league leaders, and standings are no longer buried in a series of dropdown menus.…"
+author: "JEREMY SALVO, Seattle Wiffle"
 ---
 
-###### JEREMY SALVO, Seattle Wiffle
-
-                 
-                    
 I don't know what I was thinking when I decided to create a new league website from scratch, but here it is. Scores, league leaders, and standings are no longer buried in a series of dropdown menus. Liam will no longer have to endure the bizarre, medieval torture of entering stats into League Lineup. And last but not least, no more carefully targeted ad- vert isements reminding you that Lysol produces the finest lemon-scented disinfecting wipes that money can buy. Welcome to the new home of Seattle Wiffleball.
 
                     

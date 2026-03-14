@@ -1,13 +1,11 @@
 ---
 title: "SEASON IX: THE RISE OF SEA-WIFFLE"
 date: "2023-06-23"
-excerpt: "###### Preston Sahabu, Commissioner John Trupin throws the first pitch of 2023 to Reed McFeely. The ninth is often deeply anti-climatic. Turning twenty-nine feels like nothing but a step to turning…"
+excerpt: "John Trupin throws the first pitch of 2023 to Reed McFeely. The ninth is often deeply anti-climatic. Turning twenty-nine feels like nothing but a step to turning thirty. A batter weakly grounds out…"
+author: "Preston Sahabu, Commissioner"
 ---
 
-###### Preston Sahabu, Commissioner
-
-                   
-                     John Trupin throws the first pitch of 2023 to Reed McFeely. 
+John Trupin throws the first pitch of 2023 to Reed McFeely. 
                     
 The ninth is often deeply anti-climatic. Turning twenty-nine feels like nothing but a step to turning thirty. A batter weakly grounds out to end the game. Palpatine comes back, somehow.
 

@@ -1,13 +1,10 @@
 ---
 title: "X: THE POWER RANKINGS APP"
 date: "2024-06-30"
-excerpt: "###### Preston Sahabu, Commissioner As Tim McLaughlin's Big Wiffowskis move on from the league to host Thursday night pickup at Green Lake -- tune into the league Instagram for week-by-week updates…"
+excerpt: "As Tim McLaughlin's Big Wiffowskis move on from the league to host Thursday night pickup at Green Lake -- tune into the league Instagram for week-by-week updates -- the remaining nine teams have…"
+author: "Preston Sahabu, Commissioner"
 ---
 
-###### Preston Sahabu, Commissioner
-
-                 
-                    
 As Tim McLaughlin's  Big Wiffowskis  move on from the league to host Thursday night pickup at Green Lake -- tune into the league Instagram for week-by-week updates -- the remaining nine teams have spent a month jockeying for position. Let's check in.
 
                  

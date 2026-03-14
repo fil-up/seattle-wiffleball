@@ -1,17 +1,10 @@
 ---
 title: "It's Crunch Time"
 date: "2025-07-28"
-excerpt: "###### Grant Bronsdon, Editor-in-Chief From one coast to another, from legends to the legend, last Sunday, July 27, was a formative day for all ballplayers. On one side, a maestro at the plate —…"
+excerpt: "From one coast to another, from legends to the legend, last Sunday, July 27, was a formative day for all ballplayers. On one side, a maestro at the plate — Ichiro Suzuki — received his due flowers…"
+author: "Grant Bronsdon, Editor-in-Chief"
 ---
 
-###### Grant Bronsdon, Editor-in-Chief
-
-                   
-
-                    
-
-                     
-                        
 From one coast to another, from legends to the legend, last Sunday, July 27, was a formative day for all ballplayers.
 
                         

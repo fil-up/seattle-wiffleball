@@ -1,19 +1,11 @@
 ---
 title: "Juice Maintain Supremacy with Back-to-Back Titles"
 date: "1970-01-01"
-excerpt: "Editor's Note: This article was written at the end of May, 2020. Procrastination, blah, blah, blah. You can blame us. Blame us for the lockdown, blame us for the COVID, blame us for your Quarantine…"
+excerpt: "Game 1: 100% Real Juice 14, Bilabial Stops 6 Game One was a showdown between 2019 Cy Young winner Aaron Hunter of 100% Real Juice and rookie sensation Eddie Brown of the Bilabials Stops. The Juice…"
+author: "DAN RISH, West Coast Washout"
 ---
 
-Editor's Note: This article was written at the end of May, 2020. Procrastination, blah, blah, blah. 
-
-                    
-You can blame us. Blame us for the lockdown, blame us for the COVID, blame us for your Quarantine 30. Here it is, the end of May, and no Wiffle has been played. That’s because a great omission - a snub - has taken place. The Juice Boxes made Seattle Wiffleball history, yet the journals of the day were silent. No more. Let it be announced to the world that on August 18, 2019, 100% Real Juice won their record 2nd World Series title, becoming the league’s most prolific champions and owners of the last two titles. Now, let the curse be lifted, and normalcy return.
-
-                 
-                
-###### DAN RISH, West Coast Washout
-
-                  Game 1: 100% Real Juice 14, Bilabial Stops 6 
+Game 1: 100% Real Juice 14, Bilabial Stops 6 
                     
 Game One was a showdown between 2019 Cy Young winner Aaron Hunter of 100% Real Juice and rookie sensation Eddie Brown of the Bilabials Stops. The Juice batted six, a trim lineup for them, while the Stops took the field with only four.
 

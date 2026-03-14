@@ -1,16 +1,11 @@
 ---
 title: "2024 World Series Recap"
 date: "2025-03-30"
-excerpt: "###### Phillip Thomas, Commissioner Never forget where you came from. --> Seattle Wiffleball’s 2024 World Series was the highly anticipated showdown between two powerhouse teams: the undefeated…"
+excerpt: "Never forget where you came from. --> Seattle Wiffleball’s 2024 World Series was the highly anticipated showdown between two powerhouse teams: the undefeated Wiffle House and the…"
+author: "Phillip Thomas, Commissioner"
 ---
 
-###### Phillip Thomas, Commissioner
-
-                   
-
-                    
-
-                     Never forget where you came from. -->
+Never forget where you came from. -->
                     
 Seattle Wiffleball’s 2024 World Series was the highly anticipated showdown between two powerhouse teams: the undefeated Wiffle House and the more-than-formidable Bilabial Stops, who had only two losses in the regular season, both handed to them by Wiffle House. The series lived up to the hype, delivering intense, high-stakes action from start to finish.
 

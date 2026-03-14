@@ -1,14 +1,11 @@
 ---
 title: "Batter and Fry!"
 date: "2022-09-09"
-excerpt: "###### Preston Sahabu, Commissioner The grizzled vets meet the juggernaut upstarts for the title this Sunday! After months of rain, heat, sweat, and tears, it has come to this. Two teams on two…"
+excerpt: "The grizzled vets meet the juggernaut upstarts for the title this Sunday! After months of rain, heat, sweat, and tears, it has come to this. Two teams on two different paths will meet in Cowen Park,…"
+author: "Preston Sahabu, Commissioner"
 ---
 
-###### Preston Sahabu, Commissioner
-
-                 
-                       
-                         The grizzled vets meet the juggernaut upstarts for the title this Sunday! 
+The grizzled vets meet the juggernaut upstarts for the title this Sunday! 
                         
 After months of rain, heat, sweat, and tears, it has come to this. Two teams on two different paths will meet in Cowen Park, at high noon on September 11th. Only one will walk away with the Leaning Golden Man, as our champions for the 2022 season.
 

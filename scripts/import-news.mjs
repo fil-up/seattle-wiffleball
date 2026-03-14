@@ -8,11 +8,13 @@
  *   node scripts/import-news.mjs --file=path/to/archive-2015.html --archive --year=2015
  *   node scripts/import-news.mjs --url=https://... (fetch; may timeout)
  *   node scripts/import-news.mjs --stdin  (read HTML or text from stdin; paste then Ctrl+D)
+ *   node scripts/import-news.mjs --fix-existing  (decode HTML entities in all content/news/*.md in place)
  *
  * When fetch fails, save the page HTML (e.g. "Save as" in browser) and use --file, or paste and use --stdin.
  */
 
 import fs from 'fs'
+import matter from 'gray-matter'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -57,6 +59,19 @@ function parseDate(line) {
   return iso ? iso[0] : null
 }
 
+/** Decode common HTML entities (e.g. in frontmatter/body from HTML). Does not collapse newlines. */
+function decodeEntities(str) {
+  if (!str || typeof str !== 'string') return str
+  return str
+    .replace(/&#160;/g, ' ')
+    .replace(/&#xa0;/gi, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+}
+
 /**
  * Normalize HTML to markdown-like text for parsing
  */
@@ -85,7 +100,8 @@ function htmlToText(html) {
 }
 
 /**
- * Parse current site format: ## TITLE, ###### Date, ###### Author, body
+ * Parse current site format: ## TITLE, optional ###### Date, ###### Author, then body.
+ * Body starts after the last ###### line in the first 15 lines so we don't treat paragraphs as metadata.
  */
 function parseCurrentSite(text) {
   const articles = []
@@ -98,17 +114,14 @@ function parseCurrentSite(text) {
     let date = null
     let author = null
     let bodyStart = 1
-    for (let j = 1; j < Math.min(lines.length, 6); j++) {
+    const metaLimit = Math.min(lines.length, 15)
+    for (let j = 1; j < metaLimit; j++) {
       const line = lines[j].trim()
       if (line.startsWith('###### ')) {
         const content = line.replace(/^#+\s*/, '').trim()
-        if (!date && parseDate(content)) {
-          date = parseDate(content)
-          bodyStart = j + 1
-        } else if (date && !author && content) {
-          author = content
-          bodyStart = j + 1
-        }
+        if (!date && parseDate(content)) date = parseDate(content)
+        else if (content && !author && !parseDate(content)) author = content
+        bodyStart = j + 1
       }
     }
     const body = lines.slice(bodyStart).join('\n').trim()
@@ -215,13 +228,16 @@ function parseArchive(text, year) {
 }
 
 function toFrontmatter(article, slug) {
+  const title = decodeEntities(article.title)
+  const body = decodeEntities(article.body)
+  const excerptStr = excerpt(body)
   const lines = [
     '---',
-    `title: "${article.title.replace(/"/g, '\\"')}"`,
+    `title: "${title.replace(/"/g, '\\"')}"`,
     `date: "${article.date || '1970-01-01'}"`,
-    `excerpt: "${excerpt(article.body).replace(/"/g, '\\"')}"`,
+    `excerpt: "${excerptStr.replace(/"/g, '\\"')}"`,
   ]
-  if (article.author) lines.push(`author: "${article.author.replace(/"/g, '\\"')}"`)
+  if (article.author) lines.push(`author: "${decodeEntities(article.author).replace(/"/g, '\\"')}"`)
   lines.push('---')
   return lines.join('\n')
 }
@@ -229,8 +245,9 @@ function toFrontmatter(article, slug) {
 function writeArticle(article, slug, year = null) {
   const filename = `${slug}.md`
   const filepath = path.join(NEWS_DIR, filename)
+  const body = decodeEntities(article.body)
   const front = toFrontmatter(article, slug)
-  const content = `${front}\n\n${article.body}\n`
+  const content = `${front}\n\n${body}\n`
   fs.writeFileSync(filepath, content, 'utf8')
   console.log('  wrote', filename)
 }
@@ -259,6 +276,42 @@ function readStdin() {
   })
 }
 
+function fixExistingMdFiles() {
+  if (!fs.existsSync(NEWS_DIR)) return
+  const files = fs.readdirSync(NEWS_DIR).filter((n) => n.endsWith('.md'))
+  let count = 0
+  for (const name of files) {
+    const filepath = path.join(NEWS_DIR, name)
+    const raw = fs.readFileSync(filepath, 'utf8')
+    const { data, content } = matter(raw)
+    let changed = false
+    let decodedContent = content || ''
+    if (data.title && (data.title.includes('&') || data.title.includes('#'))) {
+      data.title = decodeEntities(data.title)
+      changed = true
+    }
+    if (data.excerpt && (data.excerpt.includes('&') || data.excerpt.includes('#'))) {
+      data.excerpt = decodeEntities(data.excerpt)
+      changed = true
+    }
+    if (data.author && data.author.includes('&')) {
+      data.author = decodeEntities(data.author)
+      changed = true
+    }
+    if (content && (content.includes('&#160;') || content.includes('&nbsp;') || content.includes('&amp;'))) {
+      decodedContent = decodeEntities(content)
+      changed = true
+    }
+    if (changed) {
+      const newRaw = matter.stringify(decodedContent, data, { lineWidth: -1 })
+      fs.writeFileSync(filepath, newRaw, 'utf8')
+      count++
+      console.log('  fixed', name)
+    }
+  }
+  console.log('Fixed', count, 'files')
+}
+
 async function main() {
   const args = process.argv.slice(2)
   let file = null
@@ -272,6 +325,10 @@ async function main() {
     else if (a === '--stdin') useStdin = true
     else if (a === '--archive') archive = true
     else if (a.startsWith('--year=')) year = a.slice(7)
+    else if (a === '--fix-existing') {
+      fixExistingMdFiles()
+      return
+    }
   }
 
   let raw

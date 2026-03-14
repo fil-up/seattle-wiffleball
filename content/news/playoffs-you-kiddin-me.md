@@ -1,13 +1,11 @@
 ---
 title: "Playoffs? You Kiddin' me?"
 date: "2022-08-04"
-excerpt: "###### Preston Sahabu, Commissioner The Sheryl Crows' season-long grit has produced an 11-7 record and their first ever playoff berth. ### The Favorites 1. Bilabial Stops (15-1) 2. Wiffle House…"
+excerpt: "The Sheryl Crows' season-long grit has produced an 11-7 record and their first ever playoff berth. ### The Favorites 1. Bilabial Stops (15-1) 2. Wiffle House (13-1) 3. West Coast Washout (12-1)…"
+author: "Preston Sahabu, Commissioner"
 ---
 
-###### Preston Sahabu, Commissioner
-
-                   
-                     The Sheryl Crows' season-long grit has produced an 11-7 record and their first ever playoff berth. 
+The Sheryl Crows' season-long grit has produced an 11-7 record and their first ever playoff berth. 
                     
 ### The Favorites
 

@@ -95,16 +95,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* GameChanger Schedule Widget (compact) */}
-      <div className="bg-surface-card py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-content-primary mb-8">Upcoming Games</h2>
-          <div className="w-full">
-            <GameChangerWidget maxGames={2} />
-          </div>
-        </div>
-      </div>
-
       {/* News + Standings two-column layout */}
       <div className="container mx-auto px-4 py-16">
         <div className="flex items-center justify-between mb-8">
@@ -201,6 +191,16 @@ export default function Home() {
           {/* Standings sidebar */}
           <div>
             <StandingsWidget />
+          </div>
+        </div>
+      </div>
+
+      {/* GameChanger Schedule Widget */}
+      <div className="bg-surface-card py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-content-primary mb-8">Upcoming Games</h2>
+          <div className="w-full">
+            <GameChangerWidget maxGames={2} />
           </div>
         </div>
       </div>

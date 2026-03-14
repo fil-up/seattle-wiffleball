@@ -55,10 +55,10 @@ export default function Home() {
           alt=""
           className="w-full block"
         />
-        <div className="absolute bottom-0 left-0 right-0 h-[10%] bg-gradient-to-b from-transparent to-surface-card pointer-events-none z-20" />
+        <div className="absolute bottom-0 left-0 right-0 h-[20%] bg-gradient-to-b from-transparent to-black/60 pointer-events-none z-20" />
 
-        <div className="absolute inset-0 z-10">
-          <div className="py-20 md:py-40 px-4 md:px-6">
+        <div className="absolute inset-0 z-10 flex flex-col">
+          <div className="flex-1 py-20 md:py-40 px-4 md:px-6">
             <div className="flex flex-col md:flex-row">
               <div className="w-full md:w-[20%] flex flex-col items-center">
                 <div className="relative w-40 h-40 md:w-56 md:h-56">
@@ -91,6 +91,25 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Nav tiles */}
+          <div className="grid grid-cols-4 divide-x divide-white/20 border-t border-white/20 z-30">
+            {[
+              { label: 'News', href: '/news', subtitle: 'Articles, recaps and events' },
+              { label: 'Stats', href: '/stats/players', subtitle: 'Player stats by year' },
+              { label: 'Schedule', href: '/schedule', subtitle: 'Upcoming games and results' },
+              { label: 'Rules', href: '/rules', subtitle: 'League rules and regulations' },
+            ].map((tile) => (
+              <Link
+                key={tile.href}
+                href={tile.href}
+                className="flex flex-col items-center justify-center text-center py-3 md:py-5 px-2 bg-black/40 hover:bg-brand-navy/70 backdrop-blur-sm transition-colors"
+              >
+                <span className="text-white font-bold text-sm md:text-base">{tile.label}</span>
+                <span className="hidden md:block text-white/70 text-xs mt-0.5">{tile.subtitle}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

@@ -58,37 +58,35 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-[20%] bg-gradient-to-b from-transparent to-black/60 pointer-events-none z-20" />
 
         <div className="absolute inset-0 z-10 flex flex-col">
-          <div className="flex-1 py-20 md:py-40 px-4 md:px-6">
-            <div className="flex flex-col md:flex-row">
-              <div className="w-full md:w-[20%] flex flex-col items-center">
-                <div className="relative w-40 h-40 md:w-56 md:h-56">
-                  <Image
-                    src="/images/seattle-wiffleball-logo.png"
-                    alt="Seattle Wiffle Logo"
-                    fill
-                    priority
-                    unoptimized
-                    className="object-contain"
-                  />
-                </div>
-                <p className="mt-2 text-blue-200 font-semibold tracking-wider text-center">EST. 2015</p>
+          <div className="flex-1 flex items-center px-4 md:px-8 py-8">
+            <div className="flex flex-row items-center gap-4 md:gap-8 w-full">
+              {/* Logo — scales with the container */}
+              <div className="relative flex-shrink-0 w-[12vw] h-[12vw] min-w-[64px] min-h-[64px] max-w-[180px] max-h-[180px]">
+                <Image
+                  src="/images/seattle-wiffleball-logo.png"
+                  alt="Seattle Wiffle Logo"
+                  fill
+                  priority
+                  unoptimized
+                  className="object-contain"
+                />
               </div>
-              <div className="w-full md:w-[80%] flex items-center justify-center text-center md:pl-8 mt-6 md:mt-0">
-                <div className="max-w-3xl">
-                  <h1
-                    className="text-3xl md:text-6xl font-black tracking-wider text-white"
-                    style={{
-                      fontFamily: 'Impact, "Arial Black", sans-serif',
-                      textShadow:
-                        '2px 2px 0px #FFD700, -2px -2px 0px #FFD700, 2px -2px 0px #FFD700, -2px 2px 0px #FFD700'
-                    }}
-                  >
-                    SEATTLE WIFFLE
-                  </h1>
-                  <p className="mt-2 text-base md:text-xl text-blue-100">
-                    Premier Wiffleball League of the Pacific Northwest
-                  </p>
-                </div>
+              {/* Title + subtitle take remaining space */}
+              <div>
+                <h1
+                  className="text-3xl md:text-6xl font-black tracking-wider text-white"
+                  style={{
+                    fontFamily: 'Impact, "Arial Black", sans-serif',
+                    textShadow:
+                      '2px 2px 0px #FFD700, -2px -2px 0px #FFD700, 2px -2px 0px #FFD700, -2px 2px 0px #FFD700'
+                  }}
+                >
+                  SEATTLE WIFFLE
+                </h1>
+                <p className="mt-1 text-sm md:text-xl text-blue-100">
+                  Premier Wiffleball League of the Pacific Northwest
+                </p>
+                <p className="mt-1 text-blue-200 font-semibold tracking-wider text-sm">EST. 2015</p>
               </div>
             </div>
           </div>

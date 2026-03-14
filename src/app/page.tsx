@@ -60,16 +60,19 @@ export default function Home() {
         <div className="absolute inset-0 z-10 flex flex-col">
           <div className="flex-1 flex items-center px-4 md:px-8 py-8">
             <div className="flex flex-row items-center gap-4 md:gap-8 w-full">
-              {/* Logo — scales with the container */}
-              <div className="relative flex-shrink-0 w-[12vw] h-[12vw] min-w-[64px] min-h-[64px] max-w-[180px] max-h-[180px]">
-                <Image
-                  src="/images/seattle-wiffleball-logo.png"
-                  alt="Seattle Wiffle Logo"
-                  fill
-                  priority
-                  unoptimized
-                  className="object-contain"
-                />
+              {/* Logo + EST. 2015 — scales with the container */}
+              <div className="flex-shrink-0 flex flex-col items-center w-[12vw] min-w-[64px] max-w-[180px]">
+                <div className="relative w-full" style={{ paddingBottom: '100%' }}>
+                  <Image
+                    src="/images/seattle-wiffleball-logo.png"
+                    alt="Seattle Wiffle Logo"
+                    fill
+                    priority
+                    unoptimized
+                    className="object-contain"
+                  />
+                </div>
+                <p className="mt-1 text-blue-200 font-semibold tracking-wider text-center text-[1.8vw] min-text-[10px] leading-tight" style={{ fontSize: 'clamp(10px, 1.4vw, 18px)' }}>EST. 2015</p>
               </div>
               {/* Title + subtitle take remaining space */}
               <div>
@@ -86,7 +89,6 @@ export default function Home() {
                 <p className="mt-1 text-sm md:text-xl text-blue-100">
                   Premier Wiffleball League of the Pacific Northwest
                 </p>
-                <p className="mt-1 text-blue-200 font-semibold tracking-wider text-sm">EST. 2015</p>
               </div>
             </div>
           </div>

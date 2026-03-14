@@ -7,7 +7,7 @@ interface HallOfFameEntry {
   inductionYear: number
   image: string
   bio: string
-  seasonsPlayed: number
+  seasonsPlayed: number | null
   teams: string[]
   awards: string[]
   careerStats: {
@@ -142,7 +142,7 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
           <p className="text-sm text-content-secondary mt-1">
             Class of {entry.inductionYear}
             {entry.teams.length > 0 && <> &bull; {entry.teams.join(', ')}</>}
-            {entry.seasonsPlayed > 0 && <> &bull; {entry.seasonsPlayed} seasons</>}
+            {entry.seasonsPlayed != null && entry.seasonsPlayed > 0 && <> &bull; {entry.seasonsPlayed} seasons</>}
           </p>
 
           {/* Awards */}

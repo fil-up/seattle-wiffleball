@@ -49,13 +49,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-surface-secondary">
       {/* Hero Section */}
-      <div className="hero-section text-white relative overflow-hidden">
+      <div className="hero-section text-white relative overflow-hidden min-h-[300px]">
         <img
           src="/images/game-highlights.gif"
           alt=""
-          className="w-full block"
+          className="w-full block min-h-[300px] object-cover"
         />
-        <div className="absolute bottom-0 left-0 right-0 h-[20%] bg-gradient-to-b from-transparent to-black/60 pointer-events-none z-20" />
 
         <div className="absolute inset-0 z-10 flex flex-col">
           <div className="flex-1 flex items-center px-4 md:px-8 py-8">
@@ -72,7 +71,12 @@ export default function Home() {
                     className="object-contain"
                   />
                 </div>
-                <p className="mt-1 text-blue-200 font-semibold tracking-wider text-center text-[1.8vw] min-text-[10px] leading-tight" style={{ fontSize: 'clamp(10px, 1.4vw, 18px)' }}>EST. 2015</p>
+                <p
+                  className="mt-1 text-blue-200 font-semibold tracking-wider text-center leading-tight"
+                  style={{ fontSize: 'clamp(10px, 1.4vw, 18px)', textShadow: '0 1px 6px rgba(0,0,0,0.9)' }}
+                >
+                  EST. 2015
+                </p>
               </div>
               {/* Title + subtitle take remaining space */}
               <div>
@@ -81,12 +85,15 @@ export default function Home() {
                   style={{
                     fontFamily: 'Impact, "Arial Black", sans-serif',
                     textShadow:
-                      '2px 2px 0px #FFD700, -2px -2px 0px #FFD700, 2px -2px 0px #FFD700, -2px 2px 0px #FFD700'
+                      '2px 2px 0px #FFD700, -2px -2px 0px #FFD700, 2px -2px 0px #FFD700, -2px 2px 0px #FFD700, 0 3px 12px rgba(0,0,0,0.8)'
                   }}
                 >
                   SEATTLE WIFFLE
                 </h1>
-                <p className="mt-1 text-sm md:text-xl text-blue-100">
+                <p
+                  className="mt-1 text-sm md:text-xl text-blue-100"
+                  style={{ textShadow: '0 1px 6px rgba(0,0,0,0.9), 0 2px 12px rgba(0,0,0,0.7)' }}
+                >
                   Premier Wiffleball League of the Pacific Northwest
                 </p>
               </div>
@@ -94,7 +101,7 @@ export default function Home() {
           </div>
 
           {/* Nav tiles */}
-          <div className="grid grid-cols-4 gap-2 md:gap-3 px-4 md:px-8 pb-4 md:pb-6 z-30">
+          <div className="grid grid-cols-4 gap-2 md:gap-3 px-4 md:px-8 pb-4 md:pb-6">
             {[
               { label: 'News', href: '/news', subtitle: 'Articles, recaps and events' },
               { label: 'Stats', href: '/stats/players', subtitle: 'Player stats by year' },
@@ -104,7 +111,7 @@ export default function Home() {
               <Link
                 key={tile.href}
                 href={tile.href}
-                className="flex flex-col items-center justify-center text-center py-3 md:py-5 px-2 bg-black/50 hover:bg-brand-navy/70 backdrop-blur-sm transition-colors rounded-xl"
+                className="flex flex-col items-center justify-center text-center py-3 md:py-5 px-2 bg-brand-navy/40 hover:bg-brand-navy/70 backdrop-blur-sm transition-colors rounded-xl"
               >
                 <span className="text-white font-bold text-sm md:text-base">{tile.label}</span>
                 <span className="hidden md:block text-white/70 text-xs mt-0.5">{tile.subtitle}</span>
@@ -113,6 +120,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* Gradient fade from hero into section below */}
+      <div className="h-10 -mt-10 relative z-10 bg-gradient-to-b from-transparent to-surface-secondary pointer-events-none" />
 
       {/* News + Standings two-column layout */}
       <div className="container mx-auto px-4 py-16">

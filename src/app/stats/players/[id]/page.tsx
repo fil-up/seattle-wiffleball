@@ -160,6 +160,82 @@ function TeamCell({ code }: { code: string }) {
   )
 }
 
+// --- IP helpers (baseball out-notation: .1 = 1 out = ⅓ inning) ---
+
+function parseIP(ip: number): number {
+  const whole = Math.floor(ip)
+  const outs = Math.round((ip - whole) * 10) // 0, 1, or 2
+  return whole + outs / 3
+}
+
+function formatIP(realInnings: number): string {
+  const whole = Math.floor(realInnings)
+  const outs = Math.round((realInnings - whole) * 3) // 0, 1, 2, or 3
+  if (outs >= 3) return `${whole + 1}.0`
+  return `${whole}.${outs}`
+}
+
+// --- Career totals calculators ---
+
+interface HittingTotals {
+  games: number; pa: number; ab: number; runs: number; hits: number
+  doubles: number; triples: number; hr: number; rbi: number; bb: number; so: number
+  avg: number; obp: number; slg: number; ops: number; wrcPlus: number
+}
+
+function computeHittingTotals(rows: HittingRow[]): HittingTotals {
+  const g  = rows.reduce((s, r) => s + r.games, 0)
+  const pa = rows.reduce((s, r) => s + r.plateAppearances, 0)
+  const ab = rows.reduce((s, r) => s + r.atBats, 0)
+  const r  = rows.reduce((s, r) => s + r.runs, 0)
+  const h  = rows.reduce((s, r) => s + r.hits, 0)
+  const d  = rows.reduce((s, r) => s + r.doubles, 0)
+  const t  = rows.reduce((s, r) => s + r.triples, 0)
+  const hr = rows.reduce((s, r) => s + r.homeRuns, 0)
+  const rbi = rows.reduce((s, r) => s + r.rbis, 0)
+  const bb = rows.reduce((s, r) => s + r.walks, 0)
+  const so = rows.reduce((s, r) => s + r.strikeouts, 0)
+
+  const avg = ab > 0 ? h / ab : 0
+  const obp = pa > 0 ? (h + bb) / pa : 0
+  const tb  = h + d + 2 * t + 3 * hr           // TB = 1B + 2×2B + 3×3B + 4×HR = H + 2B + 2×3B + 3×HR
+  const slg = ab > 0 ? tb / ab : 0
+  const ops = obp + slg
+  const wrcPlus = pa > 0
+    ? rows.reduce((s, row) => s + (row.wrcPlus ?? 0) * row.plateAppearances, 0) / pa
+    : 0
+
+  return { games: g, pa, ab, runs: r, hits: h, doubles: d, triples: t, hr, rbi, bb, so, avg, obp, slg, ops, wrcPlus }
+}
+
+interface PitchingTotals {
+  games: number; ipReal: number; wins: number; losses: number; saves: number
+  k: number; bb: number; hits: number; runs: number; er: number
+  era: number; whip: number; k9: number; oppAvg: number
+}
+
+function computePitchingTotals(rows: PitchingRow[]): PitchingTotals {
+  const g   = rows.reduce((s, r) => s + r.games, 0)
+  const ip  = rows.reduce((s, r) => s + parseIP(r.inningsPitched), 0)
+  const w   = rows.reduce((s, r) => s + r.wins, 0)
+  const l   = rows.reduce((s, r) => s + r.losses, 0)
+  const sv  = rows.reduce((s, r) => s + r.saves, 0)
+  const k   = rows.reduce((s, r) => s + r.strikeouts, 0)
+  const bb  = rows.reduce((s, r) => s + r.walks, 0)
+  const h   = rows.reduce((s, r) => s + r.hits, 0)
+  const run = rows.reduce((s, r) => s + r.runs, 0)
+  const er  = rows.reduce((s, r) => s + r.earnedRuns, 0)
+
+  const era    = ip > 0 ? (er * 9) / ip : 0
+  const whip   = ip > 0 ? (bb + h) / ip : 0
+  const k9     = ip > 0 ? (k * 9) / ip : 0
+  const oppAvg = ip > 0
+    ? rows.reduce((s, r) => s + r.oppAvg * parseIP(r.inningsPitched), 0) / ip
+    : 0
+
+  return { games: g, ipReal: ip, wins: w, losses: l, saves: sv, k, bb, hits: h, runs: run, er, era, whip, k9, oppAvg }
+}
+
 // --- Sticky column widths ---
 const YEAR_W = 72   // px — "2025" + px-4 padding
 const TEAM_W = 130  // px — logo + abbreviation + px-4 padding
@@ -355,6 +431,32 @@ export default function PlayerDetailPage() {
                       </tr>
                     )
                   })}
+                  {/* Career totals row */}
+                  {hitting.length > 1 && (() => {
+                    const t = computeHittingTotals(hitting)
+                    return (
+                      <tr className="border-t-2 border-brand-navy/30 bg-brand-navy/5 dark:bg-brand-gold/5">
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-bold text-content-primary sticky left-0 z-20 bg-brand-navy/5 dark:bg-brand-gold/5" style={{ minWidth: YEAR_W }}>Career</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-secondary sticky z-20 bg-brand-navy/5 dark:bg-brand-gold/5" style={{ left: YEAR_W, minWidth: TEAM_W }}>—</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.games)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.pa)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.ab)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.runs)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.hits)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.doubles)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.triples)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.hr)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.rbi)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.bb)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.so)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{t.avg.toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{t.obp.toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{t.slg.toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{t.ops.toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.wrcPlus)}</td>
+                      </tr>
+                    )
+                  })()}
                 </tbody>
               </table>
             </div>
@@ -426,6 +528,30 @@ export default function PlayerDetailPage() {
                       </tr>
                     )
                   })}
+                  {/* Career totals row */}
+                  {pitching.length > 1 && (() => {
+                    const t = computePitchingTotals(pitching)
+                    return (
+                      <tr className="border-t-2 border-brand-navy/30 bg-brand-navy/5 dark:bg-brand-gold/5">
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-bold text-content-primary sticky left-0 z-20 bg-brand-navy/5 dark:bg-brand-gold/5" style={{ minWidth: YEAR_W }}>Career</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-content-secondary sticky z-20 bg-brand-navy/5 dark:bg-brand-gold/5" style={{ left: YEAR_W, minWidth: TEAM_W }}>—</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.games)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{formatIP(t.ipReal)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.wins)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.losses)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.saves)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.k)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.bb)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.hits)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.runs)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{Math.round(t.er)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{t.era.toFixed(2)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{t.whip.toFixed(2)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{t.oppAvg.toFixed(3)}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-content-primary tabular-nums">{t.k9.toFixed(2)}</td>
+                      </tr>
+                    )
+                  })()}
                 </tbody>
               </table>
             </div>

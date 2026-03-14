@@ -3,13 +3,14 @@
   "inductees": [
     {
       "id": "jimmy-froio",
+      "playerId": "FroioJimmy",
       "name": "Jimmy Froio",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/jimmy-froio.png",
       "bio": "One of the foundational figures of Seattle Wiffleball, Froio's career was defined by clutch performances and an unrelenting competitive spirit. A perennial threat at the plate, he brought intensity to every at-bat and helped establish the culture of excellence the league is known for today.",
       "seasonsPlayed": null,
       "teams": [],
-      "awards": [],
+      "awards": ["Captain of the Year", "Silver Slugger", "Golden Palm", "Iron Giant", "All Star"],
       "careerStats": {
         "games": null,
         "avg": null,
@@ -25,13 +26,14 @@
     },
     {
       "id": "paul-rogers",
+      "playerId": "RogersPaul",
       "name": "Paul Rogers",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/paul-rogers.png",
       "bio": "A cornerstone of Seattle Wiffleball since its early days, Rogers combined a sharp baseball IQ with consistent production across multiple seasons. Known for his leadership both on and off the field, his contributions to the league extend well beyond the stat sheet.",
       "seasonsPlayed": null,
       "teams": [],
-      "awards": [],
+      "awards": ["MVP", "Rookie of the Year", "Comeback Player", "League Honors", "All Star"],
       "careerStats": {
         "games": null,
         "avg": null,
@@ -47,13 +49,14 @@
     },
     {
       "id": "preston-sahabu",
+      "playerId": "SahabuPreston",
       "name": "Preston Sahabu",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/preston-sahabu.png",
       "bio": "Sahabu carved out a legacy as one of the most reliable players in league history. Whether contributing at the plate or on the mound, his versatility and consistency over multiple seasons made him a building block for every team fortunate enough to have him on their roster.",
       "seasonsPlayed": null,
       "teams": [],
-      "awards": [],
+      "awards": ["Commish", "League Honors"],
       "careerStats": {
         "games": null,
         "avg": null,
@@ -69,13 +72,14 @@
     },
     {
       "id": "daniel-rish",
+      "playerId": "RishDaniel",
       "name": "Daniel Rish",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/daniel-rish.png",
       "bio": "Rish established himself as one of the most dangerous hitters the league has ever seen. His ability to drive in runs in high-leverage situations made him a nightmare for opposing pitchers, and his career numbers reflect a player who rose to the moment time and again.",
       "seasonsPlayed": null,
       "teams": [],
-      "awards": [],
+      "awards": ["Commish", "Silver Slugger", "All-Calf Team", "League Honors", "All Star"],
       "careerStats": {
         "games": null,
         "avg": null,
@@ -91,13 +95,14 @@
     },
     {
       "id": "aaron-hunter",
+      "playerId": "HunterAaron",
       "name": "Aaron Hunter",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/aaron-hunter.png",
       "bio": "A dominant two-way player who combined elite pitching command with consistent hitting. Former MVP and Cy Young winner, Hunter's career defined an era of Seattle Wiffleball excellence. His presence on the mound was enough to change the complexion of any game, and his bat was equally dangerous.",
       "seasonsPlayed": null,
       "teams": ["100% Real Juice"],
-      "awards": ["MVP", "Cy Young"],
+      "awards": ["MVP", "Cy Young", "Golden Palm", "All Star"],
       "careerStats": {
         "games": null,
         "avg": null,
@@ -113,13 +118,14 @@
     },
     {
       "id": "karl-koch",
+      "playerId": "KochKarl",
       "name": "Karl Koch",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/karl-koch.png",
       "bio": "Koch built his Hall of Fame career on a foundation of smart, heads-up play and an uncanny ability to get on base. A steady presence through multiple championship runs, his contributions defined what it meant to be a complete Seattle Wiffleball player.",
       "seasonsPlayed": null,
       "teams": [],
-      "awards": [],
+      "awards": ["Silver Slugger", "Sportsman of the Year", "Golden Palm", "All Star"],
       "careerStats": {
         "games": null,
         "avg": null,
@@ -135,13 +141,14 @@
     },
     {
       "id": "scott-lewis",
+      "playerId": "LewisScott",
       "name": "Scott Lewis",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/scott-lewis.png",
       "bio": "Lewis was as dependable as they come — a player who showed up every season and delivered. His career longevity and sustained level of play across the history of the league make him one of the most respected figures ever to take the field in Seattle Wiffleball.",
       "seasonsPlayed": null,
       "teams": [],
-      "awards": [],
+      "awards": ["MVP", "Cy Young", "All Star"],
       "careerStats": {
         "games": null,
         "avg": null,
@@ -157,13 +164,14 @@
     },
     {
       "id": "epo-olivares",
+      "playerId": "OlivaresEpo",
       "name": "Epo Olivares",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/epo-olivares.png",
       "bio": "The league's all-time strikeout king. Olivares built a legacy on the mound with overpowering stuff that left hitters guessing. His career strikeout record may stand for generations, cementing his place among the greatest to ever toe the rubber in Seattle Wiffleball.",
       "seasonsPlayed": null,
       "teams": [],
-      "awards": [],
+      "awards": ["Defensive Play of the Year", "All Star"],
       "careerStats": {
         "games": null,
         "avg": null,
@@ -179,13 +187,14 @@
     },
     {
       "id": "matt-pearson",
+      "playerId": "PearsonMatt",
       "name": "Matt Pearson",
       "inductionYear": 2024,
       "image": "/images/hall-of-fame/matt-pearson.png",
       "bio": "Pearson's Hall of Fame career was built on big moments and bigger performances. A natural competitor with an ability to elevate his game when it mattered most, he left an indelible mark on Seattle Wiffleball and earned the respect of every player who shared the field with him.",
       "seasonsPlayed": null,
       "teams": [],
-      "awards": [],
+      "awards": ["Baserunner of the Year", "Captain of the Year", "Sportsman of the Year", "Iron Giant", "All Star"],
       "careerStats": {
         "games": null,
         "avg": null,

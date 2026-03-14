@@ -1,8 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import hallOfFameData from '@/data/hall-of-fame.json'
 
 interface HallOfFameEntry {
   id: string
+  playerId?: string
   name: string
   inductionYear: number
   image: string
@@ -138,7 +140,13 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
 
         {/* Content */}
         <div className="flex-1 p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-content-primary">{entry.name}</h2>
+          <h2 className="text-2xl font-bold text-content-primary">
+            {entry.playerId ? (
+              <Link href={`/stats/players/${entry.playerId}`} className="hover:text-brand-navy dark:hover:text-brand-gold transition-colors">
+                {entry.name}
+              </Link>
+            ) : entry.name}
+          </h2>
           <p className="text-sm text-content-secondary mt-1">
             Class of {entry.inductionYear}
             {entry.teams.length > 0 && <> &bull; {entry.teams.join(', ')}</>}

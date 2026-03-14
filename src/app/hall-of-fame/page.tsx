@@ -2,6 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import hallOfFameData from '@/data/hall-of-fame.json'
 
+interface Award {
+  name: string
+  years: number[]
+}
+
 interface HallOfFameEntry {
   id: string
   playerId?: string
@@ -11,7 +16,7 @@ interface HallOfFameEntry {
   bio: string
   seasonsPlayed: number | null
   teams: string[]
-  awards: string[]
+  awards: Award[]
   careerStats: {
     games?: number | null
     avg?: number | null
@@ -28,7 +33,7 @@ interface HallOfFameEntry {
 
 function TrophyIcon({ className = '' }: { className?: string }) {
   return (
-    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg className={className} width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 15.5a5.5 5.5 0 005.5-5.5V4h2a1 1 0 011 1v2a3 3 0 01-3 3h-.17A6.52 6.52 0 0112 15.5zm0 0a5.5 5.5 0 01-5.5-5.5V4h-2a1 1 0 00-1 1v2a3 3 0 003 3h.17A6.52 6.52 0 0012 15.5zM9 18h6v2H9v-2zm-1 3h8v1H8v-1zM7.5 4h9V10a4.5 4.5 0 11-9 0V4z" />
     </svg>
   )
@@ -36,7 +41,7 @@ function TrophyIcon({ className = '' }: { className?: string }) {
 
 function StarIcon({ className = '' }: { className?: string }) {
   return (
-    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg className={className} width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
     </svg>
   )
@@ -45,7 +50,28 @@ function StarIcon({ className = '' }: { className?: string }) {
 const AWARD_ICONS: Record<string, typeof TrophyIcon> = {
   'MVP': TrophyIcon,
   'Cy Young': StarIcon,
-  'Batting Title': StarIcon,
+  'Silver Slugger': StarIcon,
+  'All Star': StarIcon,
+  'Rookie of the Year': StarIcon,
+  'Captain of the Year': TrophyIcon,
+}
+
+function AwardPill({ award }: { award: Award }) {
+  const Icon = AWARD_ICONS[award.name]
+  const yearsStr = award.years.join(', ')
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 bg-brand-navy/10 dark:bg-brand-gold/20 text-brand-navy dark:text-brand-gold px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap"
+      title={`${award.name}: ${yearsStr}`}
+    >
+      {Icon && <Icon className="fill-brand-gold flex-shrink-0" />}
+      <span>{award.name}</span>
+      {award.years.length > 1 && (
+        <span className="text-xs font-bold opacity-80">×{award.years.length}</span>
+      )}
+      <span className="text-xs opacity-70">({yearsStr})</span>
+    </span>
+  )
 }
 
 function getInitials(name: string): string {
@@ -156,19 +182,9 @@ function PlayerCard({ entry }: { entry: HallOfFameEntry }) {
           {/* Awards */}
           {entry.awards.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
-              {entry.awards.map((award) => {
-                const Icon = AWARD_ICONS[award]
-                return (
-                  <span
-                    key={award}
-                    className="inline-flex items-center gap-1.5 bg-brand-navy/10 dark:bg-brand-gold/20 text-brand-navy dark:text-brand-gold px-3 py-1 rounded-full text-sm font-medium"
-                    title={award}
-                  >
-                    {Icon && <Icon className="fill-brand-gold" />}
-                    {award}
-                  </span>
-                )
-              })}
+              {entry.awards.map((award) => (
+                <AwardPill key={award.name} award={award} />
+              ))}
             </div>
           )}
 

@@ -381,6 +381,46 @@ export function transformTotalsPitching(
     )
 }
 
+// --- Award Transform ---
+
+export interface AwardEntry {
+  award: string
+  year: number
+  playerId: string
+  playerName: string
+}
+
+function cleanAwardName(raw: string): string {
+  // Strip non-ASCII-printable characters (emoji, special symbols) and normalize whitespace
+  return raw.replace(/[^\x20-\x7E]/g, '').trim().replace(/\s+/g, ' ')
+}
+
+export function transformAwards(
+  rows: GvizRow[],
+  cols: GvizCol[]
+): AwardEntry[] {
+  const cm = buildColumnMap(cols)
+  return rows
+    .map((row) => {
+      const awardRaw = cellString(row, colIdx(cm, 'award code', 0))
+      const year = cellNumber(row, colIdx(cm, 'year', 1))
+      const playerName = cellString(row, colIdx(cm, 'player', 2))
+      const playerId = cellString(row, colIdx(cm, 'play adj', 3))
+
+      if (
+        !awardRaw || awardRaw === '~~' ||
+        !playerId || playerId === '~~' ||
+        year <= 0 || year > 2100
+      ) return null
+
+      const award = cleanAwardName(awardRaw)
+      if (!award) return null
+
+      return { award, year, playerId, playerName }
+    })
+    .filter((r): r is AwardEntry => r !== null)
+}
+
 // --- Main Export ---
 
 export async function fetchSheet<T>(

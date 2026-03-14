@@ -48,6 +48,94 @@ interface PitchingRow {
   player: { id: string; name: string }
 }
 
+// Award display names and ordering
+const AWARD_DISPLAY: Record<string, string> = {
+  'All Star': 'All-Star',
+  'Karl Koch Most Improved Batter': 'Most Improved Batter',
+  'Dan Rish Most Improved Pitcher': 'Most Improved Pitcher',
+  'IST Champ': 'IST Champion',
+  'Commish': 'Commissioner',
+}
+
+const AWARD_PRIORITY: Record<string, number> = {
+  'Hall of Fame': 0,
+  'MVP': 1,
+  'Cy Young': 2,
+  'Silver Slugger': 3,
+  'Platinum Palm': 4,
+  'All Star': 5,
+  'Rookie of the Year': 6,
+  'Captain of the Year': 7,
+  'Baserunner of the Year': 8,
+  'Comeback Player': 9,
+  'Heart and Hustle': 10,
+  'Most Improved': 11,
+  'Most Improved Batter': 12,
+  'Most Improved Pitcher': 13,
+  'Sportsman of the Year': 14,
+  'Golden Palm': 15,
+  'Defensive Play of Year': 16,
+  'Iron Giant': 17,
+  'IST Champ': 18,
+  'League Honors': 19,
+  'Commish': 99,
+}
+
+function getAwardDisplayName(raw: string): string {
+  return AWARD_DISPLAY[raw] ?? raw
+}
+
+function getAwardPriority(raw: string): number {
+  return AWARD_PRIORITY[raw] ?? 50
+}
+
+function TrophyIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 15.5a5.5 5.5 0 005.5-5.5V4h2a1 1 0 011 1v2a3 3 0 01-3 3h-.17A6.52 6.52 0 0112 15.5zm0 0a5.5 5.5 0 01-5.5-5.5V4h-2a1 1 0 00-1 1v2a3 3 0 003 3h.17A6.52 6.52 0 0012 15.5zM9 18h6v2H9v-2zm-1 3h8v1H8v-1zM7.5 4h9V10a4.5 4.5 0 11-9 0V4z" />
+    </svg>
+  )
+}
+
+function StarIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  )
+}
+
+const AWARD_ICONS: Record<string, typeof TrophyIcon> = {
+  'MVP': TrophyIcon,
+  'Hall of Fame': TrophyIcon,
+  'Cy Young': StarIcon,
+  'Silver Slugger': StarIcon,
+  'All Star': StarIcon,
+  'Platinum Palm': StarIcon,
+  'Rookie of the Year': StarIcon,
+  'Captain of the Year': TrophyIcon,
+}
+
+function AwardPill({ awardKey, years }: { awardKey: string; years: number[] }) {
+  const displayName = getAwardDisplayName(awardKey)
+  const Icon = AWARD_ICONS[awardKey]
+  const yearsStr = years.join(', ')
+
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 bg-brand-navy/10 dark:bg-brand-gold/20 text-brand-navy dark:text-brand-gold px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap"
+      title={`${displayName}: ${yearsStr}`}
+    >
+      {Icon && <Icon className="fill-brand-gold flex-shrink-0" />}
+      <span>{displayName}</span>
+      {years.length > 1 && (
+        <span className="text-xs font-bold opacity-80">×{years.length}</span>
+      )}
+      <span className="text-xs opacity-70">({yearsStr})</span>
+    </span>
+  )
+}
+
 export default function PlayerDetailPage() {
   const params = useParams()
   const id = params.id as string
@@ -55,6 +143,7 @@ export default function PlayerDetailPage() {
   const [hitting, setHitting] = useState<HittingRow[]>([])
   const [pitching, setPitching] = useState<PitchingRow[]>([])
   const [playerName, setPlayerName] = useState('')
+  const [awards, setAwards] = useState<Record<string, number[]>>({})
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
   const [error, setError] = useState(false)
@@ -67,19 +156,29 @@ export default function PlayerDetailPage() {
       setLoading(true)
       setNotFound(false)
       try {
-        const res = await fetch(`/api/players/${id}`)
-        if (res.status === 404) {
+        const [statsRes, awardsRes] = await Promise.all([
+          fetch(`/api/players/${id}`),
+          fetch(`/api/awards/${id}`),
+        ])
+
+        if (statsRes.status === 404) {
           setNotFound(true)
           return
         }
-        if (!res.ok) throw new Error('Failed to fetch player data')
-        const result = await res.json()
-        const h: HittingRow[] = result.data.hitting || []
-        const p: PitchingRow[] = result.data.pitching || []
+        if (!statsRes.ok) throw new Error('Failed to fetch player data')
+
+        const statsResult = await statsRes.json()
+        const h: HittingRow[] = statsResult.data.hitting || []
+        const p: PitchingRow[] = statsResult.data.pitching || []
         setHitting(h.sort((a, b) => b.year - a.year))
         setPitching(p.sort((a, b) => b.year - a.year))
         setPlayerName(h[0]?.player?.name || p[0]?.player?.name || 'Unknown Player')
-        setStale(result.stale)
+        setStale(statsResult.stale)
+
+        if (awardsRes.ok) {
+          const awardsResult = await awardsRes.json()
+          setAwards(awardsResult.data || {})
+        }
       } catch (err) {
         console.error('Error fetching player:', err)
         setError(true)
@@ -89,6 +188,10 @@ export default function PlayerDetailPage() {
     }
     fetchPlayer()
   }, [id, retryCount])
+
+  const sortedAwards = Object.entries(awards).sort(
+    ([a], [b]) => getAwardPriority(a) - getAwardPriority(b)
+  )
 
   if (error) {
     return (
@@ -126,7 +229,6 @@ export default function PlayerDetailPage() {
 
   return (
     <div className="min-h-screen bg-surface-secondary">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link href="/stats/players" className="text-brand-navy dark:text-brand-gold hover:text-brand-navy/80 dark:hover:text-brand-gold/80 text-sm mb-4 inline-block">&larr; Back to Players</Link>
 
@@ -137,18 +239,29 @@ export default function PlayerDetailPage() {
           </div>
         )}
 
-        <div className="flex items-center gap-4 mb-8">
-          <div className="bg-surface-secondary rounded-full p-2 flex-shrink-0">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="text-content-secondary">
-              <circle cx="24" cy="18" r="8" fill="currentColor" opacity="0.6" />
-              <path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="currentColor" opacity="0.4" />
-            </svg>
+        {/* Player header */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
+          <div className="flex items-center gap-4">
+            <div className="bg-surface-secondary rounded-full p-2 flex-shrink-0">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="text-content-secondary">
+                <circle cx="24" cy="18" r="8" fill="currentColor" opacity="0.6" />
+                <path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="currentColor" opacity="0.4" />
+              </svg>
+            </div>
+            <h1 className="text-3xl font-bold text-content-primary">{playerName}</h1>
           </div>
-          <h1 className="text-3xl font-bold text-content-primary">{playerName}</h1>
+
+          {sortedAwards.length > 0 && (
+            <div className="flex flex-wrap gap-2 sm:justify-end sm:max-w-lg">
+              {sortedAwards.map(([awardKey, years]) => (
+                <AwardPill key={awardKey} awardKey={awardKey} years={years} />
+              ))}
+            </div>
+          )}
         </div>
 
         {hitting.length > 0 && (
-          <div className="bg-surface-card rounded-lg shadow mb-8">
+          <div className="bg-surface-card rounded-lg border border-border shadow-sm mb-8">
             <div className="px-6 py-4 border-b border-border">
               <h2 className="text-xl font-semibold text-content-primary">Career Hitting Stats</h2>
             </div>
@@ -191,7 +304,7 @@ export default function PlayerDetailPage() {
         )}
 
         {pitching.length > 0 && (
-          <div className="bg-surface-card rounded-lg shadow mb-8">
+          <div className="bg-surface-card rounded-lg border border-border shadow-sm mb-8">
             <div className="px-6 py-4 border-b border-border">
               <h2 className="text-xl font-semibold text-content-primary">Career Pitching Stats</h2>
             </div>
